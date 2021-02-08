@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+        <form name="loginForm" (ngSubmit)="register()">
+            <mat-card fxLayout="column">
+                <mat-form-field appearance="outline" hideRequiredMarker>
+                    <mat-label>Name</mat-label>
+                    <input matInput required [formControl]="name">
+                    <mat-error *ngIf="name.hasError('required')">Name is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" hideRequiredMarker>
+                    <mat-label>Email</mat-label>
+                    <input matInput required [formControl]="email">
+                    <mat-error *ngIf="email.hasError('email')">Invalid email format.</mat-error>
+                    <mat-error *ngIf="email.hasError('required')">Email is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" hideRequiredMarker>
+                    <mat-label>Password</mat-label>
+                    <input matInput required type="password" [formControl]="password">
+                    <mat-error *ngIf="password.hasError('required')">Password is required.</mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary">Login</button>
+            </mat-card>
+        </form>
+    </div>
+
+</div>
