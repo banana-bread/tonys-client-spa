@@ -19,5 +19,9 @@ export class AuthService {
 
   register(name: string, email: string, password: string) {
     return this.http.post('http://localhost:89/register/client', {name, email, password})
+      .subscribe(
+        (response: any) => console.log(response), // TODO: handle
+        (error: any) => console.error(error) // TODO:handle
+      )
   }
 }

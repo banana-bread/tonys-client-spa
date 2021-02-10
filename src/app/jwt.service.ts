@@ -13,7 +13,6 @@ export class JwtService {
     localStorage.setItem('expires_at', this.setExpiresAt(data.expires_in));
     localStorage.setItem('refresh_token', data.refresh_token);
     localStorage.setItem('token_type', data.token_type);
-    console.log(localStorage)
   }
 
   getToken(): string {
@@ -30,14 +29,6 @@ export class JwtService {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('token_type');
   }
-
-  // isLoggedIn(): boolean {
-  //   const isTokenSet = !!localStorage.getItem('access_token')
-    
-  //   return isTokenSet
-  //     ? moment().isBefore(this.getExpiration())
-  //     : false;
-  // }
 
   private setExpiresAt(expires_in: number): string {
     return String(moment().add(expires_in, 'seconds').unix());

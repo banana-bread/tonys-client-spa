@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -12,14 +13,13 @@ export class RegisterComponent implements OnInit {
   email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   password: FormControl = new FormControl('', [Validators.required]);
 
-  constructor(private api: AuthService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   register(): void {
-    this.api.register(this.name.value, this.email.value, this.password.value)
-      .subscribe(response => console.log(response))
+    this.auth.register(this.name.value, this.email.value, this.password.value)
   }
 
 }

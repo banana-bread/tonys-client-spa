@@ -7,7 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PublicModule } from './public.module';
 
 import { AppComponent } from './app.component';
-import { TokenInterceptor } from './token-interceptor.service';
+import { AuthInterceptor } from './auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -18,11 +18,10 @@ import { TokenInterceptor } from './token-interceptor.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     PublicModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
