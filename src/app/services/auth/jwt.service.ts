@@ -15,7 +15,7 @@ export class JwtService {
     localStorage.setItem('token_type', data.token_type);
   }
 
-  getToken(): string {
+  getToken(): string | null {
     return localStorage.getItem('access_token')
   }
 

@@ -1,15 +1,18 @@
 import { Deserializable } from "./deserializable.model";
 
 export class Client implements Deserializable {
-  // TODO: implement like this https://nehalist.io/working-with-models-in-angular/
   id: string;
   name: string;
   email: string;
 
-  constructor() {}
+  constructor() {
+    this.id = '';
+    this.name = '';
+    this.email = '';
+  }
 
-  deserialize(input: any): this {
-    Object.assign(this, input);
+  deserialize(data: any): this {
+    Object.assign(this, data.client);
     return this;
   }
 }

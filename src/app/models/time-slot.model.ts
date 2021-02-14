@@ -1,10 +1,20 @@
-import { Employee } from './employee.model';
+import { Deserializable } from "./deserializable.model";
 
-export class TimeSlot {
+export class TimeSlot implements Deserializable {
     id: string;
-    reserved: boolean;
+    employee_id: string;
     start_time: Date;
     end_time: Date;
 
-    employee: Employee
+    constructor() {
+      this.id = '',
+      this.employee_id = '',
+      this.start_time = new Date(),
+      this.end_time = new Date()
+    }
+
+    deserialize(data: any): this {
+      Object.assign(this, data)
+      return this;
+    }
 }

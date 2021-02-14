@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtService } from './jwt.service';
 import { Observable } from 'rxjs';
+import { JwtService } from './jwt.service';
 
 @Injectable({
   providedIn: 'root'

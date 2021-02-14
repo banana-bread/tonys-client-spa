@@ -1,0 +1,11 @@
+<mat-form-field color="accent" appearance="outline">
+    <mat-label>Choose appointment date</mat-label>
+    <input matInput [matDatepickerFilter]="filterUnavailableDays" [matDatepicker]="picker1">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <div *ngFor="let slot of timeSlots">
+      <span>{{ slot.employee_id }}</span>
+  </div>
+

@@ -5,20 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { PublicModule } from './public.module';
+import { PrivateModule } from './private.module';
 
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './services/auth-interceptor.service';
+import { AuthInterceptor } from './services/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    PublicModule
+    PublicModule,
+    PrivateModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
