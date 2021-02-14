@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeSlot } from '../models/time-slot.model';
 import { TimeSlotService } from '../services/time-slot.service';
-import { map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-appointment',
@@ -10,40 +12,41 @@ import { map } from 'rxjs/operators';
 })
 export class AppointmentComponent implements OnInit {
   timeSlots: TimeSlot[];
+  selectedDate: FormControl = new FormControl();
+  selectedDatesSlots: TimeSlot[];
+  dateFilter = (date: Date): boolean => true;
 
-  constructor(private timeSlotService: TimeSlotService) {}
+  constructor(private timeSlotService: TimeSlotService) {}   
 
   ngOnInit(): void {
     this.timeSlotService.getAvailableTimeSlots()
-      .subscribe((slots: any) => this.timeSlots = slots);
+      .subscribe((slots: any) => { 
+        this.timeSlots = slots;
+        
+        this.dateFilter = (date: Date | null): boolean => {
+          const day = (date || new Date())
+
+          return this.filterUnavailableDays(day)
+        }
+      });
    }
 
-   // FIXME: this doesn't work, think its being called before this.timeSlots
-   //        is initialized 
   filterUnavailableDays(date: Date | null): boolean {
-    return !this.timeSlots.some(slot => slot.start_time == date)
-    // const day = (date || new Date().getDay());
-    // return day !==0
+    return !!this.timeSlots.find(slot => {
+      const timeSlotDay = moment(slot.start_time).startOf('day');
+      const datePickerDay = moment(date).startOf('day');
+
+      return datePickerDay.isSame(timeSlotDay);
+    })
   }
 
+
+  onDateChanged(event) {
+    this.selectedDatesSlots = this.timeSlots.filter(slot => {
+      const selectedDate = moment(this.selectedDate.value).startOf('day');
+      const slotDate = moment(slot.start_time).startOf('day');
+      
+      return selectedDate.isSame(slotDate);
+    })
+  }
 }
-
-// getTimeSlots() {
-//   this.timeSlotService.getAvailableTimeSlots()
-//     .subscribe(res => console.log(res))
-// }
-// import {Component} from '@angular/core';
-// import { TimeSlot } from '../models/time-slot.model';
-
-// /** @title Datepicker with filter validation */
-// @Component({
-//   selector: 'datepicker-filter-example',
-//   templateUrl: 'datepicker-filter-example.html',
-// })
-// export class DatepickerFilterExample {
-//   myFilter = (d: Date | null): boolean => {
-//     const day = (d || new Date()).getDay();
-//     // Prevent Saturday and Sunday from being selected.
-//     return day !== 0 && day !== 6;
-//   }
-// }
