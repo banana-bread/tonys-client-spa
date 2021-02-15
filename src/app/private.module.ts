@@ -3,6 +3,8 @@ import { SharedModule } from './shared.module'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
     declarations: [
@@ -12,6 +14,8 @@ import { AppointmentComponent } from './appointment/appointment.component';
         SharedModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatButtonToggleModule,
+        MatStepperModule,
     ],
     exports: [
         AppointmentComponent,
