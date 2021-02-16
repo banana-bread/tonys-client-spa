@@ -16,6 +16,5 @@ export class TimeSlot implements Deserializable {
     deserialize(data: any): this {
       Object.assign(this, data)
       return this;
-
     }
 }

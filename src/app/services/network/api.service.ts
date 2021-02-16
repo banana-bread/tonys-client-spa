@@ -24,4 +24,23 @@ export class ApiService {
       .query('date-to', dateTo)
       .get();
   }
+
+  getEmployees(): Observable<any> {
+    return this.http  
+      .path('/employees')
+      .get();
+  }
+
+  getEmployee(id: string): Observable<any> {
+    return this.http
+      .path('/employees/{id}')
+      .param('id', id)
+      .get();
+  }
+
+  getServiceDefinitions(): Observable<any> {
+    return this.http
+      .path('/service-definitions')
+      .get();
+  }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 type httpMethods = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE';
 
@@ -12,6 +12,7 @@ export class HttpAdapter {
   _path: string = '';
   _method: string = '';
   _queries: string = '';
+  _params: string[] = [];
   _data: {} = {};
   _headers: [] = []; 
 
@@ -31,6 +32,17 @@ export class HttpAdapter {
     this._queries = !!this._queries
       ? this._queries = `${this._queries}&${key}=${value}`
       : this._queries = `?${key}=${value}`;
+
+    return this;
+  }
+
+  param(key: string, value: string | number): this {
+    if (! this._path.includes(`{${key}}`))
+    {
+      throwError('error finding path parameter')
+    }
+
+    this._path.replace(`{${key}}`, key);
 
     return this;
   }

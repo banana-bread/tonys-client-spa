@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './shared.module'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { AppointmentComponent } from './appointment/appointment.component';
+import { BookingComponent } from './booking/booking.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule  } from '@angular/material/divider';
 
 @NgModule({
     declarations: [
-        AppointmentComponent,
+        BookingComponent,
     ],
     imports: [
         SharedModule,
@@ -16,9 +20,13 @@ import { MatStepperModule } from '@angular/material/stepper';
         MatNativeDateModule,
         MatButtonToggleModule,
         MatStepperModule,
+        MatListModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatDividerModule,
     ],
     exports: [
-        AppointmentComponent,
+        BookingComponent,
     ]
   })
   export class PrivateModule { }
