@@ -43,22 +43,18 @@
 
     <!-- STEP 3 START -->
     <mat-step label="Step 2" state="chat">
-      <mat-card style="max-width: 300px;">
-        <mat-calendar [selected]="selectedDate" 
-                      (selectedChange)="onDateSelected($event)"
-                      [dateFilter]="dateFilter">
-        </mat-calendar>
-      </mat-card>
-    <div>
-        <button *ngFor="let slot of selectedDatesSlots; let i = index" 
-                [attr.data-index]="i"
-                mat-stroked-button color="primary"
-                (click)="onSlotSelected(slot)"
-                [ngClass]="{'mat-flat-button': selectedDatesSlots[i] == selectedSlot}">
-                <!-- matStepperNext> -->
-            {{ slot.start_time | date:'HH:mm' }}
-        </button>
-    </div>
+      <div class="select-appointment-container">
+        <mat-tab-group>
+          <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')" >
+            <ng-template matTabContent>
+              <div *ngFor="let slot of slotsFor(day)">
+                {{ slot.start_time }}
+              </div>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
     </mat-step>
     <!-- STEP 3 END -->
 
@@ -76,3 +72,23 @@
       <mat-icon>forum</mat-icon>
     </ng-template>
   </mat-horizontal-stepper>
+
+
+
+
+  <!-- <mat-card style="max-width: 300px;">
+    <mat-calendar [selected]="selectedDate" 
+                  (selectedChange)="onDateSelected($event)"
+                  [dateFilter]="dateFilter">
+    </mat-calendar>
+  </mat-card>
+<div>
+    <button *ngFor="let slot of selectedDatesSlots; let i = index" 
+            [attr.data-index]="i"
+            mat-stroked-button color="primary"
+            (click)="onSlotSelected(slot)"
+            [ngClass]="{'mat-flat-button': selectedDatesSlots[i] == selectedSlot}">
+            matStepperNext>
+        {{ slot.start_time | date:'HH:mm' }}
+    </button>
+</div> -->
