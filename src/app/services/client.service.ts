@@ -11,10 +11,8 @@ export class ClientService {
 
   constructor(private api: ApiService) { }
   
-  getAuthedClient(): Observable<Client> {
-    return this.api.getAuthedClient()
-      .pipe(
-        map((response: any) => new Client().deserialize(response.data))
-      );
+  async getAuthedClient(): Promise<Client> {
+   const response = await this.api.getAuthedClient();
+   return new Client().deserialize(response.data);
   }
 }

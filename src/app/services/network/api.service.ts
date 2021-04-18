@@ -9,13 +9,15 @@ export class ApiService {
 
   constructor(private http: HttpAdapter) { }
 
-  getAuthedClient(): Observable<any> {
+  getAuthedClient(): Promise<any> 
+  {
     return this.http
       .path('/authed/client')
       .get();
   }
 
-  getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = ''): Observable<any> {
+  getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = ''): Promise<any> 
+  {
     return this.http
       .path('/time-slots')
       .query('service-definition-ids', serviceIds)
@@ -25,20 +27,22 @@ export class ApiService {
       .get();
   }
 
-  getEmployees(): Observable<any> {
+  getEmployees(): Promise<any> 
+  {
     return this.http  
       .path('/employees')
       .get();
   }
 
-  getEmployee(id: string): Observable<any> {
+  getEmployee(id: string): Promise<any> 
+  {
     return this.http
       .path('/employees/{id}')
       .param('id', id)
       .get();
   }
 
-  getServiceDefinitions(): Observable<any> {
+  getServiceDefinitions(): Promise<any> {
     return this.http
       .path('/service-definitions')
       .get();

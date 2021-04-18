@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+// import { Observable, throwError } from 'rxjs';
 
 type httpMethods = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE';
 
@@ -18,13 +18,15 @@ export class HttpAdapter {
 
   constructor(private _http: HttpClient) {}
 
-  path(path: string): this {
+  path(path: string): this 
+  {
     this._path = path;
 
     return this;
   }
 
-  query(key: string, value: string | String[]): this {
+  query(key: string, value: string | String[]): this 
+  {
     value = typeof value === 'string'
       ? value
       : value.join(','); 
@@ -36,10 +38,12 @@ export class HttpAdapter {
     return this;
   }
 
-  param(key: string, value: string | number): this {
+  param(key: string, value: string | number): this 
+  {
     if (! this._path.includes(`{${key}}`))
     {
-      throwError('error finding path parameter')
+      console.error('fix!')
+      // throwError('error finding path parameter')
     }
 
     this._path.replace(`{${key}}`, key);
@@ -47,39 +51,47 @@ export class HttpAdapter {
     return this;
   }
 
-  data(data: {}): this {
+  data(data: {}): this 
+  {
     this._data = {...this._data, ...data}
 
     return this;
   }
 
-  get(): Observable<any> {
+  get(): Promise<any> 
+  {
     return this.sendRequest('GET');
   }
 
-  post(): Observable<any> {
+  post(): Promise<any> 
+  {
     return this.sendRequest('POST');
   }
 
-  put(): Observable<any> {
+  put(): Promise<any> 
+  {
     return this.sendRequest('PUT');
   }
 
-  patch(): Observable<any> { 
+  patch(): Promise<any> 
+  { 
     return this.sendRequest('PATCH');
   }
 
-  delete(): Observable<any> {
+  delete(): Promise<any> 
+  {
     return this.sendRequest('DELETE');
   }
 
-  private generateUrl(): string {
+  private generateUrl(): string 
+  {
     return `${this.API_URL}${this._path}${this._queries}`;
   }
 
-  private sendRequest(method: httpMethods): Observable<any> {
+  private sendRequest(method: httpMethods): Promise<any> 
+  {
     return this._http.request(method, this.generateUrl(), {
       body: this._data
-    });
+    }).toPromise();
   }
 }

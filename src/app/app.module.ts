@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { PublicModule } from './public.module';
-import { PrivateModule } from './private.module';
+import { BookingModule } from './booking/booking.module';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor.service';
@@ -20,7 +20,7 @@ import { AuthInterceptor } from './services/auth/auth-interceptor.service';
     BrowserAnimationsModule,
     HttpClientModule,
     PublicModule,
-    PrivateModule,
+    BookingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

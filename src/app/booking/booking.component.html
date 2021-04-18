@@ -1,51 +1,47 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom">
   <!-- STEP 1 START -->
-    <mat-step label="Step 0" state="phone">
-      <div fxLayout="column" fxLayoutAlign="space-between center" style="width: max-content;">
-          <mat-card>
-            <div fxLayout="column">
-              <div *ngFor="let service of serviceDefinitions; let i = index" [attr.data-index]="i">
-                <mat-checkbox [(ngModel)]="service.selected"
-                              (ngModelChange)="updateSelectedServices()">
-                  {{ service.name }}
-                </mat-checkbox> 
-              </div>
-            </div>
-          </mat-card>
-          <button mat-raised-button color="primary" 
-                  (click)="goToServiceProviderStep(stepper)"
-                  [disabled]="!selectedServices || !selectedServices.length">
+    <mat-step 
+       state="phone"
+       fxLayout="row"
+       fxLayoutAlign="center center"
+       [completed]="!!selectedServices?.length">
+       <div fxFlex="60">
+          <app-service-selection 
+             [serviceDefinitions]="serviceDefinitions" 
+             (selected)="onServiceSelected()">
+          </app-service-selection>
+
+          <button 
+             mat-raised-button 
+             color="primary" 
+             (click)="goToServiceProviderStep(stepper)"
+             [disabled]="!selectedServices || !selectedServices.length">
             Next
-          </button>
-      </div>
+         </button>
+       </div>
     </mat-step>
   <!-- STEP 1 END -->
 
   <!-- STEP 2 START -->
-    <mat-step label="Step 1" state="phone">
-        <div fxLayout="column" fxLayoutAlign="space-between center" style="width: max-content;">
-          <mat-selection-list [(ngModel)]="selectedProvider" [multiple]="false">
-            <mat-list-option [value]="'any'">
-              First available
-            </mat-list-option>
-            <mat-list-option *ngFor="let employee of employees" [value]="employee">
-              {{ employee.name }}
-            </mat-list-option>
-          </mat-selection-list>
-          <button mat-raised-button color="primary" 
-                  (click)="goToDateSelectionStep(stepper)"
-                  [disabled]="!selectedServices || !selectedServices.length">
-                Next
-         </button>
+    <mat-step  
+       state="person"
+       fxLayout="row" 
+       fxLayoutAlign="space-between center"
+       [completed]="!!selectedEmployee">
+        <div fxFlex=60>
+          <app-staff-selection
+             [employees]="employees"
+             (selected)="onStaffSelected($event)">
+          </app-staff-selection>
         </div>
     </mat-step>
     <!-- STEP 2 END -->
 
     <!-- STEP 3 START -->
-    <mat-step label="Step 2" state="chat">
+    <mat-step state="today">
       <div class="select-appointment-container">
-        <mat-tab-group>
-          <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')" >
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')">
             <ng-template matTabContent>
               <div *ngFor="let slot of slotsFor(day)">
                 {{ slot.start_time }}
@@ -59,7 +55,7 @@
     <!-- STEP 3 END -->
 
     <!-- STEP 4 START -->
-    <mat-step label="Step 3">
+    <mat-step>
       <p>You're welcome.</p>
     </mat-step>
     <!-- STEP 4 END -->
@@ -72,23 +68,3 @@
       <mat-icon>forum</mat-icon>
     </ng-template>
   </mat-horizontal-stepper>
-
-
-
-
-  <!-- <mat-card style="max-width: 300px;">
-    <mat-calendar [selected]="selectedDate" 
-                  (selectedChange)="onDateSelected($event)"
-                  [dateFilter]="dateFilter">
-    </mat-calendar>
-  </mat-card>
-<div>
-    <button *ngFor="let slot of selectedDatesSlots; let i = index" 
-            [attr.data-index]="i"
-            mat-stroked-button color="primary"
-            (click)="onSlotSelected(slot)"
-            [ngClass]="{'mat-flat-button': selectedDatesSlots[i] == selectedSlot}">
-            matStepperNext>
-        {{ slot.start_time | date:'HH:mm' }}
-    </button>
-</div> -->

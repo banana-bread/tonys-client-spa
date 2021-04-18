@@ -11,11 +11,14 @@ export class TimeSlotService {
 
   constructor(private api: ApiService) { }
 
-  getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId): Observable<TimeSlot> {
-    return this.api.getAvailableTimeSlots(serviceIds, dateFrom, dateTo, employeeId)
-      .pipe(map((response: any) => response.data.time_slots
-        .map((time_slot: any) => new TimeSlot().deserialize(time_slot)))
-      );
+  async getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId): Promise<TimeSlot[]> 
+  {
+    const response = await this.api.getAvailableTimeSlots(
+      serviceIds, dateFrom, dateTo, employeeId
+    );
+    
+    return response.data.time_slots
+      .map(slot => new TimeSlot().deserialize(slot));
   }
 }
 TimeSlot

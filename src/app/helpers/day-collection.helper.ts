@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { TimeSlot } from '../models/time-slot.model';
 
 type Moment = moment.Moment;
 
@@ -17,6 +18,14 @@ export class DayCollection {
     static fromDays(start: Moment|Date, end: Moment|Date)
     {
         return new DayCollection(start, end).create();
+    }
+
+    static fromSlots(slots: TimeSlot[])
+    {
+        return new DayCollection(
+            slots[0].start_time,
+            [...slots].pop().start_time
+        ).create();
     }
 
     create(): Moment[]

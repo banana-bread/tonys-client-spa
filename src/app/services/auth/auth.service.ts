@@ -9,7 +9,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private jwtService: JwtService) { }
 
-  login(username: string, password: string) {
+  login(username: string, password: string) 
+  {
     return this.http.post('http://localhost:89/login', {username, password})
       .subscribe(
         (response: any) => this.jwtService.setToken(response.data),
@@ -17,7 +18,8 @@ export class AuthService {
       )
   }
 
-  register(name: string, email: string, password: string) {
+  register(name: string, email: string, password: string) 
+  {
     return this.http.post('http://localhost:89/register/client', {name, email, password})
       .subscribe(
         (response: any) => console.log(response), // TODO: handle

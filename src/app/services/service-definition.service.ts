@@ -11,10 +11,11 @@ export class ServiceDefinitionService {
 
   constructor(private api: ApiService) { }
 
-  getServiceDefinitions(): Observable<any> {
-    return this.api.getServiceDefinitions()
-      .pipe(map((response: any) => response.data.service_definitions
-        .map((service: any) => new ServiceDefinition().deserialize(service)))
-    )
+  async getServiceDefinitions(): Promise<ServiceDefinition[]> 
+  {
+    const response = await this.api.getServiceDefinitions();
+    
+    return response.data.service_definitions
+      .map(service => new ServiceDefinition().deserialize(service));
   }
 }

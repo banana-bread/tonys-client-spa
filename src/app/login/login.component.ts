@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Client } from '../models/client.model';
 import { AuthService } from '../services/auth/auth.service';
 import { ClientService } from '../services/client.service';
 import { TimeSlotService } from '../services/time-slot.service';
@@ -19,12 +20,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  login(): void {
+  async login(): Promise<void> 
+  {
     this.authService.login(this.email.value, this.password.value)
   }
 
-  getClient() {
-    this.clientService.getAuthedClient()
-      .subscribe(res => console.log(res)); // new Client model
+  async getClient(): Promise<Client>
+  {
+    return await this.clientService.getAuthedClient();
   }
 }

@@ -1,0 +1,52 @@
+span.material-icons-outlined {
+    transform: scale(1.5);
+}
+
+mat-card {
+    padding: 0;
+}
+
+mat-card-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.staff-selection {
+    padding: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #F2F2F7;
+    }
+}
+
+$color-light-blue: rgb(198, 198, 228);
+
+.employee-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 25px;
+    color: darken($color-light-blue, 60%);
+    background: rgb(198, 198, 228);
+}
+
+.staff-selection-card {
+    max-width: 470px;
+}
+
+.first-available-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    width: 55px;
+
+    span {
+        transform: scale(1.7);
+        margin-left: -22px;
+    }
+}

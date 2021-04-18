@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TimeSlot } from '../models/time-slot.model';
 import { TimeSlotService } from '../services/time-slot.service';
 import * as moment from 'moment';
@@ -9,7 +9,8 @@ import { ServiceDefinitionService } from '../services/service-definition.service
 import { ServiceDefinition } from '../models/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
 import { DayCollection } from '../helpers/day-collection.helper';
-import { Dictionary, groupBy, get } from 'lodash';
+import { Dictionary, get } from 'lodash';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -21,97 +22,101 @@ import { Dictionary, groupBy, get } from 'lodash';
 })
 export class BookingComponent implements OnInit {
 
-  timeSlots: TimeSlot[];
+  @ViewChild('stepper') stepper: MatStepper;
+
   employees: Employee[];
   serviceDefinitions: ServiceDefinition[];
   selectedDate: Date;
   selectedDatesSlots: TimeSlot[];
   selectedSlot: TimeSlot;
   selectedServices: ServiceDefinition[];
-  selectedProvider: any[];
+  selectedEmployee;
   days: moment.Moment[];
   groupedSlots: Dictionary<TimeSlot[]>
 
-  dateFilter = (date: Date): boolean => true;
+  serviceGroup: FormGroup;
+  staffGroup: FormGroup;
 
   constructor(
     private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
-    private serviceDefinitionService: ServiceDefinitionService
+    private serviceDefinitionService: ServiceDefinitionService,
   ) {}   
 
-  ngOnInit(): void {
-    this.employeeService.getEmployees()
-      .subscribe((employees: any) => this.employees = employees);
+  async ngOnInit(): Promise<void> 
+  {
+    this.employees = await this.employeeService.getEmployees();
+    this.serviceDefinitions = await this.serviceDefinitionService.getServiceDefinitions();
+  }  
 
-    this.serviceDefinitionService.getServiceDefinitions()
-      .subscribe((serviceDefinitions: any) => this.serviceDefinitions = serviceDefinitions);
-  }
+  // filterUnavailableDays(date: Date | null): boolean {
+  //   return !!this.timeSlots.find(slot => 
+  //     const timeSlotDay = moment(slot.start_time).startOf('day');
+  //     const datePickerDay = moment(date).startOf('day');
 
-  filterUnavailableDays(date: Date | null): boolean {
-    return !!this.timeSlots.find(slot => {
-      const timeSlotDay = moment(slot.start_time).startOf('day');
-      const datePickerDay = moment(date).startOf('day');
+  //     return datePickerDay.isSame(timeSlotDay);
+  //   })
+  // }
 
-      return datePickerDay.isSame(timeSlotDay);
-    })
-  }
-
-  onDateSelected(event) {
-    this.selectedDate = event
-    this.selectedDatesSlots = this.timeSlots.filter(slot => {
-      const selectedDate = moment(this.selectedDate).startOf('day');
-      const slotDate = moment(slot.start_time).startOf('day');
+  // onDateSelected(event) {
+  //   this.selectedDate = event
+  //   this.selectedDatesSlots = this.timeSlots.filter(slot => {
+  //     const selectedDate = moment(this.selectedDate).startOf('day');
+  //     const slotDate = moment(slot.start_time).startOf('day');
       
-      return selectedDate.isSame(slotDate);
-    });
+  //     return selectedDate.isSame(slotDate);
+  //   });
 
-    this.selectedSlot = null;
-  }
+  //   this.selectedSlot = null;
+  // }
 
-  onSlotSelected(slot: TimeSlot) {
+  onSlotSelected(slot: TimeSlot) 
+  {
     this.selectedSlot = slot;
   }
 
-  goToServiceProviderStep(stepper: MatStepper) {
+  goToServiceProviderStep(stepper: MatStepper) 
+  {
     stepper.next();
-  }
-
-  goToDateSelectionStep(stepper: MatStepper) {
-    const serviceIds = this.selectedServices.map(service => service.id);
-    const selectedProviderId = 
-      this.selectedProvider[0] === 'any'
-        ? ''
-        : this.selectedProvider[0].id;
-    
-    const dateFrom = moment().unix().toString();
-    const dateTo = moment().add(30, 'days').unix().toString();
-    
-    this.timeSlotService.getAvailableTimeSlots(serviceIds, dateFrom, dateTo, selectedProviderId)
-      .subscribe((slots: any) => { 
-        this.timeSlots = slots;
-       
-        const firstDay = this.timeSlots[0].start_time;
-        const lastDay = [...this.timeSlots].pop().start_time;
-
-        this.days = DayCollection.fromDays(firstDay, lastDay);
-
-        this.groupedSlots = groupBy(this.timeSlots, slot => {
-          return moment(slot.start_time).startOf('day').format('l');
-        });
-
-        stepper.next();
-      });
   }
 
   slotsFor(day: moment.Moment)
   {
-    // console.log(day.format())
     return get(this.groupedSlots, day.format('l'));
   }
 
-  updateSelectedServices() {
+  onServiceSelected() 
+  {
     this.selectedServices = this.serviceDefinitions.filter(service => service.selected)
+  }
+
+  async onStaffSelected(id: string)
+  {
+    this.selectedEmployee = this.getSelectedEmployee(id);
+    const slots = await this.getOpenSlots();
+    this.days = DayCollection.fromSlots(slots);
+    this.groupedSlots = TimeSlot.group(slots);
+
+    this.stepper.next();
+  }
+
+  private getSelectedEmployee(id: string): Employee
+  {
+    return this.selectedEmployee = id === 'any'
+       ? new Employee()
+       : this.employees.find(e => e.id === id);
+  }
+
+  private async getOpenSlots(): Promise<TimeSlot[]>
+  {
+    const dateFrom = moment().startOf('day').unix().toString();
+    // TODO: this 30 should be a setting of sorts
+    const dateTo = moment().endOf('day').add(30, 'days').unix().toString();
+    const serviceIds = this.selectedServices.map(service => service.id);
+    
+    return await this.timeSlotService.getAvailableTimeSlots(
+      serviceIds, dateFrom, dateTo, this.selectedEmployee.id
+    )
   }
 
   // isMorning(slot: TimeSlot) {

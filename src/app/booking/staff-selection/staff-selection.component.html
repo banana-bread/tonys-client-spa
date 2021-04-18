@@ -1,0 +1,51 @@
+<!-- <div class="staff-selection-wapper"> -->
+<mat-card class="staff-selection-card mat-elevation-z10">
+  <div (click)="onSelected('any')">
+     <div
+        class="staff-selection"
+        fxLayout="row"
+        fxLayoutAlign=" center"
+        matRipple>
+        <div fxFlex="18" class="first-available-container">
+           <span class="material-icons-outlined">groups</span>
+        </div>
+       <mat-card-title fxFlex>First available</mat-card-title>
+       <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
+     </div>
+     <mat-divider></mat-divider>
+  </div>
+
+  <div *ngFor="let employee of employees; last as isLast;"
+     (click)="onSelected(employee.id)">
+     <div 
+        class="staff-selection"
+        fxLayout="row"
+        fxLayoutAlign=" center"
+        matRipple>
+        <div fxFlex="18">
+          <div class="employee-avatar">{{ employee.initials }}</div>
+        </div>
+         <mat-card-title fxFlex>{{ employee.name }}</mat-card-title>
+         <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
+     </div>
+     <mat-divider *ngIf="!isLast"></mat-divider>
+  </div>
+</mat-card>
+<!-- </div> -->
+<!-- <span class="material-icons-outlined">
+  supervised_user_circle
+  </span> -->
+
+<!-- <mat-selection-list 
+   [(ngModel)]="selectedProvider" 
+   [multiple]="false">
+    <mat-list-option [value]="'any'">
+      First available
+    </mat-list-option>
+    <mat-list-option 
+       *ngFor="let employee of employees" 
+       [value]="employee">
+      {{ employee.name }}
+    </mat-list-option>
+</mat-selection-list> -->
+
