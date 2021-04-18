@@ -27,14 +27,17 @@ export class BookingComponent implements OnInit {
   loading = false;
 
   employees: Employee[];
+  selectedEmployee: Employee;
+
   serviceDefinitions: ServiceDefinition[];
+  selectedServices: ServiceDefinition[];
+
+  groupedSlots: Dictionary<TimeSlot[]>
+  selectedSlot: TimeSlot;
+  
   // selectedDate: Date;
   // selectedDatesSlots: TimeSlot[];
-  selectedSlot: TimeSlot;
-  selectedServices: ServiceDefinition[];
-  selectedEmployee: Employee;
   days: moment.Moment[];
-  groupedSlots: Dictionary<TimeSlot[]>
 
   serviceGroup: FormGroup;
   staffGroup: FormGroup;
@@ -75,11 +78,6 @@ export class BookingComponent implements OnInit {
   onSlotSelected(slot: TimeSlot) 
   {
     this.selectedSlot = slot;
-  }
-
-  slotsFor(day: moment.Moment)
-  {
-    return get(this.groupedSlots, day.format('l'));
   }
 
   onServiceSelected() 

@@ -1,6 +1,9 @@
+@import '../../../shared';
+
 .service-item {
     cursor: pointer;
-    padding: 24px 16px 16px;
+    // padding: 24px 16px 16px;
+    padding: 30px 20px 20px;
 }
 
 .mat-icon {
@@ -8,10 +11,14 @@
 }
 
 mat-card-title {
-    font-size: 20px;
+    @include card-title-selection-list;
+    margin-bottom: 3px;
+}
+
+mat-card-subtitle {
+    margin: 0;
 }
 
 .service-selection-card {
     max-width: 470px;
-    // margin: 0 auto;
 }
