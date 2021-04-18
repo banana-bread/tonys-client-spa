@@ -1,3 +1,26 @@
 .mat-tab-list  {
     height: 300px;
 }
+
+.stepper-container {
+    height: 100%;
+    position: relative;    
+}
+
+// If we absolutely need to use this to make step header fixed...
+::ng-deep .mat-horizontal-stepper-header-container {
+    background-color: white;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; 
+    z-index: 1000; 
+    margin-bottom: 10px;
+}
+
+mat-progress-bar {
+    position: absolute;
+    top: 0; 
+    z-index: 1000; 
+}
+
+

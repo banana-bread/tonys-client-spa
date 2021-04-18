@@ -1,12 +1,11 @@
+<div class="stepper-container">
 <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom">
   <!-- STEP 1 START -->
     <mat-step 
        state="phone"
-       fxLayout="row"
-       fxLayoutAlign="center center"
        [completed]="!!selectedServices?.length">
-       <div fxFlex="60">
           <app-service-selection 
+             class="step-component"
              [serviceDefinitions]="serviceDefinitions" 
              (selected)="onServiceSelected()">
           </app-service-selection>
@@ -14,26 +13,23 @@
           <button 
              mat-raised-button 
              color="primary" 
-             (click)="goToServiceProviderStep(stepper)"
+             matStepperNext
              [disabled]="!selectedServices || !selectedServices.length">
             Next
          </button>
-       </div>
     </mat-step>
   <!-- STEP 1 END -->
 
   <!-- STEP 2 START -->
     <mat-step  
+       fxLayout="row"
+       fxLayoutAlign="center center"
        state="person"
-       fxLayout="row" 
-       fxLayoutAlign="space-between center"
        [completed]="!!selectedEmployee">
-        <div fxFlex=60>
           <app-staff-selection
              [employees]="employees"
              (selected)="onStaffSelected($event)">
           </app-staff-selection>
-        </div>
     </mat-step>
     <!-- STEP 2 END -->
 
@@ -68,3 +64,6 @@
       <mat-icon>forum</mat-icon>
     </ng-template>
   </mat-horizontal-stepper>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <!-- TODO: make a little bottom status bar type thing maybe -->
+</div>

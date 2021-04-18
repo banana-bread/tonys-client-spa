@@ -19,6 +19,8 @@ import { MatRippleModule } from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppCurrencyPipe } from './pipes/currency.pipe';
 import { AppDurationPipe } from './pipes/duration.pipe';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 @NgModule({
   imports:[ 
@@ -41,6 +43,7 @@ import { AppDurationPipe } from './pipes/duration.pipe';
     MatTabsModule,
     MatRippleModule,
     ScrollingModule,
+    MatProgressBarModule,
   ],
   declarations: [
     AppCurrencyPipe,
@@ -72,6 +75,8 @@ import { AppDurationPipe } from './pipes/duration.pipe';
     AppCurrencyPipe,
     AppDurationPipe,
     DecimalPipe,
+    MatProgressBarModule,
+    
   ]
 })
 export class SharedModule { }

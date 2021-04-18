@@ -24,13 +24,15 @@ export class BookingComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatStepper;
 
+  loading = false;
+
   employees: Employee[];
   serviceDefinitions: ServiceDefinition[];
-  selectedDate: Date;
-  selectedDatesSlots: TimeSlot[];
+  // selectedDate: Date;
+  // selectedDatesSlots: TimeSlot[];
   selectedSlot: TimeSlot;
   selectedServices: ServiceDefinition[];
-  selectedEmployee;
+  selectedEmployee: Employee;
   days: moment.Moment[];
   groupedSlots: Dictionary<TimeSlot[]>
 
@@ -75,11 +77,6 @@ export class BookingComponent implements OnInit {
     this.selectedSlot = slot;
   }
 
-  goToServiceProviderStep(stepper: MatStepper) 
-  {
-    stepper.next();
-  }
-
   slotsFor(day: moment.Moment)
   {
     return get(this.groupedSlots, day.format('l'));
@@ -92,11 +89,14 @@ export class BookingComponent implements OnInit {
 
   async onStaffSelected(id: string)
   {
+    this.loading = true;
+
     this.selectedEmployee = this.getSelectedEmployee(id);
     const slots = await this.getOpenSlots();
     this.days = DayCollection.fromSlots(slots);
     this.groupedSlots = TimeSlot.group(slots);
 
+    this.loading = false;
     this.stepper.next();
   }
 
@@ -113,10 +113,10 @@ export class BookingComponent implements OnInit {
     // TODO: this 30 should be a setting of sorts
     const dateTo = moment().endOf('day').add(30, 'days').unix().toString();
     const serviceIds = this.selectedServices.map(service => service.id);
-    
+  
     return await this.timeSlotService.getAvailableTimeSlots(
       serviceIds, dateFrom, dateTo, this.selectedEmployee.id
-    )
+    );
   }
 
   // isMorning(slot: TimeSlot) {

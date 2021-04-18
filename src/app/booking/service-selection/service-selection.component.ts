@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ServiceDefinition } from 'src/app/models/service-definition.model';
 
 @Component({
   selector: 'app-service-selection',
   templateUrl: './service-selection.component.html',
-  styleUrls: ['./service-selection.component.scss']
+  styleUrls: ['./service-selection.component.scss'],
 })
 export class ServiceSelectionComponent implements OnInit {
 
