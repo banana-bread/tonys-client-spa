@@ -13,6 +13,8 @@ export class SlotSelectionComponent implements OnInit {
   @Input() days: moment.Moment[];
   @Input() slots: Dictionary<TimeSlot[]>
 
+  selectedSlot: TimeSlot = new TimeSlot();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -21,6 +23,11 @@ export class SlotSelectionComponent implements OnInit {
   slotsFor(day: moment.Moment)
   {
     return get(this.slots, day.format('l'));
+  }
+
+  onSelected(slot: TimeSlot)
+  {
+    this.selectedSlot = slot;
   }
 
 }

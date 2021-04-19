@@ -1,0 +1,27 @@
+:host ::ng-deep .mat-tab-header {
+    position: fixed !important;
+    z-index: 1000;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.slot-selection-card {
+    margin-top: 70px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    max-width: 470px;
+    padding: 0;
+}
+
+.slot-selection {
+    padding: 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #F2F2F7;
+    }
+}
+
+mat-card {
+    padding: 0;
+}
