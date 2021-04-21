@@ -37,28 +37,20 @@
     <mat-step state="today">
       <app-slot-selection
          [days]="days"
-         [slots]="groupedSlots">
-         <!-- (selected)="onSlotSelected($event)" -->
-
+         [slots]="groupedSlots"
+         (selected)="onSlotSelected($event)">
       </app-slot-selection>
-      <!-- <div class="select-appointment-container">
-        <mat-tab-group mat-align-tabs="center">
-          <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')">
-            <ng-template matTabContent>
-              <div *ngFor="let slot of slotsFor(day)">
-                {{ slot.start_time }}
-              </div>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
-      </div> -->
 
     </mat-step>
     <!-- STEP 3 END -->
 
     <!-- STEP 4 START -->
     <mat-step>
-      <p>You're welcome.</p>
+      <app-booking-confirmation
+        [slot]="selectedSlot"
+        [services]="selectedServices">
+
+      </app-booking-confirmation>
     </mat-step>
     <!-- STEP 4 END -->
   

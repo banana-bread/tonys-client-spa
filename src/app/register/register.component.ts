@@ -14,10 +14,10 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth: AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  register(): void {
+  register(): void 
+  {
     this.auth.register(this.name.value, this.email.value, this.password.value)
   }
 

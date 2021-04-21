@@ -9,7 +9,7 @@ import { Employee } from 'src/app/models/employee.model';
 export class StaffSelectionComponent implements OnInit {
 
   @Input() employees: Employee[] = [];
-  @Output() selected: EventEmitter<any> = new EventEmitter();
+  @Output() selected = new EventEmitter<string>();
 
   constructor() { }
 

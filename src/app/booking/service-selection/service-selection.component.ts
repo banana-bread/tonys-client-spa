@@ -9,12 +9,11 @@ import { ServiceDefinition } from 'src/app/models/service-definition.model';
 export class ServiceSelectionComponent implements OnInit {
 
   @Input() serviceDefinitions: ServiceDefinition[];
-  @Output() selected: EventEmitter<any> = new EventEmitter();
+  @Output() selected = new EventEmitter<null>();
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSelected(service: ServiceDefinition)
   {

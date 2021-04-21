@@ -78,6 +78,7 @@ export class BookingComponent implements OnInit {
   onSlotSelected(slot: TimeSlot) 
   {
     this.selectedSlot = slot;
+    this.stepper.next();
   }
 
   onServiceSelected() 
