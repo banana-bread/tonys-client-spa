@@ -22,7 +22,11 @@ export class AuthService {
   async loginWithProvider(provider: string): Promise<void>
   {
     const response = await this.api.loginWithProvider(provider);
+    window.open(response.data.auth_url, "mywindow","menubar=1,resizable=1,width=500,height=500");
     // TODO: do something with the response...
+
+    //  This should do the trick!
+    // https://blog.leavemealone.app/how-to-oauth-popup/
   }
 
   async registerWithEmail(name: string, email: string, password: string): Promise<any> 

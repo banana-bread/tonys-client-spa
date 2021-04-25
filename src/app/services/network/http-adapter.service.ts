@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Observable, throwError } from 'rxjs';
 
 type httpMethods = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE';
 
@@ -8,7 +7,8 @@ type httpMethods = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE';
   providedIn: 'root'
 })
 export class HttpAdapter {
-  private readonly API_URL: string = 'http://localhost:89'
+  // TODO: make this an env variable
+  private readonly API_URL: string = 'http://b725e8cd70bb.ngrok.io'
   private _path: string = '';
   private _queries: string = '';
   private _params: string[] = [];
