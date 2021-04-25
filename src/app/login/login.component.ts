@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   async login(): Promise<void> 
   {
-    this.authService.login(this.email.value, this.password.value)
+    this.authService.loginWithEmail(this.email.value, this.password.value)
   }
 
   async getClient(): Promise<Client>

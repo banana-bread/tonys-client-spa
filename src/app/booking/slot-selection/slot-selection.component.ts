@@ -11,10 +11,8 @@ import { TimeSlot } from 'src/app/models/time-slot.model';
 export class SlotSelectionComponent implements OnInit {
 
   @Input() days: moment.Moment[];
-  @Input() slots: Dictionary<TimeSlot[]>
+  @Input() slots: Dictionary<TimeSlot[]>;  
   @Output() selected = new EventEmitter<TimeSlot>();
-
-  // selectedSlot: TimeSlot = new TimeSlot();
 
   constructor() { }
 

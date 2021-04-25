@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void 
   {
-    this.auth.register(this.name.value, this.email.value, this.password.value)
+    this.auth.registerWithEmail(this.name.value, this.email.value, this.password.value)
   }
 
 }

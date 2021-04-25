@@ -42,9 +42,35 @@ export class ApiService {
       .get();
   }
 
-  getServiceDefinitions(): Promise<any> {
+  getServiceDefinitions(): Promise<any> 
+  {
     return this.http
       .path('/service-definitions')
       .get();
+  }
+
+  // This technically logins in and/or registers... find a better name?
+  loginWithProvider(provider: string): Promise<any> 
+  {
+    return this.http
+      .path('/login/{provider}')
+      .param('provider', provider)
+      .get();
+  }
+
+  loginWithEmail(data: {username: string, password: string}): Promise<any>
+  {
+    return this.http
+      .path('/login')
+      .data(data)
+      .get();
+  }
+
+  registerWithEmail(data: {name: string, email: string, password: string}): Promise<any>
+  {
+    return this.http
+      .path('/register/client')
+      .data(data)
+      .post();
   }
 }

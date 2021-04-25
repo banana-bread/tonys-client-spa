@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtService } from './jwt.service';
+import { ApiService } from '../network/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwtService: JwtService) { }
+  constructor(
+    private api: ApiService,
+    private jwtService: JwtService,
+  ) { }
 
-  login(username: string, password: string) 
+  async loginWithEmail(username: string, password: string): Promise<void> 
   {
-    return this.http.post('http://localhost:89/login', {username, password})
-      .subscribe(
-        (response: any) => this.jwtService.setToken(response.data),
-        (error: any) => console.error(error)// TODO: handle error
-      )
+    const response = await this.api.loginWithEmail({username, password});
+    this.jwtService.setToken(response.data);
   }
 
-  register(name: string, email: string, password: string) 
+  async loginWithProvider(provider: string): Promise<void>
   {
-    return this.http.post('http://localhost:89/register/client', {name, email, password})
-      .subscribe(
-        (response: any) => console.log(response), // TODO: handle
-        (error: any) => console.error(error) // TODO:handle
-      )
+    const response = await this.api.loginWithProvider(provider);
+    // TODO: do something with the response...
+  }
+
+  async registerWithEmail(name: string, email: string, password: string): Promise<any> 
+  {
+    const response = await this.api.registerWithEmail({name, email, password});
+    return response;
   }
 }

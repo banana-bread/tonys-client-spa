@@ -8,13 +8,12 @@ type httpMethods = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE';
   providedIn: 'root'
 })
 export class HttpAdapter {
-  API_URL: string = 'http://localhost:89'
-  _path: string = '';
-  _method: string = '';
-  _queries: string = '';
-  _params: string[] = [];
-  _data: {} = {};
-  _headers: [] = []; 
+  private readonly API_URL: string = 'http://localhost:89'
+  private _path: string = '';
+  private _queries: string = '';
+  private _params: string[] = [];
+  private _data: Object = {};
+  private _headers: [] = []; 
 
   constructor(private _http: HttpClient) {}
 
@@ -38,23 +37,26 @@ export class HttpAdapter {
     return this;
   }
 
-  param(key: string, value: string | number): this 
+  param(key: string, value: string): this 
   {
     if (! this._path.includes(`{${key}}`))
     {
       console.error('fix!')
       // throwError('error finding path parameter')
     }
-
-    this._path.replace(`{${key}}`, key);
+    
+    this._path = this._path.replace(`{${key}}`, value);
 
     return this;
   }
 
-  data(data: {}): this 
+  data(data: Object): this 
   {
-    this._data = {...this._data, ...data}
 
+    this._data = !!this._data
+      ? {...this._data, ...data}
+      : data;
+    
     return this;
   }
 
@@ -90,8 +92,22 @@ export class HttpAdapter {
 
   private sendRequest(method: httpMethods): Promise<any> 
   {
-    return this._http.request(method, this.generateUrl(), {
-      body: this._data
-    }).toPromise();
+    // Necessary steps when dealing with angular service singleton
+    const url = this.generateUrl();
+    const data = this._data;
+    this.clear();
+
+    return this._http.request(method, url, {
+      body: data
+    }).toPromise()
+  }
+
+  clear()  
+  {
+    this._path = '';
+    this._queries = '';
+    this._params = [];
+    this._data = {};
+    this._headers = []; 
   }
 }
