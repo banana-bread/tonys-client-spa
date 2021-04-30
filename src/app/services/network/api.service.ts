@@ -62,7 +62,7 @@ export class ApiService {
     return this.http
       .path('/login')
       .data(data)
-      .get();
+      .post();
   }
 
   registerWithEmail(data: {name: string, email: string, password: string}): Promise<any>

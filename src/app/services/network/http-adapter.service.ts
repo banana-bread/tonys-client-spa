@@ -96,7 +96,7 @@ export class HttpAdapter {
     const url = this.generateUrl();
     const data = this._data;
     this.clear();
-
+  
     return this._http.request(method, url, {
       body: data
     }).toPromise()

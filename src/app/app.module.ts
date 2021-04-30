@@ -8,7 +8,7 @@ import { PublicModule } from './public.module';
 import { BookingModule } from './booking/booking.module';
 
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './services/auth/auth-interceptor.service';
+import { AuthInterceptor } from './services/auth/auth-interceptor/auth-interceptor.service';
 
 @NgModule({
   declarations: [

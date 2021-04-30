@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Client } from '../models/client.model';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../services/auth/auth/auth.service';
 import { ClientService } from '../services/client.service';
 import { TimeSlotService } from '../services/time-slot.service';
 
