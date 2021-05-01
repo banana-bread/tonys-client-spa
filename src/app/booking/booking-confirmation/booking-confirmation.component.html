@@ -1,3 +1,4 @@
 <div>
-    <app-login></app-login>
+    <app-login *ngIf="!this.isLoggedIn"></app-login>
+    <div *ngIf="this.isLoggedIn">LETS BOOK THIS MUG</div>
 </div>

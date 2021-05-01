@@ -13,7 +13,7 @@ export class BookingConfirmationComponent implements OnInit {
   @Input() slots: TimeSlot[];
   @Input() services: ServiceDefinition[];
 
-  component: string;
+  isLoggedIn: boolean;
 
   constructor(
     private auth: AuthService,
@@ -21,19 +21,6 @@ export class BookingConfirmationComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.component = this.auth.isLoggedIn()
-      ? 'secure booking!!'
-      : 'login/register!!'
+    this.isLoggedIn = this.auth.isLoggedIn();
   }
-
-  async onGoogleAuth()
-  {
-    await this.auth.loginWithProvider('google');
-  }
-
-  /*
-  TODO: Login shouldn't happen in this component.  This component should be responsible for
-        rendering the login/register component if user is not logged in already 
-  */
-
 }

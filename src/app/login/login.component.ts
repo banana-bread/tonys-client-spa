@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Client } from '../models/client.model';
 import { AuthService } from '../services/auth/auth/auth.service';
@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
    - snack bar notification for success / failure (create snackbar notification service from bl)
    - implement continue with provider
    - implement forgot your password
-   - 
+   - implement bottom progress-bar when loading
+   - should emit event, so parent (booking confirmation step) can re-query isLoggedIn()
+   - log in immediately after sucessful registration
   */
 
   @ViewChild('authForm') authForm: NgForm;
@@ -49,6 +51,11 @@ export class LoginComponent implements OnInit {
     if (this.authForm.invalid) return;
 
     await this.auth.registerWithEmail(this.name, this.email, this.password, this.phone);
+  }
+
+  async continueWithGoogle()
+  {
+    await this.auth.loginWithProvider('google');
   }
 
   async getClient(): Promise<Client>
