@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
    TODO:
    - implement continue with provider
    - implement forgot your password
+   - implement captcha for email login
   */
 
   @ViewChild('authForm') authForm: NgForm;
