@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TimeSlot } from '../models/time-slot.model';
 import { TimeSlotService } from '../services/time-slot.service';
 import * as moment from 'moment';
@@ -11,6 +11,8 @@ import { MatStepper } from '@angular/material/stepper';
 import { DayCollection } from '../helpers/day-collection.helper';
 import { Dictionary, get } from 'lodash';
 import { FormGroup } from '@angular/forms';
+import { LoginStateService } from '../login/login-state.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-booking',
@@ -20,11 +22,13 @@ import { FormGroup } from '@angular/forms';
     provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
 })
-export class BookingComponent implements OnInit {
+export class BookingComponent implements OnInit, OnDestroy {
 
   @ViewChild('stepper') stepper: MatStepper;
 
   loading = false;
+  authLoading = false;
+  loadingChangeSubscription: Subscription;
 
   employees: Employee[];
   selectedEmployee: Employee;
@@ -34,9 +38,6 @@ export class BookingComponent implements OnInit {
 
   groupedSlots: Dictionary<TimeSlot[]>
   selectedSlot: TimeSlot;
-  
-  // selectedDate: Date;
-  // selectedDatesSlots: TimeSlot[];
   days: moment.Moment[];
 
   serviceGroup: FormGroup;
@@ -46,34 +47,23 @@ export class BookingComponent implements OnInit {
     private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
     private serviceDefinitionService: ServiceDefinitionService,
+    private loginState: LoginStateService,
   ) {}   
 
   async ngOnInit(): Promise<void> 
   {
     this.employees = await this.employeeService.getEmployees();
     this.serviceDefinitions = await this.serviceDefinitionService.getServiceDefinitions();
+
+    this.loadingChangeSubscription = this.loginState.loadingChange.subscribe(value => {
+      this.authLoading = value
+    });
   }  
 
-  // filterUnavailableDays(date: Date | null): boolean {
-  //   return !!this.timeSlots.find(slot => 
-  //     const timeSlotDay = moment(slot.start_time).startOf('day');
-  //     const datePickerDay = moment(date).startOf('day');
-
-  //     return datePickerDay.isSame(timeSlotDay);
-  //   })
-  // }
-
-  // onDateSelected(event) {
-  //   this.selectedDate = event
-  //   this.selectedDatesSlots = this.timeSlots.filter(slot => {
-  //     const selectedDate = moment(this.selectedDate).startOf('day');
-  //     const slotDate = moment(slot.start_time).startOf('day');
-      
-  //     return selectedDate.isSame(slotDate);
-  //   });
-
-  //   this.selectedSlot = null;
-  // }
+  ngOnDestroy()
+  {
+    this.loadingChangeSubscription.unsubscribe();
+  }
 
   onSlotSelected(slot: TimeSlot) 
   {
@@ -117,8 +107,4 @@ export class BookingComponent implements OnInit {
       serviceIds, dateFrom, dateTo, this.selectedEmployee.id
     );
   }
-
-  // isMorning(slot: TimeSlot) {
-  //   return moment(slot.start_time).hour() < 12;
-  // }
 }

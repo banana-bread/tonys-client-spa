@@ -1,22 +1,41 @@
-<form #authForm="ngForm" (ngSubmit)="login()" novalidate>
-    <div fxLayout="row" fxLayoutAlign="center ">
-        <h2 class="mat-display-2">{{ this.getTitle() }}</h2>
-    </div>
+<div fxLayout="row" fxLayoutAlign="center">
+    <h2 class="mat-display-1" style="margin-bottom: 48px;">{{ this.getTitle() }}</h2>
+</div>
 
+<form #authForm="ngForm" (ngSubmit)="this.onSubmit()" novalidate>
+    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="16px">
+        <button type="reset" mat-stroked-button (click)="this.continueWithGoogle()">
+            <mat-icon fxFlexAlign="center" svgIcon="google"></mat-icon>
+            <span fxFlex>Continue with Google</span> 
+        </button>
+        <button type="reset" class="btn-facebook" mat-stroked-button (click)="this.continueWithFacebook()">
+            <mat-icon fxFlexAlign="center" svgIcon="facebook"></mat-icon>
+            <span fxFlex>Continue with Facebook</span> 
+        </button>
+    </div> 
+
+    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" class="mat-caption or-line my-32"><span>Or</span></div>
+
+    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="12px">
+        <button mat-flat-button type="reset" color="primary" (click)="this.toggleEmailSignup()">
+            <mat-icon fxFlexAlign="center">email</mat-icon>
+            <span fxFlex>Sign up with email</span> 
+        </button>
+    </div> 
     <div fxLayout="column">
-        <mat-form-field fxFlex [fxHide]="this.isLogin" hideRequiredMarker>
+        <mat-form-field *ngIf="this.isEmailSignupView" fxFlex hideRequiredMarker>
             <mat-label>Full name</mat-label>
             <input type="text" 
                 [(ngModel)]="this.name" 
                 name="nameField" 
                 #nameField="ngModel"
-                [required]="!this.isLogin" 
+                [required]="!this.isLoginView" 
                 matInput>
             <mat-icon class="input-icon" matPrefix>person</mat-icon>
             <mat-error *ngIf="nameField.hasError('required')">Name is required.</mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex hideRequiredMarker>
+        <mat-form-field *ngIf="this.isEmailSignupView || this.isLoginView" fxFlex hideRequiredMarker>
             <mat-label>Email</mat-label>
             <input type="email" 
                 [(ngModel)]="email"
@@ -30,7 +49,7 @@
             <mat-error *ngIf="emailField.hasError('required')">Email is required.</mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex [fxHide]="this.isLogin">
+        <mat-form-field *ngIf="this.isEmailSignupView" fxFlex>
             <mat-label>Phone</mat-label>
             <input type="text"
                 [(ngModel)]="this.phone"
@@ -39,7 +58,7 @@
             <mat-icon class="input-icon" matPrefix>phone</mat-icon>
         </mat-form-field>
 
-        <mat-form-field fxFlex hideRequiredMarker>
+        <mat-form-field *ngIf="this.isEmailSignupView || this.isLoginView" fxFlex hideRequiredMarker>
             <mat-label>Password</mat-label>
             <input type="password" 
                 [(ngModel)]="this.password"
@@ -50,38 +69,36 @@
             <mat-icon class="input-icon" matPrefix>lock</mat-icon>
             <mat-error *ngIf="passwordField.hasError('required')">Password is required.</mat-error>
         </mat-form-field>
-    </div>
 
-    <div fxLayout="row" fxLayoutAlign="end ">
-        <!-- TODO: needs to be a router link -->
-        <span class="mat-caption">Forgot your password?</span>
+        <div *ngIf="this.isLoginView" fxLayout="row" fxLayoutAlign="end">
+            <span class="fake-link forgot-password-link">Forgot your password?</span>
+        </div>
     </div>
 
     <div class="mt-16" fxLayout="column" fxLayoutGap="12px">
         <button mat-flat-button 
-            *ngIf="this.isLogin"
+            *ngIf="this.isEmailSignupView"
             type="submit" 
             color="primary"
-            (click)="this.login()">
+            [disabled]="this.loading">
+            Create an account
+        </button>
+
+        <button mat-flat-button 
+            *ngIf="this.isLoginView"
+            type="submit" 
+            color="primary"
+            [disabled]="this.loading">
             Sign in
         </button>
-        <button mat-flat-button 
-            *ngIf="!this.isLogin"
-            type="submit" 
-            color="primary"
-            (click)="this.register()">
-            Register
-        </button>
-        <button mat-stroked-button type="reset" (click)="this.toggleAction()">{{ this.getToggleLabel() }}</button>
-    </div>
+        <div *ngIf="!this.isLoginView" fxLayout="row" fxLayoutAlign="center">
+            <span>Already have an account?&nbsp;</span>
+            <span class="fake-link" (click)="this.toggleLogin()">Sign in</span>
+        </div>
 
-    <div class="mat-caption my-48"><span>OR</span></div>
-
-    <div fxLayout="column" fxLayoutGap="12px">
-        <button mat-flat-button color="primary">
-            <mat-icon svgIcon="google"></mat-icon>
-            Continue with Google
-        </button>
-        <button mat-flat-button color="primary">Continue with Facebook</button>
-    </div> 
+        <div *ngIf="this.isLoginView" fxLayout="row" fxLayoutAlign="center">
+            <span>Don't have an account?&nbsp;</span>
+            <span class="fake-link" (click)="this.toggleEmailSignup()">Register</span>
+        </div>
+    </div>  
 </form>

@@ -9,6 +9,11 @@ import { JwtService } from '../jwt/jwt.service';
 })
 export class AuthService {
 
+  /*
+  TODO:
+    - Fix login with providers
+  */
+
   constructor(
     private api: ApiService,
     private jwt: JwtService,
@@ -59,7 +64,7 @@ export class AuthService {
   async registerWithEmail(name: string, email: string, password: string, phone?: string): Promise<any> 
   {
     const response = await this.api.registerWithEmail({name, email, password, phone});
-    return response;
+    return response; 
   }
 
   isLoggedIn(): boolean

@@ -1,7 +1,7 @@
 <div class="select-appointment-container">
   <div>
     <mat-tab-group>
-      <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')">
+      <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')" [disabled]="!slotsFor(day)?.length">
         <ng-template matTabContent>
           <mat-card class="slot-selection-card mat-elevation-z10">
             <div 

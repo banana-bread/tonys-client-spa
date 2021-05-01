@@ -1,8 +1,10 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Client } from '../models/client.model';
 import { AuthService } from '../services/auth/auth/auth.service';
 import { ClientService } from '../services/client.service';
+import { SnackbarNotificationService } from '../services/notifications/snackbar-notifications/snackbar-notification.service';
+import { LoginStateService } from './login-state.service';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +14,18 @@ import { ClientService } from '../services/client.service';
 export class LoginComponent implements OnInit {
   /*
    TODO:
-
-   - snack bar notification for success / failure (create snackbar notification service from bl)
    - implement continue with provider
    - implement forgot your password
-   - implement bottom progress-bar when loading
-   - should emit event, so parent (booking confirmation step) can re-query isLoggedIn()
-   - log in immediately after sucessful registration
   */
 
   @ViewChild('authForm') authForm: NgForm;
+  @Output() loggedIn = new EventEmitter<null>();
 
-  isLogin = true;
+  
+  loading = false;
+  title = 'Create your free account';
+  isLoginView = false;
+  isEmailSignupView = false;
 
   name = '';
   email = '';
@@ -33,52 +35,101 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private clientService: ClientService,
+    private snackbarNotification: SnackbarNotificationService,
+    private loginState: LoginStateService,
   ) { }
 
-  ngOnInit(): void 
+  ngOnInit(): void {}
+
+  setLoading(isLoading: boolean)
   {
+    this.loading = isLoading;
+    this.loginState.loadingChanged(this.loading);
   }
 
-  async login(): Promise<void> 
+  async onSubmit(): Promise<void|null>
   {
     if (this.authForm.invalid) return;
 
-    await this.auth.loginWithEmail(this.email, this.password);
+    this.setLoading(true);
+
+    try
+    {
+      this.isEmailSignupView 
+        ? await this.register()
+        : await this.login();
+
+      this.loggedIn.emit();
+    }
+    finally
+    {
+      this.setLoading(false);
+    }
   }
 
-  async register(): Promise<void>
+  protected async login(): Promise<void> 
   {
-    if (this.authForm.invalid) return;
+    try
+    {
+      await this.auth.loginWithEmail(this.email, this.password);
+      this.snackbarNotification.success('Log in successful!');
+    }
+    catch
+    {
+      this.snackbarNotification.error('Error logging in');
+    }
+  }
 
-    await this.auth.registerWithEmail(this.name, this.email, this.password, this.phone);
+  protected async register(): Promise<void>
+  {
+    try
+    {
+      await this.auth.registerWithEmail(this.name, this.email, this.password, this.phone);
+      this.snackbarNotification.success('Registration successful!')
+      await this.auth.loginWithEmail(this.email, this.password);
+    }
+    catch
+    {
+      this.snackbarNotification.error('Error registering')
+    }
   }
 
   async continueWithGoogle()
   {
-    await this.auth.loginWithProvider('google');
+    console.log('continuing with google!')
+    // await this.auth.loginWithProvider('google');
   }
 
+  async continueWithFacebook()
+  {
+    console.log('continuing with facebook!')
+    // await this.auth.loginWithProvider('facebook');
+  }
+
+  // if isLoggedIn, get authed client
   async getClient(): Promise<Client>
   {
     return await this.clientService.getAuthedClient();
   }
 
-  toggleAction(): void
+  toggleLogin(): void
   {
-    this.isLogin = !this.isLogin;
+    this.isLoginView = true;
+    this.isEmailSignupView = false;
+    this.authForm.resetForm();
   }
 
-  getToggleLabel(): string
+  toggleEmailSignup()
   {
-    return this.isLogin 
-      ? 'Register'
-      : 'Sign in';
+    this.isEmailSignupView = true;
+    this.isLoginView = false;
+    this.authForm.resetForm();
   }
 
   getTitle(): string
   {
-    return !this.isLogin 
-      ? 'Register'
-      : 'Sign in';
+    return this.isLoginView
+      ? 'Sign in to your account'
+      : 'Create your free account'
   }
 }

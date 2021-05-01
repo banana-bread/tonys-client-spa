@@ -20,6 +20,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppCurrencyPipe } from './pipes/currency.pipe';
 import { AppDurationPipe } from './pipes/duration.pipe';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SnackbarNotificationComponent } from './services/notifications/snackbar-notifications/snackbar-notification.component';
 
 
 @NgModule({
@@ -44,10 +47,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatRippleModule,
     ScrollingModule,
     MatProgressBarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     AppCurrencyPipe,
     AppDurationPipe,
+    SnackbarNotificationComponent,
   ],
   providers: [
     DecimalPipe,
@@ -77,6 +83,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     AppDurationPipe,
     DecimalPipe,
     MatProgressBarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    SnackbarNotificationComponent,
   ]
 })
 export class SharedModule { }

@@ -1,52 +1,47 @@
 <div class="stepper-container">
-<mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom">  
-  <mat-step #firstStep
-    state="phone"
-    [completed]="!!selectedServices?.length">
-    <app-service-selection 
-      class="step-component"
-      [serviceDefinitions]="serviceDefinitions" 
-      (selected)="onServiceSelected()">
-    </app-service-selection>
+  <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom">  
+    <mat-step #firstStep state="phone" [completed]="!!selectedServices?.length">
+      
+      <app-service-selection class="step-component"
+        [serviceDefinitions]="serviceDefinitions" 
+        (selected)="onServiceSelected()">
+      </app-service-selection>
 
-      <button 
+      <button matStepperNext
         mat-raised-button 
-        color="primary" 
-        matStepperNext
+        color="primary"  
         [disabled]="!selectedServices || !selectedServices.length">
-          Next
+        Next
       </button>
-  </mat-step>
+
+    </mat-step>
  
-    <mat-step #secondStep
-      fxLayout="row"
-      fxLayoutAlign="center center"
-      state="person"
-      [completed]="!!selectedEmployee">
-      <app-staff-selection
-        [employees]="employees"
+    <mat-step #secondStep fxLayout="row" fxLayoutAlign="center center" state="person" [completed]="!!selectedEmployee">
+
+      <app-staff-selection [employees]="employees"
         (selected)="onStaffSelected($event)">
       </app-staff-selection>
+
     </mat-step>
 
-    <mat-step #thirdStep
-      state="today">
-      <app-slot-selection
-         [days]="days"
+    <mat-step #thirdStep state="today">
+
+      <app-slot-selection [days]="days"
          [slots]="groupedSlots"
          (selected)="onSlotSelected($event)">
       </app-slot-selection>
+
     </mat-step>
     
     <mat-step #fourthStep>
+
       <ng-container *ngIf="stepper.selected == fourthStep">
-        <app-booking-confirmation
-          [slot]="selectedSlot"
+        <app-booking-confirmation [slot]="selectedSlot"
           [services]="selectedServices">
         </app-booking-confirmation>
       </ng-container>
+
     </mat-step>
-    <!-- STEP 4 END -->
   
     <!-- Icon overrides. -->
     <ng-template matStepperIcon="phone">
@@ -56,6 +51,7 @@
       <mat-icon>forum</mat-icon>
     </ng-template>
   </mat-horizontal-stepper>
-  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+  <mat-progress-bar *ngIf="this.loading || this.authLoading" mode="indeterminate"></mat-progress-bar>
   <!-- TODO: make a little bottom status bar type thing maybe -->
 </div>

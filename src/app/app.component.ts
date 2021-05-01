@@ -17,9 +17,7 @@ export class AppComponent {
     private domSanitizer: DomSanitizer,
     ) 
   {
-    this.matIconRegistry.addSvgIcon(
-      'google',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/google_icon.svg')
-    );
+    this.matIconRegistry.addSvgIcon('google',this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/google_icon.svg'));
+    this.matIconRegistry.addSvgIcon('facebook',this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/facebook_icon.svg'));
   }
 }

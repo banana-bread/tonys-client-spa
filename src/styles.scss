@@ -38,8 +38,24 @@ $tonys-webapp-theme: mat-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// UTILS
+.btn-facebook {
+  background-color: #4267B2; 
+  color: #fff;
+}
 
+.snackbar-success {
+  background: #1DA345;
+}
+
+.snackbar-warning {
+  background: #FFC003;
+}
+
+.snackbar-error {
+  background: #DE4045;
+}
+
+// UTILS
 // Padding
 .p-16 {
   padding: 16px;

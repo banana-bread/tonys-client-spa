@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ServiceDefinition } from 'src/app/models/service-definition.model';
 import { TimeSlot } from 'src/app/models/time-slot.model';
 import { AuthService } from 'src/app/services/auth/auth/auth.service';
@@ -20,6 +20,11 @@ export class BookingConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void 
+  {
+    this.updateLoggedIn();
+  }
+
+  updateLoggedIn()
   {
     this.isLoggedIn = this.auth.isLoggedIn();
   }
