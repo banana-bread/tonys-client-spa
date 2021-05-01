@@ -1,3 +1,16 @@
+// #booking-stepper .mat-horizontal-stepper-content,
+// mat-horizontal-stepper#booking-stepper div.mat-horizontal-content-container {
+//     height: 100%;
+// }
+
+.mat-horizontal-content-container{
+    height: 100%;
+  }
+  .mat-horizontal-stepper-content{
+    height: 100%;
+    display: flex;
+  }
+
 .mat-tab-list  {
     height: 300px;
 }

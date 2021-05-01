@@ -1,5 +1,5 @@
 <div class="stepper-container">
-  <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom" backgroundColor="red">  
+  <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom" style="height: 100%;">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length">
       
       <app-service-selection class="step-component"

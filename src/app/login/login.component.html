@@ -1,5 +1,6 @@
+<mat-card class="mat-elevation-z10">
 <div fxLayout="row" fxLayoutAlign="center">
-    <h2 class="mat-display-1" style="margin-bottom: 48px;">{{ this.getTitle() }}</h2>
+    <h2 class="mat-display-1 login-title">{{ this.getTitle() }}</h2>
 </div>
 
 <form #authForm="ngForm" (ngSubmit)="this.onSubmit()" novalidate>
@@ -102,3 +103,4 @@
         </div>
     </div>  
 </form>
+</mat-card>
