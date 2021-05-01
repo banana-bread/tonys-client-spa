@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Client } from '../models/client.model';
 import { AuthService } from '../services/auth/auth/auth.service';
 import { ClientService } from '../services/client.service';
-import { TimeSlotService } from '../services/time-slot.service';
 
 @Component({
   selector: 'app-login',
@@ -11,22 +10,66 @@ import { TimeSlotService } from '../services/time-slot.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: FormControl = new FormControl('', [Validators.required, Validators.email]);
-  password: FormControl = new FormControl('', [Validators.required]);
+  /*
+   TODO:
+
+   - snack bar notification for success / failure (create snackbar notification service from bl)
+   - 
+  */
+
+  @ViewChild('authForm') authForm: NgForm;
+
+  isLogin = true;
+
+  name = '';
+  email = '';
+  phone = '';
+  password = '';
 
   constructor(
-    private authService: AuthService,
-    private clientService: ClientService) { }
+    private auth: AuthService,
+    private clientService: ClientService,
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void 
+  {
+  }
 
   async login(): Promise<void> 
   {
-    this.authService.loginWithEmail(this.email.value, this.password.value)
+    if (this.authForm.invalid) return;
+
+    await this.auth.loginWithEmail(this.email, this.password);
+  }
+
+  async register(): Promise<void>
+  {
+    if (this.authForm.invalid) return;
+
+    await this.auth.registerWithEmail(this.name, this.email, this.password, this.phone);
   }
 
   async getClient(): Promise<Client>
   {
     return await this.clientService.getAuthedClient();
+  }
+
+  toggleAction(): void
+  {
+    this.isLogin = !this.isLogin;
+  }
+
+  getToggleLabel(): string
+  {
+    return this.isLogin 
+      ? 'Register'
+      : 'Sign in';
+  }
+
+  getTitle(): string
+  {
+    return !this.isLogin 
+      ? 'Register'
+      : 'Sign in';
   }
 }

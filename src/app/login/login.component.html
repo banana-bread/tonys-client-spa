@@ -1,21 +1,83 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-    <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-        <form name="loginForm" (ngSubmit)="login()">
-            <mat-card fxLayout="column">
-                <mat-form-field appearance="outline" hideRequiredMarker>
-                    <mat-label>Email</mat-label>
-                    <input matInput required [formControl]="email">
-                    <mat-error *ngIf="email.hasError('email')">Invalid email format.</mat-error>
-                    <mat-error *ngIf="email.hasError('required')">Email is required.</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" hideRequiredMarker>
-                    <mat-label>Password</mat-label>
-                    <input matInput required type="password" [formControl]="password">
-                    <mat-error *ngIf="password.hasError('required')">Password is required.</mat-error>
-                </mat-form-field>
-                <button mat-raised-button color="primary">Login</button>
-            </mat-card>
-        </form>
+<form #authForm="ngForm" (ngSubmit)="login()" novalidate>
+    <div fxLayout="row" fxLayoutAlign="center ">
+        <h2 class="mat-display-2">{{ this.getTitle() }}</h2>
     </div>
 
-</div>
+    <div fxLayout="column">
+        <mat-form-field fxFlex [fxHide]="this.isLogin" hideRequiredMarker>
+            <mat-label>Full name</mat-label>
+            <input type="text" 
+                [(ngModel)]="this.name" 
+                name="nameField" 
+                #nameField="ngModel"
+                [required]="!this.isLogin" 
+                matInput>
+            <mat-icon class="input-icon" matPrefix>person</mat-icon>
+            <mat-error *ngIf="nameField.hasError('required')">Name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex hideRequiredMarker>
+            <mat-label>Email</mat-label>
+            <input type="email" 
+                [(ngModel)]="email"
+                name="emailField"
+                #emailField="ngModel" 
+                required
+                matInput>
+            <mat-icon class="input-icon" matPrefix>email</mat-icon>
+            <mat-error *ngIf="emailField.hasError('email')">Invalid email format.</mat-error>
+            <mat-error *ngIf="emailField.hasError('required')">Email is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex [fxHide]="this.isLogin">
+            <mat-label>Phone</mat-label>
+            <input type="text"
+                [(ngModel)]="this.phone"
+                name="phoneField"
+                matInput>
+            <mat-icon class="input-icon" matPrefix>phone</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field fxFlex hideRequiredMarker>
+            <mat-label>Password</mat-label>
+            <input type="password" 
+                [(ngModel)]="this.password"
+                name="passwordField"
+                #passwordField="ngModel" 
+                required
+                matInput>
+            <mat-icon class="input-icon" matPrefix>lock</mat-icon>
+            <mat-error *ngIf="passwordField.hasError('required')">Password is required.</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end ">
+        <!-- TODO: needs to be a router link -->
+        <span class="mat-caption">Forgot your password?</span>
+    </div>
+
+    <div class="mt-16" fxLayout="column" fxLayoutGap="12px">
+        <button mat-flat-button 
+            *ngIf="this.isLogin"
+            type="submit" 
+            color="primary"
+            (click)="this.login()">
+            Sign in
+        </button>
+        <button mat-flat-button 
+            *ngIf="!this.isLogin"
+            type="submit" 
+            color="primary"
+            (click)="this.register()">
+            Register
+        </button>
+        <button mat-stroked-button type="reset" (click)="this.toggleAction()">{{ this.getToggleLabel() }}</button>
+    </div>
+
+    <div class="mat-caption my-48"><span>OR</span></div>
+
+    <div fxLayout="column" fxLayoutGap="12px">
+        <button mat-flat-button color="primary">Continue with Google</button>
+        <button mat-flat-button color="primary">Continue with Facebook</button>
+    </div> 
+</form>
