@@ -19,7 +19,7 @@ export class AppComponent {
   {
     this.matIconRegistry.addSvgIcon(
       'google',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/google-icon.svg')
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/google_icon.svg')
     );
   }
 }

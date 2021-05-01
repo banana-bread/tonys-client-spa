@@ -8,7 +8,7 @@ type httpMethods = 'GET'|'POST'|'PUT'|'PATCH'|'DELETE';
 })
 export class HttpAdapter {
   // TODO: make this an env variable
-  private readonly API_URL: string = 'http://b725e8cd70bb.ngrok.io'
+  private readonly API_URL: string = 'http://localhost:89'
   private _path: string = '';
   private _queries: string = '';
   private _params: string[] = [];
