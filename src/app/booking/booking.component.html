@@ -1,6 +1,6 @@
 <div class="stepper-container">
-  <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom">  
-    <mat-step #firstStep state="phone" [completed]="!!selectedServices?.length">
+  <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom" backgroundColor="red">  
+    <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length">
       
       <app-service-selection class="step-component"
         [serviceDefinitions]="serviceDefinitions" 
@@ -16,7 +16,7 @@
 
     </mat-step>
  
-    <mat-step #secondStep fxLayout="row" fxLayoutAlign="center center" state="person" [completed]="!!selectedEmployee">
+    <mat-step #secondStep fxLayout="row" fxLayoutAlign="center center" state="person_outline" [completed]="!!selectedEmployee">
 
       <app-staff-selection [employees]="employees"
         (selected)="onStaffSelected($event)">
@@ -33,7 +33,7 @@
 
     </mat-step>
     
-    <mat-step #fourthStep>
+    <mat-step #fourthStep state="receipt">
 
       <ng-container *ngIf="stepper.selected == fourthStep">
         <app-booking-confirmation [slot]="selectedSlot"
