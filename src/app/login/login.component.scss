@@ -1,5 +1,5 @@
 form {
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
 }
 
@@ -8,11 +8,10 @@ div.mat-caption {
     text-align: center; 
     border-bottom: 1px solid lighten(gray, 25%); 
     line-height: 0.1em;
-    // margin: 10px 0 20px; 
- } 
+} 
  
- div.mat-caption span { 
-     background:#fff; 
-     padding:0 10px; 
-     color: gray;
- }
+div.mat-caption span { 
+    background:#fff; 
+    padding:0 10px; 
+    color: gray;
+}

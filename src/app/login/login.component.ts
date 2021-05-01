@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
    TODO:
 
    - snack bar notification for success / failure (create snackbar notification service from bl)
+   - implement continue with provider
+   - implement forgot your password
    - 
   */
 
