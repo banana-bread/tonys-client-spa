@@ -9,10 +9,10 @@ import { ServiceDefinitionService } from '../services/service-definition.service
 import { ServiceDefinition } from '../models/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
 import { DayCollection } from '../helpers/day-collection.helper';
-import { Dictionary, get } from 'lodash';
+import { Dictionary } from 'lodash';
 import { FormGroup } from '@angular/forms';
-import { LoginStateService } from '../login/login-state.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { AppStateService } from '../app-state.service';
 
 @Component({
   selector: 'app-booking',
@@ -27,8 +27,8 @@ export class BookingComponent implements OnInit, OnDestroy {
   @ViewChild('stepper') stepper: MatStepper;
 
   loading = false;
-  authLoading = false;
-  loadingChangeSubscription: Subscription;
+  appLoading = false;
+  appLoadingChanges: Subscription;
 
   employees: Employee[];
   selectedEmployee: Employee;
@@ -47,7 +47,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
     private serviceDefinitionService: ServiceDefinitionService,
-    private loginState: LoginStateService,
+    private appState: AppStateService,
   ) {}   
 
   async ngOnInit(): Promise<void> 
@@ -55,14 +55,12 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.employees = await this.employeeService.getEmployees();
     this.serviceDefinitions = await this.serviceDefinitionService.getServiceDefinitions();
 
-    this.loadingChangeSubscription = this.loginState.loadingChange.subscribe(value => {
-      this.authLoading = value
-    });
+    this.appLoadingChanges = this.appState.loading.subscribe(loading => this.appLoading = loading);
   }  
 
   ngOnDestroy()
   {
-    this.loadingChangeSubscription.unsubscribe();
+    this.appLoadingChanges.unsubscribe();
   }
 
   onSlotSelected(slot: TimeSlot) 

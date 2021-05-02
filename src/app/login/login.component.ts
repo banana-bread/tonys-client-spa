@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AppStateService } from '../app-state.service';
 import { Client } from '../models/client.model';
 import { AuthService } from '../services/auth/auth/auth.service';
 import { ClientService } from '../services/client.service';
 import { SnackbarNotificationService } from '../services/notifications/snackbar-notifications/snackbar-notification.service';
-import { LoginStateService } from './login-state.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private clientService: ClientService,
     private snackbarNotification: SnackbarNotificationService,
-    private loginState: LoginStateService,
+    private appState: AppStateService,
   ) { }
 
   ngOnInit(): void {}
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   setLoading(isLoading: boolean)
   {
     this.loading = isLoading;
-    this.loginState.loadingChanged(this.loading);
+    this.appState.setLoading(this.loading);
   }
 
   async onSubmit(): Promise<void|null>

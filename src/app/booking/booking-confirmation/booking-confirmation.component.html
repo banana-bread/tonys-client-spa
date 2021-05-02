@@ -1,4 +1,60 @@
-<div>
-    <app-login *ngIf="!this.isLoggedIn" (loggedIn)="this.updateLoggedIn()"></app-login>
-    <app-booking-summary *ngIf="this.isLoggedIn" (create)="this.createBooking()"></app-booking-summary>
-</div>
+<app-login *ngIf="!this.isLoggedIn" (loggedIn)="this.updateLoggedIn()"></app-login>
+
+<mat-card class="summary-container mat-elevation-z10" 
+    fxLayout="column" 
+    fxLayoutGap="10px"
+    *ngIf="this.isLoggedIn">
+
+    <div fxLayout="row" fxLayoutAlign="center">
+        <h2 class="confirmation-title mat-display-1">Booking Summary</h2>
+    </div>
+
+    <div fxLayout="row">
+        <mat-divider></mat-divider>
+    </div>
+
+    <div fxLayout="column">
+        <h2 class="mat-title">Tony's Barber Shop</h2>
+        <p>180 N Front St, Belleville, ON</p>
+    </div>
+
+    <!-- <h2 class="mat-title">Claudio Dramisino</h2> -->    
+
+    <div fxLayout="column">
+        <h2 class="mat-title">Claudio Dramisino</h2>
+        <p>Friday, November 12, 9:30 AM - 10:00 AM</p>
+    </div>
+
+    <div fxLayout="row">
+        <mat-divider></mat-divider>
+    </div>
+    
+    <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h2>Hair Cut</h2>
+            <h2>$20</h2>
+        </div>
+        <p>30 min</p>
+    </div>
+    <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h2>Beard Trim</h2>
+            <h2>$10</h2>
+        </div>
+        <p>15 min</p>
+    </div>
+
+    <div fxLayout="row">
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="py-16" fxLayout="row" fxLayoutAlign="space-between center">
+        <h1>Total</h1>
+        <h1>$30</h1>
+    </div>
+
+    <button mat-flat-button 
+        color="primary" 
+        (click)="this.createBooking()"
+        [disabled]="this.loading">Reserve booking</button>
+</mat-card>
