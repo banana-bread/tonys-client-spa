@@ -72,4 +72,20 @@ export class ApiService {
       .data(data)
       .post();
   }
+
+  getBooking(id: string): Promise<any>
+  {
+    return this.http
+      .path('/bookings/{id}')
+      .param('id', id)
+      .get();
+  }
+
+  createBooking(data: {clientId: string, timeSlotId: string, serviceIds: string[]}): Promise<any>
+  {
+    return this.http
+      .path('/bookings')
+      .data(data)
+      .post();
+  }
 }

@@ -107,12 +107,6 @@ export class LoginComponent implements OnInit {
     // await this.auth.loginWithProvider('facebook');
   }
 
-  // if isLoggedIn, get authed client
-  async getClient(): Promise<Client>
-  {
-    return await this.clientService.getAuthedClient();
-  }
-
   toggleLogin(): void
   {
     this.isLoginView = true;

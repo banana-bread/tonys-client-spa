@@ -1,4 +1,4 @@
 <div>
     <app-login *ngIf="!this.isLoggedIn" (loggedIn)="this.updateLoggedIn()"></app-login>
-    <app-booking-summary *ngIf="this.isLoggedIn"></app-booking-summary>
+    <app-booking-summary *ngIf="this.isLoggedIn" (create)="this.createBooking()"></app-booking-summary>
 </div>
