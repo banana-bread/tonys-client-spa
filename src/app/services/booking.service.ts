@@ -9,9 +9,14 @@ export class BookingService {
 
   constructor(private api: ApiService) { }
 
-  async createBooking(clientId: string, timeSlotId: string, serviceIds: string[]): Promise<Booking>
+  async createBooking(clientId: string, timeSlotId: number, serviceIds: string[]): Promise<Booking>
   {
-    const response = await this.api.createBooking({clientId, timeSlotId, serviceIds});
+    const response = await this.api.createBooking({
+      client_id: clientId, 
+      time_slot_id: timeSlotId, 
+      service_definition_ids: serviceIds,
+    });
+
     return new Booking().deserialize(response.data);
   }
 

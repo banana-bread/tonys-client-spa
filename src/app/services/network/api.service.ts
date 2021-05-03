@@ -11,7 +11,7 @@ export class ApiService {
   getAuthedClient(): Promise<any> 
   {
     return this.http
-      .path('/authed/client')
+      .path('/client/authed')
       .get();
   }
 
@@ -81,7 +81,7 @@ export class ApiService {
       .get();
   }
 
-  createBooking(data: {clientId: string, timeSlotId: string, serviceIds: string[]}): Promise<any>
+  createBooking(data: {client_id: string, time_slot_id: number, service_definition_ids: string[]}): Promise<any>
   {
     return this.http
       .path('/bookings')

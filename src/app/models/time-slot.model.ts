@@ -1,9 +1,9 @@
-import { Dictionary, get, groupBy } from "lodash";
+import { Dictionary, groupBy } from "lodash";
 import * as moment from "moment";
 import { Deserializable } from "./deserializable.model";
 
 export class TimeSlot implements Deserializable {
-    id: string = null;
+    id: number = null;
     company_id: string = null;
     employee_id: string = null;
     start_time: Date = null;
