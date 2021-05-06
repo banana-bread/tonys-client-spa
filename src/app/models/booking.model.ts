@@ -1,6 +1,6 @@
-import { Deserializable } from "./deserializable.model";
+import { BaseModel } from "./base.model";
 
-export class Booking implements Deserializable {
+export class Booking extends BaseModel{
   id = '';
   client_id = '';
   employee_id = '';
@@ -9,11 +9,10 @@ export class Booking implements Deserializable {
   started_at: number = null;
   ended_at: number = null;
 
-  constructor() {}
-
-  deserialize(data: any): this 
+  // TODO: figure out how to make this reusable
+  constructor(data: any) 
   {
-    Object.assign(this, data.booking);
-    return this;
+    super();
+    this.map(data.booking);
   }
 }

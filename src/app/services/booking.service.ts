@@ -16,13 +16,15 @@ export class BookingService {
       time_slot_id: timeSlotId, 
       service_definition_ids: serviceIds,
     });
-
-    return new Booking().deserialize(response.data);
+    // console.log(response.data)
+    const booking =  new Booking(response.data);
+    console.log(booking)
+    return booking;
   }
 
   async getBooking(id: string): Promise<Booking>
   {
     const response = await this.api.getBooking(id);
-    return new Booking().deserialize(response.data);
+    return new Booking(response.data);
   }
 }
