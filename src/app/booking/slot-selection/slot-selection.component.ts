@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Dictionary, get } from 'lodash';
 import * as moment from 'moment';
-import { TimeSlot } from 'src/app/models/time-slot.model';
+import { TimeSlot } from 'src/app/models/time-slot/time-slot.model';
 
 @Component({
   selector: 'app-slot-selection',

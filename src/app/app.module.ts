@@ -8,7 +8,8 @@ import { PublicModule } from './public.module';
 import { BookingModule } from './booking/booking.module';
 
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './services/auth/auth-interceptor/auth-interceptor.service';
+import { AuthInterceptor } from './services/auth-interceptor.service';
+import { TonysSharedModule } from '@tonys/shared';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AuthInterceptor } from './services/auth/auth-interceptor/auth-intercept
     HttpClientModule,
     PublicModule,
     BookingModule,
+    TonysSharedModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

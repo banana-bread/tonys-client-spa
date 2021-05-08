@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { TimeSlot } from '../models/time-slot.model';
-import { TimeSlotService } from '../services/time-slot.service';
+import { TimeSlot } from '../models/time-slot/time-slot.model';
+import { TimeSlotService } from '../models/time-slot/time-slot.service';
 import * as moment from 'moment';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { EmployeeService } from '../services/employee.service';
-import { Employee } from '../models/employee.model';
-import { ServiceDefinitionService } from '../services/service-definition.service';
-import { ServiceDefinition } from '../models/service-definition.model';
+import { EmployeeService } from '../models/employee/employee.service';
+import { Employee } from '../models/employee/employee.model';
+import { ServiceDefinitionService } from '../models/service-definition/service-definition.service';
+import { ServiceDefinition } from '../models/service-definition/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
 import { DayCollection } from '../helpers/day-collection.helper';
 import { Dictionary } from 'lodash';

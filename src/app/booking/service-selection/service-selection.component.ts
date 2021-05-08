@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { ServiceDefinition } from 'src/app/models/service-definition.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ServiceDefinition } from 'src/app/models/service-definition/service-definition.model';
 
 @Component({
   selector: 'app-service-selection',

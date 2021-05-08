@@ -1,6 +1,6 @@
 import { Dictionary, groupBy } from "lodash";
 import * as moment from "moment";
-import { BaseModel } from "./base.model";
+import { BaseModel } from "../base.model";
 
 export class TimeSlot extends BaseModel {
 

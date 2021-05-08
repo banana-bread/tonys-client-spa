@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppStateService } from '../app-state.service';
-import { Client } from '../models/client.model';
-import { AuthService } from '../services/auth/auth/auth.service';
-import { ClientService } from '../services/client.service';
-import { SnackbarNotificationService } from '../services/notifications/snackbar-notifications/snackbar-notification.service';
+import { AuthService } from '../services/auth.service';
+import { ClientService } from '../models/client/client.service';
+import { SnackbarNotificationService } from '@tonys/shared';
 
 @Component({
   selector: 'app-login',

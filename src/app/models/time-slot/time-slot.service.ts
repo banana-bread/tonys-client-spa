@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TimeSlot } from '../models/time-slot.model';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { ApiService } from './network/api.service';
+import { TimeSlot } from './time-slot.model';
+import { ApiService } from '../../services/api.service';
 
 @Injectable({
   providedIn: 'root'

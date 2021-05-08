@@ -1,5 +1,5 @@
-import { BaseModel } from "./base.model";
-import { ServiceDefinition } from "./service-definition.model";
+import { BaseModel } from "../base.model";
+
 export class Employee extends BaseModel {
 
     id?: string = '';

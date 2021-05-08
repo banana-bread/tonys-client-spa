@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Booking } from '../models/booking.model';
-import { ApiService } from './network/api.service';
+import { Booking } from './booking.model';
+import { ApiService } from '../../services/api.service';
 
 @Injectable({
   providedIn: 'root'

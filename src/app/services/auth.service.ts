@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../../network/api.service';
-import { JwtService } from '../jwt/jwt.service';
+import { ApiService } from './api.service';
+import { JwtService } from '@tonys/shared';
 
 
 @Injectable({
