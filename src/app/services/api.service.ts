@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { HttpAdapter } from './http-adapter.service';
 import { HttpAdapter } from '@tonys/shared';
 
 @Injectable({
