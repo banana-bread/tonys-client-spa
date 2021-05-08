@@ -1,5 +1,5 @@
 export abstract class BaseModel {
-
+    
     map(data: any) 
     {
         Object.keys(this).forEach(key => {

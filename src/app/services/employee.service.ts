@@ -11,11 +11,11 @@ export class EmployeeService {
   
   constructor(private api: ApiService) {}
 
-  async getEmployees(): Promise<Employee[]> 
+  async getAll(): Promise<Employee[]> 
   {
     const response = await this.api.getEmployees();
     
     return response.data.employees
-      .map(employee => new Employee().deserialize(employee));
+      .map((employee: any) => new Employee(employee));
   }
 }

@@ -9,8 +9,9 @@ export class ClientService {
 
   constructor(private api: ApiService) { }
   
-  async getAuthedClient(): Promise<Client> {
+  async getAuthed(): Promise<Client> 
+  {
    const response = await this.api.getAuthedClient();
-   return new Client().deserialize(response.data);
+   return new Client(response.data.client);
   }
 }

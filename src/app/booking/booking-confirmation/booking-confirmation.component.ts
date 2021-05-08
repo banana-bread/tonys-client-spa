@@ -46,9 +46,9 @@ export class BookingConfirmationComponent implements OnInit {
     try
     {
       const serviceIds: string[] = this.services.map(service => service.id);
-      const client = await this.clientService.getAuthedClient();
+      const client = await this.clientService.getAuthed();
 
-      await this.bookingService.createBooking(client.id, this.slot.id, serviceIds);
+      await this.bookingService.create(client.id, this.slot.id, serviceIds);
 
       this.snackbarNotifications.success('Booking created!');
     }

@@ -1,20 +1,19 @@
 import { Dictionary, groupBy } from "lodash";
 import * as moment from "moment";
-import { Deserializable } from "./deserializable.model";
+import { BaseModel } from "./base.model";
 
-export class TimeSlot implements Deserializable {
-    id: number = null;
-    company_id: string = null;
-    employee_id: string = null;
-    start_time: Date = null;
-    end_time: Date = null;
+export class TimeSlot extends BaseModel {
 
-    constructor() {}
+    id?: number = null;
+    company_id?: string = null;
+    employee_id?: string = null;
+    start_time?: Date = null;
+    end_time?: Date = null;
 
-    deserialize(data: any): this 
+    constructor(data: any = {}) 
     {
-      Object.assign(this, data)
-      return this;
+      super();
+      this.map(data);
     }
     
     static group(slots: TimeSlot[]): Dictionary<TimeSlot[]>

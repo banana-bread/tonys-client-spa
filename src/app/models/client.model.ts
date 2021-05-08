@@ -1,18 +1,14 @@
-import { Deserializable } from "./deserializable.model";
+import { BaseModel } from "./base.model";
 
-export class Client implements Deserializable {
-  id: string;
-  name: string;
-  email: string;
+export class Client extends BaseModel {
 
-  constructor() {
-    this.id = '';
-    this.name = '';
-    this.email = '';
-  }
+  id?: string = '';
+  name?: string = '';
+  email?: string = '';
 
-  deserialize(data: any): this {
-    Object.assign(this, data.client);
-    return this;
+  constructor(data: any = {}) 
+  {
+    super();
+    this.map(data);
   }
 }

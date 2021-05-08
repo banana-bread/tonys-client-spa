@@ -1,19 +1,18 @@
-import { Deserializable } from "./deserializable.model";
+import { BaseModel } from "./base.model";
 import { ServiceDefinition } from "./service-definition.model";
-export class Employee implements Deserializable{
-    id: string = '';
-    company_id: string = '';
-    name: string = '';
-    email: string = '';
+export class Employee extends BaseModel {
 
-    constructor() {}
-    
-    deserialize(data: any): this 
+    id?: string = '';
+    company_id?: string = '';
+    name?: string = '';
+    email?: string = '';
+
+    constructor(data: any = {}) 
     {
-        Object.assign(this, data);
-        return this;
+        super();
+        this.map(data);
     }
-
+    
     get initials(): string
     {
         return this.name[0].toUpperCase();

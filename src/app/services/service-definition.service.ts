@@ -11,11 +11,11 @@ export class ServiceDefinitionService {
 
   constructor(private api: ApiService) { }
 
-  async getServiceDefinitions(): Promise<ServiceDefinition[]> 
+  async getAll(): Promise<ServiceDefinition[]> 
   {
     const response = await this.api.getServiceDefinitions();
     
     return response.data.service_definitions
-      .map(service => new ServiceDefinition().deserialize(service));
+      .map((service: any) => new ServiceDefinition(service));
   }
 }

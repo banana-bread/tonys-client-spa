@@ -52,8 +52,8 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> 
   {
-    this.employees = await this.employeeService.getEmployees();
-    this.serviceDefinitions = await this.serviceDefinitionService.getServiceDefinitions();
+    this.employees = await this.employeeService.getAll();
+    this.serviceDefinitions = await this.serviceDefinitionService.getAll();
 
     this.appLoadingChanges = this.appState.loading.subscribe(loading => this.appLoading = loading);
   }  
@@ -101,7 +101,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     const dateTo = moment().endOf('day').add(30, 'days').unix().toString();
     const serviceIds = this.selectedServices.map(service => service.id);
   
-    return await this.timeSlotService.getAvailableTimeSlots(
+    return await this.timeSlotService.getAllAvailable(
       serviceIds, dateFrom, dateTo, this.selectedEmployee.id
     );
   }
