@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "shared-u": "npm uninstall @tonys/shared --registry http://localhost:4873",
+    "shared-i": "npm i @tonys/shared --registry http://localhost:4873"
   },
   "private": true,
   "dependencies": {
