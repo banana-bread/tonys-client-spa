@@ -69,8 +69,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTabsModule,
     MatRippleModule,
     ScrollingModule,
-    AppCurrencyPipe,
-    AppDurationPipe,
     DecimalPipe,
     MatProgressBarModule,
     MatProgressSpinnerModule,
