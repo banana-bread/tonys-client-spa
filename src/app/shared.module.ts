@@ -17,8 +17,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { AppCurrencyPipe } from './pipes/currency.pipe';
-import { AppDurationPipe } from './pipes/duration.pipe';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -46,10 +44,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressBarModule,
     MatProgressSpinnerModule,
   ],
-  declarations: [
-    AppCurrencyPipe,
-    AppDurationPipe,
-  ],
+  declarations: [],
   providers: [
     DecimalPipe,
     { provide:MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
