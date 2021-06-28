@@ -19,6 +19,8 @@ import { MatRippleModule } from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TonysSharedModule } from '@tonys/shared';
+
 
 @NgModule({
   imports:[ 
@@ -43,6 +45,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ScrollingModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    TonysSharedModule.forRoot(),
   ],
   declarations: [],
   providers: [

@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // TODO: need to learn about child routing etc
-  { path: 'appointments', component: BookingComponent},
+  { path: ':companyId/appointments', component: BookingComponent},
 
 ];
 

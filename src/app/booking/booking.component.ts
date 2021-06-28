@@ -13,6 +13,7 @@ import { Dictionary } from 'lodash';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../app-state.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -36,24 +37,27 @@ export class BookingComponent implements OnInit, OnDestroy {
   serviceDefinitions: ServiceDefinition[];
   selectedServices: ServiceDefinition[];
 
-  groupedSlots: Dictionary<TimeSlot[]>
   selectedSlot: TimeSlot;
-  days: moment.Moment[];
+  openSlots: TimeSlot[];
 
   serviceGroup: FormGroup;
   staffGroup: FormGroup;
+
+  // dateFilter = (date: Date): boolean => true;
+  companyId = this.route.snapshot.paramMap.get('companyId');
 
   constructor(
     private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
     private serviceDefinitionService: ServiceDefinitionService,
     private appState: AppStateService,
+    private route: ActivatedRoute,
   ) {}   
 
   async ngOnInit(): Promise<void> 
   {
-    this.employees = await this.employeeService.getAll();
-    this.serviceDefinitions = await this.serviceDefinitionService.getAll();
+    this.employees = await this.employeeService.getAll(this.companyId);
+    this.serviceDefinitions = await this.serviceDefinitionService.getAll(this.companyId);
 
     this.appLoadingChanges = this.appState.loading.subscribe(loading => this.appLoading = loading);
   }  
@@ -74,14 +78,17 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.selectedServices = this.serviceDefinitions.filter(service => service.selected)
   }
 
+  goToStaffSelection()
+  {
+    this.stepper.next()
+  }
+
   async onStaffSelected(id: string)
   {
     this.loading = true;
 
     this.selectedEmployee = this.getSelectedEmployee(id);
-    const slots = await this.getOpenSlots();
-    this.days = DayCollection.fromSlots(slots);
-    this.groupedSlots = TimeSlot.group(slots);
+    this.openSlots = await this.getOpenSlots();
 
     this.loading = false;
     this.stepper.next();
@@ -102,7 +109,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     const serviceIds = this.selectedServices.map(service => service.id);
   
     return await this.timeSlotService.getAllAvailable(
-      serviceIds, dateFrom, dateTo, this.selectedEmployee.id
+      serviceIds, dateFrom, dateTo, this.selectedEmployee.id, this.companyId
     );
   }
 }

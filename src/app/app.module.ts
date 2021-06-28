@@ -22,7 +22,6 @@ import { TonysSharedModule } from '@tonys/shared';
     HttpClientModule,
     PublicModule,
     BookingModule,
-    TonysSharedModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

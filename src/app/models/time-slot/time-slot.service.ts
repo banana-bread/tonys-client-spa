@@ -9,10 +9,10 @@ export class TimeSlotService {
 
   constructor(private api: ApiService) { }
 
-  async getAllAvailable(serviceIds: string[], dateFrom: string, dateTo: string, employeeId): Promise<TimeSlot[]> 
+  async getAllAvailable(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string, companyId: string): Promise<TimeSlot[]> 
   {
     const response = await this.api.getAvailableTimeSlots(
-      serviceIds, dateFrom, dateTo, employeeId
+      serviceIds, dateFrom, dateTo, employeeId, companyId
     );
     
     return response.data.time_slots

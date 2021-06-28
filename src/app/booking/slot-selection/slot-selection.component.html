@@ -1,27 +1,27 @@
-<div class="select-appointment-container">
-  <!-- <div > -->
-    <mat-tab-group>
-      <mat-tab *ngFor="let day of days" [label]="day.format('MMM DD')" [disabled]="!slotsFor(day)?.length">
-        <ng-template matTabContent>
-          <mat-card class="slot-selection-card mat-elevation-z10">
-            <div 
-               *ngFor="let slot of slotsFor(day); last as isLast;"
-               (click)="onSelected(slot)">
-               <div 
-                  class="slot-selection"
-                  fxLayout="row"
-                  fxLayoutAlign=" center"
-                  matRipple>
-                   <mat-card-title fxFlex>
-                    {{ slot.start_time | date:'h:mm a' }}
-                   </mat-card-title>
-                   <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
-               </div>
-               <mat-divider *ngIf="!isLast"></mat-divider>
-            </div>
-          </mat-card>
-        </ng-template>
-      </mat-tab>
-    </mat-tab-group>
-  <!-- </div> -->
+<div fxLayout="column" fxLayoutAlign=" center" style="height: 100%;">
+    <div class="calendar-container">
+      <mat-calendar [selected]="selectedDate" 
+        (selectedChange)="onDateSelected($event)"
+        [dateFilter]="dateFilter">
+      </mat-calendar>
+    </div>
+    <mat-card *ngIf="selectedDateSlots?.length" class="selection-card mat-elevation-z2">
+      <div *ngFor="let slot of selectedDateSlots; let i = index; last as isLast;"
+        (click)="onSelected(slot)">
+          <div 
+            class="slot-selection"
+            fxLayout="row"
+            fxLayoutAlign=" center"
+            matRipple>
+              <mat-card-title fxFlex>
+              {{ slot.start_time | date:'h:mm a' }}
+              </mat-card-title>
+              <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
+          </div>
+          <mat-divider *ngIf="!isLast"></mat-divider>
+      </div>
+    </mat-card>
+    <div *ngIf="!selectedDateSlots?.length">
+      Select a day to view available appointment times.
+    </div>
 </div>

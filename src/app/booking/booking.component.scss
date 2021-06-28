@@ -35,3 +35,17 @@ mat-progress-bar {
     top: 0; 
     z-index: 1000; 
 }
+
+.next-button-container {
+    padding: 8px 16px;
+    max-width: 450px;
+    width: 100%;
+
+    button {
+        width: 100%;
+    }
+}
+
+h1 {
+    margin-bottom: 40px;
+}

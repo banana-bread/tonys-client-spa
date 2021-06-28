@@ -6,7 +6,7 @@ import { BookingService } from 'src/app/models/booking/booking.service';
 import { ClientService } from 'src/app/models/client/client.service';
 import { AppStateService } from 'src/app/app-state.service';
 import { SnackbarNotificationService } from '@tonys/shared';
-// import { SnackbarNotificationService } from 'src/app/services/notifications/snackbar-notifications/snackbar-notification.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-booking-confirmation',
   templateUrl: './booking-confirmation.component.html',
@@ -20,12 +20,15 @@ export class BookingConfirmationComponent implements OnInit {
   isLoggedIn: boolean;
   loading = false;
 
+  companyId = this.route.snapshot.paramMap.get('companyId');
+
   constructor(
     private auth: AuthService,
     private clientService: ClientService,
     private bookingService: BookingService,
     private appState: AppStateService,
     private snackbarNotifications: SnackbarNotificationService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void 
@@ -49,7 +52,8 @@ export class BookingConfirmationComponent implements OnInit {
       const serviceIds: string[] = this.services.map(service => service.id);
       const client = await this.clientService.getAuthed();
 
-      await this.bookingService.create(client.id, this.slot.id, serviceIds);
+      await this.bookingService.create(client.id, this.slot.id, serviceIds, this.companyId);
+
 
       // TODO: should re-route to a different view from here.. but WHERE?!?!
       // could be '/booking/confirmation'

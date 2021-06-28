@@ -6,6 +6,7 @@ import { StaffSelectionComponent } from './staff-selection/staff-selection.compo
 import { SlotSelectionComponent } from './slot-selection/slot-selection.component';
 import { PublicModule } from '../public.module';
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
+import { TonysSharedModule } from '@tonys/shared';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { BookingConfirmationComponent } from './booking-confirmation/booking-con
     imports: [
         SharedModule,
         PublicModule,
+        TonysSharedModule.forRoot(),
     ],
     exports: []
   })

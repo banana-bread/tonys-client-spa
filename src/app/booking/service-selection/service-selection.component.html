@@ -1,22 +1,20 @@
-<mat-card class="service-selection-card mat-elevation-z10">
-   <div *ngFor="let service of serviceDefinitions; let i = index; first as isFirst;" 
-      [attr.data-index]="i">
+<mat-card class="selection-card mat-elevation-z2" *ngIf="serviceDefinitions?.length">
+   <div *ngFor="let service of serviceDefinitions; let i = index; first as isFirst;" [attr.data-index]="i">
       <mat-divider *ngIf="!isFirst"></mat-divider>
-       <div class="service-item" 
-          fxLayout="row"
-          fxFlex
-          (click)="onSelected(service)">
-           <div fxLayout="column" fxFlex="10">
-               <mat-icon color="primary" *ngIf="!service.selected">radio_button_unchecked</mat-icon>
-               <mat-icon color="primary" *ngIf="service.selected">check_circle</mat-icon>
-           </div>
-           <div fxLayout="column" fxFlex>
-             <mat-card-title>{{ service.name }}</mat-card-title>
+      <div class="service-item" fxLayout="row" fxLayoutGap="10px" fxFlex (click)="onSelected(service)">
+         <div fxLayout="column">
+            <mat-icon color="primary" *ngIf="!service.selected">radio_button_unchecked</mat-icon>
+            <mat-icon color="primary" *ngIf="service.selected">check_circle</mat-icon>
+         </div>
+         <div fxLayout="column">
+            <mat-card-title>{{ service.name }}</mat-card-title>
             <mat-card-subtitle>{{ service.duration | appDuration }}</mat-card-subtitle>
-          </div>
-           <div fxLayout="column">
-              <mat-card-title>{{ service.price | appCurrency }}</mat-card-title>
-           </div>
+         </div>
+         <span fxFlex></span>
+         <div fxLayout="column">
+            <mat-card-title>{{ service.price | appCurrency }}</mat-card-title>
+         </div>
        </div>
     </div>
 </mat-card>
+<mat-progress-spinner *ngIf="!serviceDefinitions?.length" mode="indeterminate"></mat-progress-spinner>

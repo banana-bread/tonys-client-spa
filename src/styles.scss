@@ -55,6 +55,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: #DE4045;
 }
 
+mat-card.selection-card {
+  max-width: 450px;
+  width: 100%;
+}
+
 // UTILS
 // Padding
 .p-16 {

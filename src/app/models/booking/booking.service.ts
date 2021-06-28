@@ -9,20 +9,21 @@ export class BookingService {
 
   constructor(private api: ApiService) { }
 
-  async create(clientId: string, timeSlotId: number, serviceIds: string[]): Promise<Booking>
+  async create(clientId: string, timeSlotId: number, serviceIds: string[], companyId: string): Promise<Booking>
   {
     const response = await this.api.createBooking({
       client_id: clientId, 
       time_slot_id: timeSlotId, 
       service_definition_ids: serviceIds,
-    });
+    }, companyId);
 
     return new Booking(response.data.booking);
   }
 
   async get(id: string): Promise<Booking>
   {
-    const response = await this.api.getBooking(id);
-    return new Booking(response.data);
+    return new Booking();
+    // const response = await this.api.getBooking(id);
+    // return new Booking(response.data);
   }
 }

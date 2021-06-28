@@ -9,9 +9,9 @@ export class ServiceDefinitionService {
 
   constructor(private api: ApiService) { }
 
-  async getAll(): Promise<ServiceDefinition[]> 
+  async getAll(companyId: string): Promise<ServiceDefinition[]> 
   {
-    const response = await this.api.getServiceDefinitions();
+    const response = await this.api.getServiceDefinitions(companyId);
     
     return response.data.service_definitions
       .map((service: any) => new ServiceDefinition(service));

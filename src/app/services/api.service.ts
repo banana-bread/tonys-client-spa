@@ -15,10 +15,11 @@ export class ApiService {
       .get();
   }
 
-  getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = ''): Promise<any> 
+  getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = '', companyId: string): Promise<any> 
   {
     return this.http
       .path('/time-slots')
+      .withCompany(companyId)
       .query('service-definition-ids', serviceIds)
       .query('employee-id', employeeId)
       .query('date-from', dateFrom)
@@ -26,25 +27,27 @@ export class ApiService {
       .get();
   }
 
-  getEmployees(): Promise<any> 
+  getEmployees(companyId: string): Promise<any> 
   {
     return this.http  
-      .path('/employees')
+      .path('/booking/employees')
+      .withCompany(companyId)
       .get();
   }
 
-  getEmployee(id: string): Promise<any> 
-  {
-    return this.http
-      .path('/employees/{id}')
-      .param('id', id)
-      .get();
-  }
+  // getEmployee(id: string): Promise<any> 
+  // {
+  //   return this.http
+  //     .path('/employees/{id}')
+  //     .param('id', id)
+  //     .get();
+  // }
 
-  getServiceDefinitions(): Promise<any> 
+  getServiceDefinitions(companyId: string): Promise<any> 
   {
     return this.http
       .path('/service-definitions')
+      .withCompany(companyId)
       .get();
   }
 
@@ -52,7 +55,7 @@ export class ApiService {
   loginWithProvider(provider: string): Promise<any> 
   {
     return this.http
-      .path('/login/{provider}')
+      .path('/client/login/{provider}')
       .param('provider', provider)
       .get();
   }
@@ -60,7 +63,7 @@ export class ApiService {
   loginWithEmail(data: {username: string, password: string}): Promise<any>
   {
     return this.http
-      .path('/login')
+      .path('/client/login')
       .data(data)
       .post();
   }
@@ -73,18 +76,20 @@ export class ApiService {
       .post();
   }
 
-  getBooking(id: string): Promise<any>
+  getBooking(id: string, companyId: string): Promise<any>
   {
     return this.http
       .path('/bookings/{id}')
+      .withCompany(companyId)
       .param('id', id)
       .get();
   }
 
-  createBooking(data: {client_id: string, time_slot_id: number, service_definition_ids: string[]}): Promise<any>
+  createBooking(data: {client_id: string, time_slot_id: number, service_definition_ids: string[]}, companyId: string): Promise<any>
   {
     return this.http
       .path('/bookings')
+      .withCompany(companyId)
       .data(data)
       .post();
   }

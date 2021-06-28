@@ -1,11 +1,10 @@
-<mat-card class="staff-selection-card mat-elevation-z10">
+<mat-card class="staff-selection-card mat-elevation-z2">
   <div (click)="onSelected('any')">
-     <div
-        class="staff-selection"
+     <div class="staff-selection"
         fxLayout="row"
         fxLayoutAlign=" center"
         matRipple>
-        <div fxFlex="18" class="first-available-container">
+        <div fxFlex="18" fxFlex.lt-sm="15" class="first-available-container">
            <span class="material-icons-outlined">groups</span>
         </div>
        <mat-card-title fxFlex>First available</mat-card-title>
@@ -14,14 +13,13 @@
      <mat-divider></mat-divider>
   </div>
 
-  <div *ngFor="let employee of employees; last as isLast;"
-     (click)="onSelected(employee.id)">
+  <div *ngFor="let employee of employees; last as isLast;" (click)="onSelected(employee.id)">
      <div 
         class="staff-selection"
         fxLayout="row"
         fxLayoutAlign=" center"
         matRipple>
-        <div fxFlex="18">
+        <div fxFlex="18" fxFlex.lt-sm="15">
           <div class="employee-avatar">{{ employee.initials }}</div>
         </div>
          <mat-card-title fxFlex>{{ employee.name }}</mat-card-title>
