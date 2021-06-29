@@ -1,12 +1,22 @@
 <div class="stepper-container" fxLayout="column" fxLayoutAlign.lt-sm="space-between">
-  <mat-horizontal-stepper #stepper [linear]="true" labelPosition="bottom">  
-    <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length">
+  <mat-horizontal-stepper class="booking-stepper" #stepper [linear]="true" labelPosition="bottom">  
+    <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
       <h1>Select services</h1>
       <app-service-selection class="step-component"
         [serviceDefinitions]="serviceDefinitions" 
         (selected)="onServiceSelected()">
       </app-service-selection>
-
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div class="action-button-container">
+          <button mat-raised-button
+             (click)="goToStaffSelection()" 
+             color="primary" 
+             *ngIf="!loading" 
+             [disabled]="!selectedServices || !selectedServices?.length">
+             Next
+          </button>
+        </div>
+      </div>
     </mat-step>
  
     <mat-step #secondStep fxLayout="row" fxLayoutAlign="center center" state="person_outline" [completed]="!!selectedEmployee">
@@ -32,11 +42,11 @@
     <mat-step #fourthStep state="receipt">
       <h1>Confirm and book</h1>
       <ng-container *ngIf="stepper.selected == fourthStep">
-        <app-booking-confirmation [slot]="selectedSlot"
+        <app-booking-confirmation 
+          [slot]="selectedSlot"
           [services]="selectedServices">
         </app-booking-confirmation>
       </ng-container>
-
     </mat-step>
   
     <!-- Icon overrides. -->
@@ -48,16 +58,5 @@
     </ng-template>
   </mat-horizontal-stepper>
 
-  <mat-progress-bar *ngIf="this.loading || this.appLoading" mode="indeterminate"></mat-progress-bar>
-
-  <div fxLayout="row" fxLayoutAlign="center" *ngIf="stepper.selected == firstStep ">
-    <div class="next-button-container" fxLayout="row">
-      <button mat-raised-button
-        (click)="goToStaffSelection()" 
-        color="primary"  
-        [disabled]="!selectedServices || !selectedServices?.length">
-        Next
-      </button>
-    </div>
-  </div>
+  <mat-progress-bar *ngIf="appLoading" mode="indeterminate"></mat-progress-bar>
 </div>

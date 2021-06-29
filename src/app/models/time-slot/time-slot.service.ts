@@ -19,4 +19,3 @@ export class TimeSlotService {
       .map((slot: any) => new TimeSlot(slot));
   }
 }
-TimeSlot

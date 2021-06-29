@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TimeSlot } from '../models/time-slot/time-slot.model';
 import { TimeSlotService } from '../models/time-slot/time-slot.service';
 import * as moment from 'moment';
@@ -8,8 +8,6 @@ import { Employee } from '../models/employee/employee.model';
 import { ServiceDefinitionService } from '../models/service-definition/service-definition.service';
 import { ServiceDefinition } from '../models/service-definition/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
-import { DayCollection } from '../helpers/day-collection.helper';
-import { Dictionary } from 'lodash';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../app-state.service';
@@ -19,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-booking',
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.scss'],
+  // encapsulation: ViewEncapsulation.None,
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
@@ -43,7 +42,6 @@ export class BookingComponent implements OnInit, OnDestroy {
   serviceGroup: FormGroup;
   staffGroup: FormGroup;
 
-  // dateFilter = (date: Date): boolean => true;
   companyId = this.route.snapshot.paramMap.get('companyId');
 
   constructor(
@@ -56,8 +54,17 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   async ngOnInit(): Promise<void> 
   {
-    this.employees = await this.employeeService.getAll(this.companyId);
-    this.serviceDefinitions = await this.serviceDefinitionService.getAll(this.companyId);
+    this.loading = true;
+
+    try
+    {
+      this.employees = await this.employeeService.getAll(this.companyId);
+      this.serviceDefinitions = await this.serviceDefinitionService.getAll(this.companyId);
+    }
+    finally
+    {
+      this.loading = false;
+    }
 
     this.appLoadingChanges = this.appState.loading.subscribe(loading => this.appLoading = loading);
   }  
@@ -85,12 +92,12 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   async onStaffSelected(id: string)
   {
-    this.loading = true;
+    this.appState.setLoading(true);
 
     this.selectedEmployee = this.getSelectedEmployee(id);
     this.openSlots = await this.getOpenSlots();
 
-    this.loading = false;
+    this.appState.setLoading(false);
     this.stepper.next();
   }
 

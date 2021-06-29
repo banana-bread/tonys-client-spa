@@ -8,25 +8,17 @@
 
 .service-item {
     cursor: pointer;
-    padding: 15px 0;
-
-    @media (min-width: 600px) {
-        padding: 20px 15px 15px;
-    }
-
+    padding: 16px;
 }
 
 .mat-icon {
-    transform: scale(1.2);
-
-    @media (min-width: 600px) {
-        transform: scale(1.4);
-    }
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
 }
 
 mat-card {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
 }
 
 mat-card-title {

@@ -1,19 +1,28 @@
-.summary-container {
-    max-width: 450px;
-    margin: 0 auto;
+:host {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.confirmation-title {
-    margin-bottom: 48px;
-}
-
-h2,
-p {
-    margin-top: -3px;
+h1, h2, h3, p {
     margin-bottom: 0;
 }
 
-h1 {
-    font-size: 30px;
-    font-weight: 700;
+p {
+    margin-top: -3px;
+}
+
+.total-row h1 {
+    font-weight: bold;
+}
+
+.button-container {
+    max-width: 450px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+mat-progress-spinner {
+    margin-top: 50px;
 }

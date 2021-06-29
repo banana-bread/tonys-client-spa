@@ -1,27 +1,17 @@
-<app-login *ngIf="!this.isLoggedIn" (loggedIn)="this.updateLoggedIn()"></app-login>
+<app-login *ngIf="!appState.isLoggedIn && !loading"></app-login>
 
-<mat-card class="summary-container mat-elevation-z10" 
+<mat-card class="selection-card mat-elevation-z2" 
     fxLayout="column" 
-    fxLayoutGap="10px"
-    *ngIf="this.isLoggedIn">
+    fxLayoutGap="12px"
+    *ngIf="appState.isLoggedIn && !loading">
 
-    <div fxLayout="row" fxLayoutAlign="center">
-        <h2 class="confirmation-title mat-display-1">Booking Summary</h2>
-    </div>
-
-    <div fxLayout="row">
-        <mat-divider></mat-divider>
+    <div fxLayout="column">
+        <h2 class="mat-title">{{ company.name }}</h2>
+        <p>{{ company.address }}</p>
     </div>
 
     <div fxLayout="column">
-        <h2 class="mat-title">Tony's Barber Shop</h2>
-        <p>180 N Front St, Belleville, ON</p>
-    </div>
-
-    <!-- <h2 class="mat-title">Claudio Dramisino</h2> -->    
-
-    <div fxLayout="column">
-        <h2 class="mat-title">Claudio Dramisino</h2>
+        <h2 class="mat-title">{{ employee.name }}</h2>
         <p>Friday, November 12, 9:30 AM - 10:00 AM</p>
     </div>
 
@@ -29,32 +19,33 @@
         <mat-divider></mat-divider>
     </div>
     
-    <div fxLayout="column">
+    <div fxLayout="column" *ngFor="let service of services">
         <div fxLayout="row" fxLayoutAlign="space-between center">
-            <h2>Hair Cut</h2>
-            <h2>$20</h2>
+            <h2>{{ service.name }}</h2>
+            <h2>{{ service.price | appCurrency }}</h2>
         </div>
-        <p>30 min</p>
-    </div>
-    <div fxLayout="column">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-            <h2>Beard Trim</h2>
-            <h2>$10</h2>
-        </div>
-        <p>15 min</p>
+        <p>{{ service.duration | appDuration }}</p>
     </div>
 
     <div fxLayout="row">
         <mat-divider></mat-divider>
     </div>
 
-    <div class="py-16" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="total-row" fxLayout="row" fxLayoutAlign="space-between center">
         <h1>Total</h1>
-        <h1>$30</h1>
+        <h1>CA $15</h1>
     </div>
+</mat-card>
 
+<mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+
+<div class="button-container" fxLayout="row" fxLayoutAlign="center">
     <button mat-flat-button 
+        fxFlex
+        *ngIf="!loading"
         color="primary" 
         (click)="this.createBooking()"
-        [disabled]="this.loading">Reserve</button>
-</mat-card>
+        [disabled]="this.loading">
+        Reserve
+    </button>
+</div>

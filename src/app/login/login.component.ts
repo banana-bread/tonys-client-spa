@@ -19,8 +19,6 @@ export class LoginComponent implements OnInit {
   */
 
   @ViewChild('authForm') authForm: NgForm;
-  @Output() loggedIn = new EventEmitter<null>();
-
   
   loading = false;
   title = 'Create your free account';
@@ -59,7 +57,7 @@ export class LoginComponent implements OnInit {
         ? await this.register()
         : await this.login();
 
-      this.loggedIn.emit();
+      this.appState.setLoggedIn(true);
     }
     finally
     {

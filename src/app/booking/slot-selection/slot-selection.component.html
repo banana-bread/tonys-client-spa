@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign=" center" style="height: 100%;">
+<div fxLayout="column" fxLayoutAlign=" center" fxLayoutGap="20px">
     <div class="calendar-container">
       <mat-calendar [selected]="selectedDate" 
         (selectedChange)="onDateSelected($event)"
@@ -8,15 +8,14 @@
     <mat-card *ngIf="selectedDateSlots?.length" class="selection-card mat-elevation-z2">
       <div *ngFor="let slot of selectedDateSlots; let i = index; last as isLast;"
         (click)="onSelected(slot)">
-          <div 
-            class="slot-selection"
+          <div class="slot-selection"
             fxLayout="row"
-            fxLayoutAlign=" center"
+            fxLayoutAlign="space-between center"
             matRipple>
-              <mat-card-title fxFlex>
+              <mat-card-title>
               {{ slot.start_time | date:'h:mm a' }}
               </mat-card-title>
-              <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
+              <mat-icon>arrow_forward_ios</mat-icon>
           </div>
           <mat-divider *ngIf="!isLast"></mat-divider>
       </div>

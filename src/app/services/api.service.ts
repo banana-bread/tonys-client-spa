@@ -35,19 +35,28 @@ export class ApiService {
       .get();
   }
 
-  // getEmployee(id: string): Promise<any> 
-  // {
-  //   return this.http
-  //     .path('/employees/{id}')
-  //     .param('id', id)
-  //     .get();
-  // }
+  getEmployee(id: string, companyId: string): Promise<any> 
+  {
+    return this.http
+      .path('/employees/{id}')
+      .withCompany(companyId)
+      .param('id', id)
+      .get();
+  }
 
   getServiceDefinitions(companyId: string): Promise<any> 
   {
     return this.http
       .path('/service-definitions')
       .withCompany(companyId)
+      .get();
+  }
+
+  getCompany(id: string): Promise<any>
+  {
+    return this.http  
+      .path('/locations/{id}')
+      .param('id', id)
       .get();
   }
 

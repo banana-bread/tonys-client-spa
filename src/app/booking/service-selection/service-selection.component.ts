@@ -20,9 +20,4 @@ export class ServiceSelectionComponent implements OnInit {
     service.selected = !service.selected;
     this.selected.emit(null);
   }
-
-  toggleChecked(service: ServiceDefinition)
-  {
-  }
-
 }

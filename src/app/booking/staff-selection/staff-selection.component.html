@@ -1,14 +1,16 @@
-<mat-card class="staff-selection-card mat-elevation-z2">
+<mat-card class="selection-card mat-elevation-z2">
   <div (click)="onSelected('any')">
      <div class="staff-selection"
         fxLayout="row"
         fxLayoutAlign=" center"
+        fxLayoutGap="10px"
         matRipple>
-        <div fxFlex="18" fxFlex.lt-sm="15" class="first-available-container">
+        <div class="first-available-container">
            <span class="material-icons-outlined">groups</span>
         </div>
-       <mat-card-title fxFlex>First available</mat-card-title>
-       <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
+       <mat-card-title>First available</mat-card-title>
+       <span fxFlex></span>
+       <mat-icon>arrow_forward_ios</mat-icon>
      </div>
      <mat-divider></mat-divider>
   </div>
@@ -18,12 +20,14 @@
         class="staff-selection"
         fxLayout="row"
         fxLayoutAlign=" center"
+        fxLayoutGap="10px"
         matRipple>
-        <div fxFlex="18" fxFlex.lt-sm="15">
+        <div>
           <div class="employee-avatar">{{ employee.initials }}</div>
         </div>
-         <mat-card-title fxFlex>{{ employee.name }}</mat-card-title>
-         <mat-icon fxFlex="10">arrow_forward_ios</mat-icon>
+         <mat-card-title>{{ employee.name }}</mat-card-title>
+         <span fxFlex></span>
+         <mat-icon>arrow_forward_ios</mat-icon>
      </div>
      <mat-divider *ngIf="!isLast"></mat-divider>
   </div>

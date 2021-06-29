@@ -7,6 +7,10 @@ import { ClientService } from 'src/app/models/client/client.service';
 import { AppStateService } from 'src/app/app-state.service';
 import { SnackbarNotificationService } from '@tonys/shared';
 import { ActivatedRoute } from '@angular/router';
+import { Employee } from 'src/app/models/employee/employee.model';
+import { EmployeeService } from 'src/app/models/employee/employee.service';
+import { CompanyService } from 'src/app/models/company/company.service';
+import { Company } from 'src/app/models/company/company.model';
 @Component({
   selector: 'app-booking-confirmation',
   templateUrl: './booking-confirmation.component.html',
@@ -20,33 +24,45 @@ export class BookingConfirmationComponent implements OnInit {
   isLoggedIn: boolean;
   loading = false;
 
+  employee = new Employee();
+  company = new Company();
   companyId = this.route.snapshot.paramMap.get('companyId');
 
   constructor(
     private auth: AuthService,
     private clientService: ClientService,
+    public appState: AppStateService,
+    private employeeService: EmployeeService,
+    private companyService: CompanyService,
     private bookingService: BookingService,
-    private appState: AppStateService,
     private snackbarNotifications: SnackbarNotificationService,
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void 
+  /*
+    TODO:
+      - [ ] Add in time of appointment (start - end)
+      - [ ] disabled reserve button on appState loading
+  */
+  async ngOnInit(): Promise<void> 
   {
-    // turn this into an observable?
-    this.updateLoggedIn();
-  }
+    this.loading = true;
+    this.appState.setLoggedIn(this.auth.isLoggedIn())
 
-  updateLoggedIn()
-  {
-    this.isLoggedIn = this.auth.isLoggedIn();
+    try
+    {
+      this.employee = await this.employeeService.get(this.slot.employee_id, this.companyId);
+      this.company = await this.companyService.get(this.companyId);
+    }
+    finally 
+    {
+      this.loading = false;
+    }
   }
-
   async createBooking()
   {
-    this.setLoading(true);
+    this.appState.setLoading(true);
 
-    // TODO: not working, figure out why
     try
     {
       const serviceIds: string[] = this.services.map(service => service.id);
@@ -67,7 +83,7 @@ export class BookingConfirmationComponent implements OnInit {
     }
     finally
     {
-      this.setLoading(false);
+      this.appState.setLoading(false);
     }
   }
 
