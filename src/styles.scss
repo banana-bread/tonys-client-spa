@@ -60,10 +60,18 @@ mat-card.selection-card {
   width: 100%;
 }
 
+h1.selection-heading {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
 .input-icon {
   margin-right: 8px;
   color: gray;
 }
+
+
 
 // mat-horizontal-stepper.booking-stepper .mat-horizontal-content-container{
 //   height: 100%;

@@ -1,7 +1,4 @@
-<mat-card class="mat-elevation-z10">
-<div fxLayout="row" fxLayoutAlign="center">
-    <h2 class="mat-display-1 login-title">{{ this.getTitle() }}</h2>
-</div>
+<mat-card class="mat-elevation-z2">
 
 <form #authForm="ngForm" (ngSubmit)="this.onSubmit()" novalidate>
     <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="16px">
@@ -15,7 +12,7 @@
         </button>
     </div> 
 
-    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" class="mat-caption or-line my-32"><span>Or</span></div>
+    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" class="mat-caption or-line"><span>Or</span></div>
 
     <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="12px">
         <button mat-flat-button type="reset" color="primary" (click)="this.toggleEmailSignup()">
@@ -23,6 +20,7 @@
             <span fxFlex>Sign up with email</span> 
         </button>
     </div> 
+
     <div fxLayout="column">
         <mat-form-field *ngIf="this.isEmailSignupView" fxFlex hideRequiredMarker>
             <mat-label>Full name</mat-label>
@@ -76,7 +74,7 @@
         </div>
     </div>
 
-    <div class="mt-16" fxLayout="column" fxLayoutGap="12px">
+    <div class="action-row" fxLayout="column" fxLayoutGap="12px">
         <button mat-flat-button 
             *ngIf="this.isEmailSignupView"
             type="submit" 

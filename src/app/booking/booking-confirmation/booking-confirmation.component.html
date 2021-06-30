@@ -1,9 +1,11 @@
-<app-login *ngIf="!appState.isLoggedIn && !loading"></app-login>
+<h1 class="selection-heading" *ngIf="!appState.loggedIn">Sign in to continue</h1>
+<app-login *ngIf="!appState.loggedIn"></app-login>
 
+<h1 class="selection-heading" *ngIf="appState.loggedIn">Confirm and book</h1>
 <mat-card class="selection-card mat-elevation-z2" 
     fxLayout="column" 
     fxLayoutGap="12px"
-    *ngIf="appState.isLoggedIn && !loading">
+    *ngIf="appState.loggedIn">
 
     <div fxLayout="column">
         <h2 class="mat-title">{{ company.name }}</h2>
@@ -12,7 +14,10 @@
 
     <div fxLayout="column">
         <h2 class="mat-title">{{ employee.name }}</h2>
-        <p>Friday, November 12, 9:30 AM - 10:00 AM</p>
+        <p>
+            {{ slot.start_time | date:'EEEE, MMMM d, h:mm a' }} - 
+            {{ bookingEndTime | date:'h:mm a' }}
+        </p>
     </div>
 
     <div fxLayout="row">
@@ -33,19 +38,17 @@
 
     <div class="total-row" fxLayout="row" fxLayoutAlign="space-between center">
         <h1>Total</h1>
-        <h1>CA $15</h1>
+        <h1>{{ bookingTotal | appCurrency }}</h1>
     </div>
 </mat-card>
-
-<mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
 
 <div class="button-container" fxLayout="row" fxLayoutAlign="center">
     <button mat-flat-button 
         fxFlex
-        *ngIf="!loading"
+        *ngIf="appState.loggedIn"
         color="primary" 
         (click)="this.createBooking()"
-        [disabled]="this.loading">
-        Reserve
+        [disabled]="appState.loading">
+        Create booking
     </button>
 </div>

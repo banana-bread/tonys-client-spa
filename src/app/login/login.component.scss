@@ -1,6 +1,6 @@
-mat-card {
+:host {
     max-width: 450px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 div.mat-caption.or-line {
@@ -8,6 +8,8 @@ div.mat-caption.or-line {
     text-align: center; 
     border-bottom: 1px solid lighten(gray, 25%); 
     line-height: 0.1em;
+    margin-top: 32px;
+    margin-bottom: 32px;
 } 
  
 div.mat-caption.or-line span { 
@@ -28,4 +30,8 @@ span.forgot-password-link {
 
 .login-title {
     margin-bottom: 48px;
+}
+
+.action-row {
+    margin-top: 16px;
 }

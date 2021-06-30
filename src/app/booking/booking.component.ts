@@ -12,6 +12,9 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../app-state.service';
 import { ActivatedRoute } from '@angular/router';
+import { Company } from '../models/company/company.model';
+import { CompanyService } from '../models/company/company.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-booking',
@@ -22,7 +25,7 @@ import { ActivatedRoute } from '@angular/router';
     provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
 })
-export class BookingComponent implements OnInit, OnDestroy {
+export class BookingComponent implements OnInit {
 
   @ViewChild('stepper') stepper: MatStepper;
 
@@ -32,6 +35,8 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   employees: Employee[];
   selectedEmployee: Employee;
+  selectedSlotEmployee: Employee;
+  company: Company;
 
   serviceDefinitions: ServiceDefinition[];
   selectedServices: ServiceDefinition[];
@@ -48,7 +53,9 @@ export class BookingComponent implements OnInit, OnDestroy {
     private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
     private serviceDefinitionService: ServiceDefinitionService,
-    private appState: AppStateService,
+    private companyService: CompanyService,
+    public appState: AppStateService,
+    private auth: AuthService,
     private route: ActivatedRoute,
   ) {}   
 
@@ -60,22 +67,28 @@ export class BookingComponent implements OnInit, OnDestroy {
     {
       this.employees = await this.employeeService.getAll(this.companyId);
       this.serviceDefinitions = await this.serviceDefinitionService.getAll(this.companyId);
+      this.company = await this.companyService.get(this.companyId);
+      this.appState.setLoggedIn(this.auth.isLoggedIn());
     }
     finally
     {
       this.loading = false;
     }
-
-    this.appLoadingChanges = this.appState.loading.subscribe(loading => this.appLoading = loading);
   }  
 
-  ngOnDestroy()
+  async onSlotSelected(slot: TimeSlot): Promise<void>
   {
-    this.appLoadingChanges.unsubscribe();
-  }
+    this.appState.setLoading(true);
 
-  onSlotSelected(slot: TimeSlot) 
-  {
+    try
+    {
+      this.selectedSlotEmployee = await this.employeeService.get(slot.employee_id, this.companyId);
+    }
+    finally 
+    {
+      this.appState.setLoading(false);
+    }
+
     this.selectedSlot = slot;
     this.stepper.next();
   }

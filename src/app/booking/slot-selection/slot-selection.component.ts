@@ -51,10 +51,10 @@ export class SlotSelectionComponent implements OnInit {
     this.selectedSlot = null;
   }
 
-  slotsFor(day: moment.Moment)
-  {
-    return get(this.slots, day.format('l'));
-  }
+  // slotsFor(day: moment.Moment)
+  // {
+  //   return get(this.slots, day.format('l'));
+  // }
 
   onSelected(slot: TimeSlot)
   {

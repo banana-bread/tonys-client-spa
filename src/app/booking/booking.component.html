@@ -1,7 +1,6 @@
 <div class="stepper-container" fxLayout="column" fxLayoutAlign.lt-sm="space-between">
   <mat-horizontal-stepper class="booking-stepper" #stepper [linear]="true" labelPosition="bottom">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
-      <h1>Select services</h1>
       <app-service-selection class="step-component"
         [serviceDefinitions]="serviceDefinitions" 
         (selected)="onServiceSelected()">
@@ -20,31 +19,29 @@
     </mat-step>
  
     <mat-step #secondStep fxLayout="row" fxLayoutAlign="center center" state="person_outline" [completed]="!!selectedEmployee">
-      <h1>Select staff</h1>
-      <app-staff-selection [employees]="employees"
-        (selected)="onStaffSelected($event)">
-      </app-staff-selection>
-
+      <ng-container *ngIf="stepper.selected == secondStep">
+        <app-staff-selection [employees]="employees"
+          (selected)="onStaffSelected($event)">
+        </app-staff-selection>
+      </ng-container>
     </mat-step>
 
     <mat-step #thirdStep state="today">
-      <h1>Select date and time</h1>
       <ng-container *ngIf="stepper.selected == thirdStep">
         <app-slot-selection 
           [slots]="openSlots"
           (selected)="onSlotSelected($event)">
         </app-slot-selection>
       </ng-container>
-     
-
     </mat-step>
     
     <mat-step #fourthStep state="receipt">
-      <h1>Confirm and book</h1>
       <ng-container *ngIf="stepper.selected == fourthStep">
         <app-booking-confirmation 
           [slot]="selectedSlot"
-          [services]="selectedServices">
+          [services]="selectedServices"
+          [company]="company"
+          [employee]="selectedSlotEmployee">
         </app-booking-confirmation>
       </ng-container>
     </mat-step>
@@ -58,5 +55,5 @@
     </ng-template>
   </mat-horizontal-stepper>
 
-  <mat-progress-bar *ngIf="appLoading" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="appState.loading" mode="indeterminate"></mat-progress-bar>
 </div>
