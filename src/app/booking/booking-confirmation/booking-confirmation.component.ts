@@ -32,6 +32,7 @@ export class BookingConfirmationComponent implements OnInit {
     private snackbarNotifications: SnackbarNotificationService,
   ) { }
 
+  // TODO: check for auth here.
   ngOnInit(): void 
   {
     const bookingDuration = this.services.reduce((sum, service) => sum + service.duration, 0);
