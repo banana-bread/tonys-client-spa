@@ -4,6 +4,7 @@ import { AppStateService } from '../app-state.service';
 import { AuthService } from '../services/auth.service';
 import { ClientService } from '../models/client/client.service';
 import { SnackbarNotificationService } from '@tonys/shared';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
   title = 'Create your free account';
   isLoginView = false;
   isEmailSignupView = false;
+  isNotMobile: boolean;
 
   name = '';
   email = '';
@@ -35,9 +37,17 @@ export class LoginComponent implements OnInit {
     private clientService: ClientService,
     private snackbarNotification: SnackbarNotificationService,
     private appState: AppStateService,
+    public breakpointObserver: BreakpointObserver,
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void 
+  {
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        this.isNotMobile = !state.matches;
+      });
+  }
 
   setLoading(isLoading: boolean)
   {

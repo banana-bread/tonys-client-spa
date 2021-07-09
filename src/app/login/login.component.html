@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z2">
+<div [class.fake-mat-card]="isNotMobile">
 
 <form #authForm="ngForm" (ngSubmit)="this.onSubmit()" novalidate>
     <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="16px">
@@ -101,4 +101,4 @@
         </div>
     </div>  
 </form>
-</mat-card>
+</div>

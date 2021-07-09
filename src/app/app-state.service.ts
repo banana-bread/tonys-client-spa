@@ -14,24 +14,24 @@ export class AppStateService {
         return this._loading.getValue();
     }
 
-    set loading(val: boolean)
-    {
-        this._loading.next(val);
-    }
-
-    setLoading(loading: boolean)
-    {
-        this.loading = loading;
-    }
-
     get loggedIn(): boolean
     {
         return this._loggedIn.getValue();
     }
 
+    set loading(val: boolean)
+    {
+        this._loading.next(val);
+    }
+
     set loggedIn(val: boolean)
     {
         this._loggedIn.next(val);
+    }
+
+    setLoading(loading: boolean)
+    {
+        this.loading = loading;
     }
 
     setLoggedIn(loggedIn: boolean): void
