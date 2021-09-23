@@ -7,6 +7,8 @@ export class Employee extends BaseModel {
     name?: string = '';
     email?: string = '';
 
+    dates = {}
+
     constructor(data: any = {}) 
     {
         super();

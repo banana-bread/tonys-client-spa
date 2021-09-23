@@ -11,4 +11,6 @@ export class Client extends BaseModel {
     super();
     this.map(data);
   }
+
+  dates = {}
 }

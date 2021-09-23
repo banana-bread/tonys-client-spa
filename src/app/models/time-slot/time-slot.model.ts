@@ -10,12 +10,17 @@ export class TimeSlot extends BaseModel {
     start_time?: Date = null;
     end_time?: Date = null;
 
+    dates = {
+      start_time: null,
+      end_time: null,
+    }
+
     constructor(data: any = {}) 
     {
       super();
       this.map(data);
     }
-    
+
     static group(slots: TimeSlot[]): Dictionary<TimeSlot[]>
     {
       return groupBy(slots, slot => {

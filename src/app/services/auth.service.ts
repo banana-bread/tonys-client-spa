@@ -62,8 +62,7 @@ export class AuthService {
 
   async registerWithEmail(name: string, email: string, password: string, phone?: string): Promise<any> 
   {
-    const response = await this.api.registerWithEmail({name, email, password, phone});
-    return response; 
+    return await this.api.registerWithEmail({name, email, password, phone});
   }
 
   isLoggedIn(): boolean

@@ -1,6 +1,9 @@
+<!-- NOT LOGGED IN -->
 <h1 class="selection-heading" *ngIf="!appState.loggedIn">Sign in to continue</h1>
 <app-login *ngIf="!appState.loggedIn"></app-login>
+<!-- NOT LOGGED IN -->
 
+<!-- LOGGED IN -->
 <h1 class="selection-heading" *ngIf="appState.loggedIn">Confirm and book</h1>
 <mat-card class="selection-card mat-elevation-z2" 
     fxLayout="column" 
@@ -52,3 +55,4 @@
         Book
     </button>
 </div>
+<!-- LOGGED IN -->

@@ -66,8 +66,6 @@ export class LoginComponent implements OnInit {
       this.isEmailSignupView 
         ? await this.register()
         : await this.login();
-
-      this.appState.setLoggedIn(true);
     }
     finally
     {
@@ -80,6 +78,7 @@ export class LoginComponent implements OnInit {
     try
     {
       await this.auth.loginWithEmail(this.email, this.password);
+      this.appState.setLoggedIn(true);
       this.snackbarNotification.success('Log in successful!');
     }
     catch
@@ -95,10 +94,11 @@ export class LoginComponent implements OnInit {
       await this.auth.registerWithEmail(this.name, this.email, this.password, this.phone);
       this.snackbarNotification.success('Registration successful!')
       await this.auth.loginWithEmail(this.email, this.password);
+      this.appState.setLoggedIn(true);
     }
-    catch
+    catch (e)
     {
-      this.snackbarNotification.error('Error registering')
+      this.snackbarNotification.error(e.error.message)
     }
   }
 

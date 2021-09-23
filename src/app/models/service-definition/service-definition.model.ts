@@ -8,6 +8,8 @@ export class ServiceDefinition extends BaseModel {
     duration?: number = 0;
     selected?: boolean = false;
 
+    dates = {}
+
     constructor(data: any = {}) 
     {
         super();

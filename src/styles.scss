@@ -71,6 +71,10 @@ h1.selection-heading {
   color: gray;
 }
 
+mat-form-field.no-padding-bottom > div.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
 
 
 // mat-horizontal-stepper.booking-stepper .mat-horizontal-content-container{

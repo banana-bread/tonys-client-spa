@@ -10,6 +10,8 @@ export class Company extends BaseModel {
     // booking_grace_period?: number = null;
     // settings?: any = null;
 
+    dates = {}
+
   constructor(data: any = {}) 
   {
     super();

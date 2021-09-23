@@ -7,8 +7,13 @@ export class Booking extends BaseModel {
   employee_id? = '';
   cancelled_at?: number = null;
   cancelled_by?: string = null;
-  started_at?: number = null;
-  ended_at?: number = null;
+  started_at?: Date = null;
+  ended_at?: Date = null;
+
+  dates = {
+    started_at: null,
+    ended_at: null,
+  }
 
   // TODO: figure out how to make this reusable
   constructor(data: any = {}) 
