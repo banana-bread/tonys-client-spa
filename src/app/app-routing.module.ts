@@ -5,10 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
+  { path: ':companyId', redirectTo: '/:companyId/bookings', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // TODO: need to learn about child routing etc
-  { path: ':companyId/appointments', component: BookingComponent},
+  { path: ':companyId/bookings', component: BookingComponent},
 
 ];
 

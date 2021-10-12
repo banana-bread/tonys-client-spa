@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { get } from 'lodash';
 import * as moment from 'moment';
 import { TimeSlot } from 'src/app/models/time-slot/time-slot.model';
 
@@ -17,7 +16,6 @@ export class SlotSelectionComponent implements OnInit {
   selectedDateSlots;
   selectedSlot: TimeSlot;
   dateFilter = (date: Date): boolean => true;
-
 
   constructor() { }
 
@@ -50,11 +48,6 @@ export class SlotSelectionComponent implements OnInit {
 
     this.selectedSlot = null;
   }
-
-  // slotsFor(day: moment.Moment)
-  // {
-  //   return get(this.slots, day.format('l'));
-  // }
 
   onSelected(slot: TimeSlot)
   {

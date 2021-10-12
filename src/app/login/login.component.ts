@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit {
   async continueWithGoogle()
   {
     console.log('continuing with google!')
-    // await this.auth.loginWithProvider('google');
+    await this.auth.loginWithProvider('google');
   }
 
   async continueWithFacebook()

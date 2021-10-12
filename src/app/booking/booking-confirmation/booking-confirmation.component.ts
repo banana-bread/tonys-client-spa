@@ -21,6 +21,7 @@ export class BookingConfirmationComponent implements OnInit {
   @Input() company: Company;
 
   loading = false;
+  isBookingConfirmed = false;
 
   bookingEndTime: Date;
   bookingTotal: number;
@@ -51,11 +52,7 @@ export class BookingConfirmationComponent implements OnInit {
       const client = await this.clientService.getAuthed();
 
       await this.bookingService.create(client.id, this.slot.id, serviceIds, this.company.id);
-
-
-      // TODO: should re-route to a different view from here.. but WHERE?!?!
-      // could be '/booking/confirmation'
-      // Thank you for booking, you will get an email confirmation
+      this.isBookingConfirmed = true;
 
       this.snackbarNotifications.success('Booking created!');
     }
