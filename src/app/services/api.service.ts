@@ -77,7 +77,7 @@ export class ApiService {
       .post();
   }
 
-  registerWithEmail(data: {name: string, email: string, password: string, phone?: string}): Promise<any>
+  registerWithEmail(data: {first_name: string, last_name: string, email: string, password: string, phone?: string}): Promise<any>
   {
     return this.http
       .path('/clients')

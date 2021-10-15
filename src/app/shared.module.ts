@@ -20,6 +20,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TonysSharedModule } from '@tonys/shared';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { TonysSharedModule } from '@tonys/shared';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     TonysSharedModule.forRoot(),
+    NgxMaskModule.forRoot(),
   ],
   declarations: [],
   providers: [
@@ -75,6 +77,7 @@ import { TonysSharedModule } from '@tonys/shared';
     DecimalPipe,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    NgxMaskModule,
   ]
 })
 export class SharedModule { }

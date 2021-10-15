@@ -23,15 +23,27 @@
 
     <div fxLayout="column">
         <mat-form-field *ngIf="this.isEmailSignupView" fxFlex hideRequiredMarker>
-            <mat-label>Full name</mat-label>
+            <mat-label>First name</mat-label>
             <input type="text" 
-                [(ngModel)]="this.name" 
-                name="nameField" 
-                #nameField="ngModel"
+                [(ngModel)]="this.first_name" 
+                name="firstNameField" 
+                #firstNameField="ngModel"
                 [required]="!this.isLoginView" 
                 matInput>
             <mat-icon class="input-icon" matPrefix>person</mat-icon>
-            <mat-error *ngIf="nameField.hasError('required')">Name is required.</mat-error>
+            <mat-error *ngIf="firstNameField.hasError('required')">First name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="this.isEmailSignupView" fxFlex hideRequiredMarker>
+            <mat-label>Last name</mat-label>
+            <input type="text" 
+                [(ngModel)]="this.last_name" 
+                name="lastNameField" 
+                #lastNameField="ngModel" 
+                [required]="!this.isLoginView" 
+                matInput>
+            <mat-icon class="input-icon" matPrefix>person</mat-icon>
+            <mat-error *ngIf="lastNameField.hasError('required')">Last name is required.</mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="this.isEmailSignupView || this.isLoginView" fxFlex hideRequiredMarker>
@@ -48,14 +60,15 @@
             <mat-error *ngIf="emailField.hasError('required')">Email is required.</mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="this.isEmailSignupView" fxFlex>
+        <!-- <mat-form-field *ngIf="this.isEmailSignupView" fxFlex>
             <mat-label>Phone</mat-label>
             <input type="text"
                 [(ngModel)]="this.phone"
                 name="phoneField"
+                mask="(000) 000-0000"
                 matInput>
             <mat-icon class="input-icon" matPrefix>phone</mat-icon>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field *ngIf="this.isEmailSignupView || this.isLoginView" fxFlex hideRequiredMarker>
             <mat-label>Password</mat-label>

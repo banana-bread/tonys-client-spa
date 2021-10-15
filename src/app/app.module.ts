@@ -9,7 +9,6 @@ import { BookingModule } from './booking/booking.module';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
-import { TonysSharedModule } from '@tonys/shared';
 
 @NgModule({
   declarations: [

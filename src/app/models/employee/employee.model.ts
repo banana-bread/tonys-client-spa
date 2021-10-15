@@ -2,10 +2,11 @@ import { BaseModel } from "../base.model";
 
 export class Employee extends BaseModel {
 
-    id?: string = '';
-    company_id?: string = '';
-    name?: string = '';
-    email?: string = '';
+    id?: string = null;
+    company_id?: string = null;
+    first_name?: string = null;
+    last_name?: string = null;
+    email?: string = null;
 
     dates = {}
 
@@ -17,6 +18,6 @@ export class Employee extends BaseModel {
     
     get initials(): string
     {
-        return this.name[0].toUpperCase();
+        return `${this.first_name[0]?.toUpperCase()}${this.last_name[0]?.toUpperCase()}`;
     }
 }

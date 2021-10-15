@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
   isEmailSignupView = false;
   isNotMobile: boolean;
 
-  name = '';
+  first_name = '';
+  last_name = '';
   email = '';
-  phone = '';
+  phone: string;
   password = '';
 
   constructor(
@@ -91,7 +92,7 @@ export class LoginComponent implements OnInit {
   {
     try
     {
-      await this.auth.registerWithEmail(this.name, this.email, this.password, this.phone);
+      await this.auth.registerWithEmail(this.first_name, this.last_name, this.email, this.password, this.phone);
       this.snackbarNotification.success('Registration successful!')
       await this.auth.loginWithEmail(this.email, this.password);
       this.appState.setLoggedIn(true);

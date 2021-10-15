@@ -3,9 +3,13 @@
         <form name="loginForm" (ngSubmit)="register()">
             <mat-card fxLayout="column">
                 <mat-form-field appearance="outline" hideRequiredMarker>
-                    <mat-label>Name</mat-label>
-                    <input matInput required [formControl]="name">
-                    <mat-error *ngIf="name.hasError('required')">Name is required.</mat-error>
+                    <mat-label>First name</mat-label>
+                    <input matInput required [formControl]="first_name">
+                    <mat-error *ngIf="first_name.hasError('required')">First name is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" hideRequiredMarker>
+                    <mat-label>Last lame</mat-label>
+                    <input matInput required [formControl]="last_name">
                 </mat-form-field>
                 <mat-form-field appearance="outline" hideRequiredMarker>
                     <mat-label>Email</mat-label>

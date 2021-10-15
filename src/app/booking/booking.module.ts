@@ -7,6 +7,7 @@ import { SlotSelectionComponent } from './slot-selection/slot-selection.componen
 import { PublicModule } from '../public.module';
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { TonysSharedModule } from '@tonys/shared';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [

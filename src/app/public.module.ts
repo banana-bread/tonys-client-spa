@@ -4,6 +4,7 @@ import { SharedModule } from './shared.module'
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [

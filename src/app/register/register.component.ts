@@ -8,7 +8,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  name: FormControl = new FormControl('', [Validators.required]);
+  first_name: FormControl = new FormControl('', [Validators.required]);
+  last_name: FormControl = new FormControl('');
   email: FormControl = new FormControl('', [Validators.required, Validators.email]);
   password: FormControl = new FormControl('', [Validators.required]);
 
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   register(): void 
   {
-    this.auth.registerWithEmail(this.name.value, this.email.value, this.password.value)
+    this.auth.registerWithEmail(this.first_name.value, this.last_name.value, this.email.value, this.password.value)
   }
 
 }
