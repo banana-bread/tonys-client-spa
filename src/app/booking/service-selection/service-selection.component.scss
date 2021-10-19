@@ -25,6 +25,7 @@ mat-card {
 mat-card-title {
     @include card-title-selection-list;
     margin-bottom: 3px;
+    color: #424242;
 }
 
 mat-card-subtitle {

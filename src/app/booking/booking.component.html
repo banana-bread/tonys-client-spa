@@ -1,5 +1,5 @@
 <div class="stepper-container" fxLayout="column" fxLayoutAlign.lt-sm="space-between">
-  <mat-horizontal-stepper class="booking-stepper" #stepper [linear]="true" labelPosition="bottom">  
+  <mat-horizontal-stepper class="booking-stepper" [class.mat-step-header--hidden]="isBookingConfirmed" #stepper [linear]="true" labelPosition="bottom" color="accent">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
       <app-service-selection class="step-component"
         [serviceDefinitions]="serviceDefinitions" 
@@ -9,7 +9,7 @@
         <div class="action-button-container">
           <button mat-raised-button
              (click)="goToStaffSelection()" 
-             color="primary" 
+             color="accent" 
              *ngIf="!loading" 
              [disabled]="!selectedServices || !selectedServices?.length">
              Next
@@ -41,7 +41,8 @@
           [slot]="selectedSlot"
           [services]="selectedServices"
           [company]="company"
-          [employee]="selectedSlotEmployee">
+          [employee]="selectedSlotEmployee"
+          (booked)="this.onBookingConfirmed()">
         </app-booking-confirmation>
       </ng-container>
     </mat-step>

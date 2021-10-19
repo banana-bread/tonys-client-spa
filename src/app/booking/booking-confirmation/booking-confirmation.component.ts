@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ServiceDefinition } from 'src/app/models/service-definition/service-definition.model';
 import { TimeSlot } from 'src/app/models/time-slot/time-slot.model';
 import { BookingService } from 'src/app/models/booking/booking.service';
@@ -19,6 +19,7 @@ export class BookingConfirmationComponent implements OnInit {
   @Input() services: ServiceDefinition[];
   @Input() employee: Employee;
   @Input() company: Company;
+  @Output() booked = new EventEmitter<void>();
 
   loading = false;
   isBookingConfirmed = false;
@@ -53,6 +54,7 @@ export class BookingConfirmationComponent implements OnInit {
 
       await this.bookingService.create(client.id, this.slot.id, serviceIds, this.company.id);
       this.isBookingConfirmed = true;
+      this.booked.emit();
 
       this.snackbarNotifications.success('Booking created!');
     }

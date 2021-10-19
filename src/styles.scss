@@ -12,19 +12,33 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$tonys-webapp-primary: mat-palette($mat-indigo);
-$tonys-webapp-accent: mat-palette($mat-pink, A200, A100, A400);
+$app-primary: mat-palette($mat-grey);
+$app-accent: mat-palette($mat-blue);
+ 
+$app-primary: mat-palette($app-primary);
+$app-accent: mat-palette($app-accent, 600);
+$app-warn: mat-palette($mat-red);
 
-// The warn palette is optional (defaults to red).
-$tonys-webapp-warn: mat-palette($mat-red);
+$app-color-primary: mat-color($app-primary, 200);
+$app-color-accent: mat-color($app-accent);
+$app-color-accent-light: mat-color($app-accent, 100);
+$app-color-warn: mat-color($app-warn);
+
+$app-color-white: mat-color($app-primary, 100);
+$app-color-black: mat-color($app-primary, 800);
+$app-color-dark-gray: mat-color($app-primary, 700);
+$app-color-avatar: mat-color($app-accent, 100);
+$app-color-avatar-font: mat-color($app-accent, 700);
+$app-color-light-gray: mat-color($app-primary, 500);
+$app-color-background: #fafafa;
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $tonys-webapp-theme: mat-light-theme((
   color: (
-    primary: $tonys-webapp-primary,
-    accent: $tonys-webapp-accent,
-    warn: $tonys-webapp-warn,
+    primary: $app-primary,
+    accent: $app-accent,
+    warn: $app-warn,
   )
 ));
 
@@ -64,6 +78,7 @@ h1.selection-heading {
   text-align: center;
   font-size: 30px;
   margin-bottom: 30px;
+  color: $app-color-black;
 }
 
 .input-icon {
@@ -75,10 +90,10 @@ mat-form-field.no-padding-bottom > div.mat-form-field-wrapper {
   padding-bottom: 0;
 }
 
+button[color="accent"] {
+  color: $app-color-white;
+}
 
-
-// mat-horizontal-stepper.booking-stepper .mat-horizontal-content-container{
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-// }
+.mat-step-icon mat-icon.mat-icon {
+  color: $app-color-white;
+}

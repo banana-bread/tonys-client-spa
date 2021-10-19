@@ -5,8 +5,8 @@
       <mat-divider *ngIf="!isFirst"></mat-divider>
       <div class="service-item" fxLayout="row" fxLayoutGap="10px" fxFlex (click)="onSelected(service)">
          <div fxLayout="column">
-            <mat-icon color="primary" *ngIf="!service.selected">radio_button_unchecked</mat-icon>
-            <mat-icon color="primary" *ngIf="service.selected">check_circle</mat-icon>
+            <mat-icon color="accent" *ngIf="!service.selected">radio_button_unchecked</mat-icon>
+            <mat-icon color="accent" *ngIf="service.selected">check_circle</mat-icon>
          </div>
          <div fxLayout="column">
             <mat-card-title>{{ service.name }}</mat-card-title>

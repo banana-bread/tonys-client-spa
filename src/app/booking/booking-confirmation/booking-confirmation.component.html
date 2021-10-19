@@ -18,7 +18,7 @@
 
     <div fxLayout="column">
         <h2 class="mat-title">{{ company.name }}</h2>
-        <p>{{ company.address }}</p>
+        <p>{{ company.full_address }}</p>
     </div>
 
     <div fxLayout="column">
@@ -55,7 +55,7 @@
     <button mat-flat-button 
         fxFlex
         *ngIf="appState.loggedIn && !isBookingConfirmed"
-        color="primary" 
+        color="accent" 
         (click)="this.createBooking()"
         [disabled]="appState.loading">
         Book

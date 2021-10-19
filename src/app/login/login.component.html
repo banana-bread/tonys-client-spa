@@ -15,7 +15,7 @@
     <div *ngIf="!this.isLoginView && !this.isEmailSignupView" class="mat-caption or-line"><span>Or</span></div>
 
     <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="12px">
-        <button mat-flat-button type="reset" color="primary" (click)="this.toggleEmailSignup()">
+        <button mat-flat-button type="reset" color="accent" (click)="this.toggleEmailSignup()">
             <mat-icon fxFlexAlign="center">email</mat-icon>
             <span fxFlex>Sign up with email</span> 
         </button>
@@ -91,7 +91,7 @@
         <button mat-flat-button 
             *ngIf="this.isEmailSignupView"
             type="submit" 
-            color="primary"
+            color="accent"
             [disabled]="this.loading">
             Create an account
         </button>
@@ -99,7 +99,7 @@
         <button mat-flat-button 
             *ngIf="this.isLoginView"
             type="submit" 
-            color="primary"
+            color="accent"
             [disabled]="this.loading">
             Sign in
         </button>

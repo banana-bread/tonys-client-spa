@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TimeSlot } from '../models/time-slot/time-slot.model';
 import { TimeSlotService } from '../models/time-slot/time-slot.service';
 import * as moment from 'moment';
@@ -46,6 +46,8 @@ export class BookingComponent implements OnInit {
 
   serviceGroup: FormGroup;
   staffGroup: FormGroup;
+
+  isBookingConfirmed = false;
 
   companyId = this.route.snapshot.paramMap.get('companyId');
 
@@ -112,6 +114,11 @@ export class BookingComponent implements OnInit {
 
     this.appState.setLoading(false);
     this.stepper.next();
+  }
+
+  onBookingConfirmed()
+  {
+    this.isBookingConfirmed = true;
   }
 
   private getSelectedEmployee(id: string): Employee

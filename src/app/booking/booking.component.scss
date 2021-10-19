@@ -23,7 +23,7 @@
 }
 
 mat-progress-bar {
-    position: absolute;
+    position: fixed;
     top: 0; 
     z-index: 1000; 
 }
@@ -37,3 +37,8 @@ mat-progress-bar {
         width: 100%;
     }
 }
+
+.mat-step-header--hidden {
+    visibility: hidden;
+  }
+  

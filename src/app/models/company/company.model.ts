@@ -23,4 +23,8 @@ export class Company extends BaseModel {
     this.map(data);
   }
 
+  get full_address(): string
+  {
+    return `${this.address.replace('.', '')}, ${this.city} ${this.region}, ${this.postal_code}`;
+  }
 }
