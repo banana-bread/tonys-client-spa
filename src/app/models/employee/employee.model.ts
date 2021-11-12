@@ -7,6 +7,7 @@ export class Employee extends BaseModel {
     first_name?: string = null;
     last_name?: string = null;
     email?: string = null;
+    ordinal_position?: number = 0;
 
     dates = {}
 

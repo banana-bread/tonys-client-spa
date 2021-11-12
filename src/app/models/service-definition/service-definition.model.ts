@@ -7,6 +7,7 @@ export class ServiceDefinition extends BaseModel {
     price?: number = 0;
     duration?: number = 0;
     selected?: boolean = false;
+    ordinal_position?: number = 0;
 
     dates = {}
 
