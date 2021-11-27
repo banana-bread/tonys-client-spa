@@ -13,4 +13,5 @@ export class Client extends BaseModel {
   }
 
   dates = {}
+  relations = {};
 }

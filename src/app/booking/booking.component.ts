@@ -16,6 +16,7 @@ import { Company } from '../models/company/company.model';
 import { CompanyService } from '../models/company/company.service';
 import { AuthService } from '../services/auth.service';
 import { SnackbarNotificationService } from '@tonys/shared';
+import { ContactDialogService } from '../contact-dialog/contact-dialog.component';
 
 @Component({
   selector: 'app-booking',
@@ -62,6 +63,7 @@ export class BookingComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private notifications: SnackbarNotificationService,
+    public contactDialog: ContactDialogService,
   ) {}   
 
   async ngOnInit(): Promise<void> 
@@ -70,10 +72,15 @@ export class BookingComponent implements OnInit {
 
     try
     {
-      this.employees = await this.employeeService.getAll(this.companyId);
-      this.serviceDefinitions = await this.serviceDefinitionService.getAll(this.companyId);
+
       this.company = await this.companyService.get(this.companyId);
+      this.employees = this.company.employees;
+      this.serviceDefinitions = this.company.service_definitions;
       this.appState.setLoggedIn(this.auth.isLoggedIn());
+    }
+    catch (e)
+    {
+      this.router.navigate(['/404'])
     }
     finally
     {

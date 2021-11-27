@@ -9,7 +9,8 @@ export class ServiceDefinition extends BaseModel {
     selected?: boolean = false;
     ordinal_position?: number = 0;
 
-    dates = {}
+    dates = {};
+    relations = {};
 
     constructor(data: any = {}) 
     {

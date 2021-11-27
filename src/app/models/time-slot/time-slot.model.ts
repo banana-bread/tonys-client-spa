@@ -13,7 +13,9 @@ export class TimeSlot extends BaseModel {
     dates = {
       start_time: null,
       end_time: null,
-    }
+    };
+
+    relations = {};
 
     constructor(data: any = {}) 
     {

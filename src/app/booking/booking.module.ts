@@ -19,7 +19,7 @@ import { TonysSharedModule } from '@tonys/shared';
     imports: [
         SharedModule,
         PublicModule,
-        TonysSharedModule.forRoot(),
+        TonysSharedModule.forRoot('http://localhost:89'),
     ],
     exports: []
   })

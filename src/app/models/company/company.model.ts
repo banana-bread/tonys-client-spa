@@ -1,4 +1,6 @@
 import { BaseModel } from "../base.model";
+import { Employee } from "../employee/employee.model";
+import { ServiceDefinition } from "../service-definition/service-definition.model";
 
 export class Company extends BaseModel {
 
@@ -15,7 +17,15 @@ export class Company extends BaseModel {
     settings?: any = null;
     base_schedule?: any = null;
 
+    employees: Employee[] = [];
+    service_definitions: ServiceDefinition[] = [];
+
     dates = {}
+    
+    relations = {
+      employees: Employee,
+      service_definitions: ServiceDefinition,
+    }
 
   constructor(data: any = {}) 
   {

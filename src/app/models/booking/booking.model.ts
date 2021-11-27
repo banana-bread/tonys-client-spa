@@ -15,6 +15,8 @@ export class Booking extends BaseModel {
     ended_at: null,
   }
 
+  relations = {};
+
   // TODO: figure out how to make this reusable
   constructor(data: any = {}) 
   {

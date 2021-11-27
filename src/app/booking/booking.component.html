@@ -5,7 +5,7 @@
       <span fxFlex></span>
       <button mat-stroked-button [matMenuTriggerFor]="optionsMenu">Menu</button>
       <mat-menu #optionsMenu yPosition="below">
-        <button mat-menu-item>Contact</button>
+        <button mat-menu-item (click)="this.contactDialog.open()">Contact</button>
         <button mat-menu-item (click)="onLogout()" *ngIf="appState.loggedIn">Logout</button>
         <!-- <button mat-menu-item (click)="onLogin()" *ngIf="!appState.loggedIn">Login</button> -->
       </mat-menu>

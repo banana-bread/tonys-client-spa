@@ -24,6 +24,8 @@ import { TonysSharedModule } from '@tonys/shared';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -52,10 +54,13 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatToolbarModule,
     MatMenuModule,
-    TonysSharedModule.forRoot(),
+    TonysSharedModule.forRoot('http://localhost:89'),
     NgxMaskModule.forRoot(),
   ],
-  declarations: [],
+  declarations: [
+    ContactDialogComponent,
+    NotFoundComponent,
+  ],
   providers: [
     DecimalPipe,
     { provide:MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
@@ -87,6 +92,8 @@ import { MatMenuModule } from '@angular/material/menu';
     NgxMaskModule,
     MatToolbarModule,
     MatMenuModule,
+    ContactDialogComponent,
+    NotFoundComponent,
   ]
 })
 export class SharedModule { }
