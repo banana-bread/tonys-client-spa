@@ -83,7 +83,10 @@
         </mat-form-field>
 
         <div *ngIf="this.isLoginView" fxLayout="row" fxLayoutAlign="end">
-            <span class="fake-link forgot-password-link">Forgot your password?</span>
+                <span class="fake-link"
+                    (click)="this.onForgotPassword()">
+                    Forgot your password?
+                </span>
         </div>
     </div>
 

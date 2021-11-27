@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookingComponent } from './booking/booking.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
-  { path: ':companyId', redirectTo: '/:companyId/bookings', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  // TODO: need to learn about child routing etc
-  { path: ':companyId/bookings', component: BookingComponent},
+  { path: 'c/:companyId', redirectTo: 'c/:companyId/bookings', pathMatch: 'full' },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'register', component: RegisterComponent },
+  { path: 'c/:companyId/bookings', component: BookingComponent },
+  { path: 'password/reset', component: ResetPasswordComponent, },
 
 ];
 

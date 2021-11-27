@@ -65,6 +65,14 @@ export class AuthService {
     return await this.api.registerWithEmail({first_name, last_name, email, password, phone});
   }
 
+  
+  async logout(): Promise<void>
+  {
+    await this.api.logout();
+
+    this.jwt.removeToken();
+  }
+
   isLoggedIn(): boolean
   {
     return this.jwt.hasToken() && this.jwt.hasValidToken();

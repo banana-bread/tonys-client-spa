@@ -1,10 +1,11 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppStateService } from '../app-state.service';
 import { AuthService } from '../services/auth.service';
 import { ClientService } from '../models/client/client.service';
 import { SnackbarNotificationService } from '@tonys/shared';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { ForgotPasswordService } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
     private clientService: ClientService,
     private snackbarNotification: SnackbarNotificationService,
     private appState: AppStateService,
+    private forgotPasswordService: ForgotPasswordService,
     public breakpointObserver: BreakpointObserver,
   ) { }
 
@@ -101,6 +103,11 @@ export class LoginComponent implements OnInit {
     {
       this.snackbarNotification.error(e.error.message)
     }
+  }
+
+  onForgotPassword()
+  {
+    this.forgotPasswordService.open();
   }
 
   async continueWithGoogle()

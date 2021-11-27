@@ -85,6 +85,31 @@ export class ApiService {
       .post();
   }
 
+  sendForgotPasswordLink(data: {email: string}): Promise<any>
+  {
+    return this.http
+      .path('/clients/forgot-password')
+      .data(data)
+      .post();
+  }
+
+  resetPassword(data: {email: string, password: string}, signature: string, expires: string): Promise<any>
+  {
+    return this.http
+      .path('/clients/reset-password')
+      .data(data)
+      .query('signature', signature)
+      .query('expires', expires)
+      .post();
+  }
+
+  logout(): Promise<any>
+  {
+    return this.http
+      .path('/logout')
+      .delete();
+  }
+
   getBooking(id: string, companyId: string): Promise<any>
   {
     return this.http

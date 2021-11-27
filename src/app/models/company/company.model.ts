@@ -25,6 +25,6 @@ export class Company extends BaseModel {
 
   get full_address(): string
   {
-    return `${this.address.replace('.', '')}, ${this.city} ${this.region}, ${this.postal_code}`;
+    return `${this.address.replace('.', '')}, ${this.city} ${this.region}, ${this.postal_code.substring(0, 3)} ${this.postal_code.substring(3, 6)}`;
   }
 }

@@ -19,8 +19,11 @@ import { MatRippleModule } from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TonysSharedModule } from '@tonys/shared';
 import { NgxMaskModule } from 'ngx-mask';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import { NgxMaskModule } from 'ngx-mask';
     ScrollingModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatMenuModule,
     TonysSharedModule.forRoot(),
     NgxMaskModule.forRoot(),
   ],
@@ -76,8 +82,11 @@ import { NgxMaskModule } from 'ngx-mask';
     ScrollingModule,
     DecimalPipe,
     MatProgressBarModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     NgxMaskModule,
+    MatToolbarModule,
+    MatMenuModule,
   ]
 })
 export class SharedModule { }

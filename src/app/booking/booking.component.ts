@@ -11,10 +11,11 @@ import { MatStepper } from '@angular/material/stepper';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../app-state.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '../models/company/company.model';
 import { CompanyService } from '../models/company/company.service';
 import { AuthService } from '../services/auth.service';
+import { SnackbarNotificationService } from '@tonys/shared';
 
 @Component({
   selector: 'app-booking',
@@ -59,6 +60,8 @@ export class BookingComponent implements OnInit {
     public appState: AppStateService,
     private auth: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
+    private notifications: SnackbarNotificationService,
   ) {}   
 
   async ngOnInit(): Promise<void> 
@@ -81,6 +84,7 @@ export class BookingComponent implements OnInit {
   async onSlotSelected(slot: TimeSlot): Promise<void>
   {
     this.appState.setLoading(true);
+    this.selectedSlot = slot;
 
     try
     {
@@ -91,7 +95,6 @@ export class BookingComponent implements OnInit {
       this.appState.setLoading(false);
     }
 
-    this.selectedSlot = slot;
     this.stepper.next();
   }
 
@@ -121,6 +124,25 @@ export class BookingComponent implements OnInit {
     this.isBookingConfirmed = true;
   }
 
+  // onLogin()
+  // {
+  //   this.router.navigate(['login']);
+  // }
+
+  async onLogout(): Promise<void>
+  {
+    try
+    {
+      await this.auth.logout();
+      this.appState.setLoggedIn(false);
+      this.notifications.success('Signed out')
+    }
+    catch
+    {
+      this.notifications.error('Couldn\'t log out');
+    }
+  }
+
   private getSelectedEmployee(id: string): Employee
   {
     return this.selectedEmployee = id === 'any'
@@ -130,9 +152,9 @@ export class BookingComponent implements OnInit {
 
   private async getOpenSlots(): Promise<TimeSlot[]>
   {
-    // // TODO: this 90 should be a setting of sorts
+    // TODO: this 60 should be a setting of sorts
     const dateFrom = moment().startOf('day').unix().toString();
-    const dateTo = moment().endOf('day').add(90, 'days').unix().toString();
+    const dateTo = moment().endOf('day').add(60, 'days').unix().toString();
     const serviceIds = this.selectedServices.map(service => service.id);
   
     return await this.timeSlotService.getAllAvailable(

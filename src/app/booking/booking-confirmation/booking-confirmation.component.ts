@@ -58,9 +58,9 @@ export class BookingConfirmationComponent implements OnInit {
 
       this.snackbarNotifications.success('Booking created!');
     }
-    catch
+    catch (e)
     {
-      this.snackbarNotifications.error('Error creating booking.');
+      this.snackbarNotifications.error(e.error.message);
     }
     finally
     {

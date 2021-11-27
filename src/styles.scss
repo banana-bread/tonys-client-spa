@@ -31,6 +31,7 @@ $app-color-avatar: mat-color($app-accent, 100);
 $app-color-avatar-font: mat-color($app-accent, 700);
 $app-color-light-gray: mat-color($app-primary, 500);
 $app-color-background: #fafafa;
+$app-color-brand: #1876c9;
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -49,7 +50,7 @@ $tonys-webapp-theme: mat-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+// html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .btn-facebook {
@@ -96,4 +97,11 @@ button[color="accent"] {
 
 .mat-step-icon mat-icon.mat-icon {
   color: $app-color-white;
+}
+
+h1.brand-logo {
+  font-family: 'Lobster', cursive !important;
+  color: $app-color-brand !important;
+  user-select: none !important;
+  margin-bottom: 0;
 }
