@@ -10,6 +10,8 @@ import { BookingModule } from './booking/booking.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 
+// import { RecaptchaModule } from 'ng-recaptcha';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,7 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
     HttpClientModule,
     PublicModule,
     BookingModule,
+    // RecaptchaModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

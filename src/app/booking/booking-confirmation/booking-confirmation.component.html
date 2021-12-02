@@ -3,7 +3,7 @@
 <app-login *ngIf="!appState.loggedIn"></app-login>
 <!-- NOT LOGGED IN -->
 
-<div class="confirmation-email-sent" *ngIf="isBookingConfirmed" fxLayout="column" fxLayoutAlign="center center">
+<div class="confirmation-email-sent" *ngIf="isBookingConfirmed && appState.loggedIn" fxLayout="column" fxLayoutAlign="center center">
     <h1 class="selection-heading">Thank you!</h1>
     <mat-icon>check_circle</mat-icon>
     <p>Your booking was successfully created.  You will receieve a confirmation email shortly.  If you dont see our email, check your spam folder.</p>
