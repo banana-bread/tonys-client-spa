@@ -159,9 +159,9 @@ export class BookingComponent implements OnInit {
 
   private async getOpenSlots(): Promise<TimeSlot[]>
   {
-    // TODO: this 60 should be a setting of sorts
+    // TODO: this 90 should be a setting of sorts
     const dateFrom = moment().startOf('day').unix().toString();
-    const dateTo = moment().endOf('day').add(60, 'days').unix().toString();
+    const dateTo = moment().endOf('day').add(90, 'days').unix().toString();
     const serviceIds = this.selectedServices.map(service => service.id);
   
     return await this.timeSlotService.getAllAvailable(
