@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { JwtService } from '@tonys/shared';
+import { JwtService } from '@tonys-barbers/shared';
 
 
 @Injectable({

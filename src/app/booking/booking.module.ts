@@ -6,7 +6,7 @@ import { StaffSelectionComponent } from './staff-selection/staff-selection.compo
 import { SlotSelectionComponent } from './slot-selection/slot-selection.component';
 import { PublicModule } from '../public.module';
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
-import { TonysSharedModule } from '@tonys/shared';
+import { TonysSharedModule } from '@tonys-barbers/shared';
 
 @NgModule({
     declarations: [

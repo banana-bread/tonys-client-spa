@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpAdapter } from '@tonys/shared';
+import { HttpAdapter } from '@tonys-barbers/shared';
 
 @Injectable({
   providedIn: 'root'

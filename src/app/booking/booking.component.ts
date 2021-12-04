@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '../models/company/company.model';
 import { CompanyService } from '../models/company/company.service';
 import { AuthService } from '../services/auth.service';
-import { SnackbarNotificationService } from '@tonys/shared';
+import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { ContactDialogService } from '../contact-dialog/contact-dialog.component';
 
 @Component({

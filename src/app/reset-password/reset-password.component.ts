@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from "@angular/cdk/l
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgModel } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { SnackbarNotificationService } from "@tonys/shared";
+import { SnackbarNotificationService } from "@tonys-barbers/shared";
 import { ApiService } from "../services/api.service";
 
 @Component({

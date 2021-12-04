@@ -4,7 +4,7 @@ import { TimeSlot } from 'src/app/models/time-slot/time-slot.model';
 import { BookingService } from 'src/app/models/booking/booking.service';
 import { ClientService } from 'src/app/models/client/client.service';
 import { AppStateService } from 'src/app/app-state.service';
-import { SnackbarNotificationService } from '@tonys/shared';
+import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { Employee } from 'src/app/models/employee/employee.model';
 import { Company } from 'src/app/models/company/company.model';
 import * as moment from 'moment';

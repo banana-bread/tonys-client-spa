@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AppStateService } from '../app-state.service';
 import { AuthService } from '../services/auth.service';
 import { ClientService } from '../models/client/client.service';
-import { SnackbarNotificationService } from '@tonys/shared';
+import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ForgotPasswordService } from '../forgot-password/forgot-password.component';
 
