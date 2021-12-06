@@ -54,7 +54,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatDialogModule,
     MatToolbarModule,
     MatMenuModule,
-    TonysSharedModule.forRoot('http://137.184.144.102'),
+    TonysSharedModule.forRoot('https://api.simplebarber.ca'),
     NgxMaskModule.forRoot(),
   ],
   declarations: [
