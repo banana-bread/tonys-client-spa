@@ -76,6 +76,7 @@ export class BookingComponent implements OnInit {
       this.company = await this.companyService.get(this.companyId);
       this.employees = this.company.employees;
       this.serviceDefinitions = this.company.service_definitions;
+
       this.appState.setLoggedIn(this.auth.isLoggedIn());
     }
     catch (e)
@@ -108,6 +109,13 @@ export class BookingComponent implements OnInit {
   onServiceSelected() 
   {
     this.selectedServices = this.serviceDefinitions.filter(service => service.selected)
+
+    // Filters out employees that cannot perform all selected services.
+    this.employees = this.employees.filter(
+      employee => this.selectedServices.every(
+        service => service.employee_ids.some(id => employee.id == id)
+      )
+    )
   }
 
   goToStaffSelection()

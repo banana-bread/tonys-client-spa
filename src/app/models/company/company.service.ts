@@ -12,6 +12,7 @@ export class CompanyService {
   async get(id: string): Promise<Company>
   {
     const response = await this.api.getCompany(id);
+
     return new Company(response.data.company);
   }
 }
