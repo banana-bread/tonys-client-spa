@@ -9,6 +9,8 @@ export class ServiceDefinition extends BaseModel {
     selected?: boolean = false;
     ordinal_position?: number = 0;
 
+    employee_ids?: string[] = [];
+
     dates = {};
     relations = {};
 
