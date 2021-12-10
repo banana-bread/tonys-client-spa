@@ -36,7 +36,7 @@
     <div fxLayout="column" *ngFor="let service of services">
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <h2>{{ service.name }}</h2>
-            <h2>{{ service.price | appCurrency }}</h2>
+            <h2>{{ (service.price / 100) | currency:'CA $':true:'1.0-2' }}</h2>
         </div>
         <p>{{ service.duration | appDuration }}</p>
     </div>
@@ -45,9 +45,20 @@
         <mat-divider></mat-divider>
     </div>
 
+    <div fxLayout="column" >
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h2>Tax</h2>
+            <h2>{{ (tax / 100) | currency:'CA $':true:'1.2-2' }}</h2>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <mat-divider></mat-divider>
+    </div>
+
     <div class="total-row" fxLayout="row" fxLayoutAlign="space-between center">
         <h1>Total</h1>
-        <h1>{{ bookingTotal | appCurrency }}</h1>
+        <h1>{{ (bookingTotal / 100) | currency:'CA $':true:'1.2-2' }}</h1>
     </div>
 </mat-card>
 

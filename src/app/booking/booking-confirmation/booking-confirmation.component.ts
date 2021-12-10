@@ -25,6 +25,7 @@ export class BookingConfirmationComponent implements OnInit {
   isBookingConfirmed = false;
 
   bookingEndTime: Date;
+  tax: number;
   bookingTotal: number;
 
   constructor(
@@ -40,7 +41,9 @@ export class BookingConfirmationComponent implements OnInit {
     const bookingDuration = this.services.reduce((sum, service) => sum + service.duration, 0);
     this.bookingEndTime = moment(this.slot.start_time).add(bookingDuration ,'seconds').toDate();
 
-    this.bookingTotal = this.services.reduce((total, service) => total + service.price, 0);
+    const subTotal = this.services.reduce((total, service) => total + service.price, 0);
+    this.tax = subTotal * 0.13;
+    this.bookingTotal = subTotal + this.tax; 
   }
 
   async createBooking()
