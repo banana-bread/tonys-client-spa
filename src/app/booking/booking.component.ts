@@ -17,6 +17,7 @@ import { CompanyService } from '../models/company/company.service';
 import { AuthService } from '../services/auth.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { ContactDialogService } from '../contact-dialog/contact-dialog.component';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-booking',
@@ -36,6 +37,7 @@ export class BookingComponent implements OnInit {
   appLoadingChanges: Subscription;
 
   employees: Employee[];
+  employeesOriginal: Employee[];
   selectedEmployee: Employee;
   selectedSlotEmployee: Employee;
   company: Company;
@@ -74,7 +76,8 @@ export class BookingComponent implements OnInit {
     {
 
       this.company = await this.companyService.get(this.companyId);
-      this.employees = this.company.employees;
+      this.employeesOriginal = this.company.employees;
+      this.employees = cloneDeep(this.employeesOriginal);
       this.serviceDefinitions = this.company.service_definitions;
 
       this.appState.setLoggedIn(this.auth.isLoggedIn());
@@ -111,7 +114,7 @@ export class BookingComponent implements OnInit {
     this.selectedServices = this.serviceDefinitions.filter(service => service.selected)
 
     // Filters out employees that cannot perform all selected services.
-    this.employees = this.employees.filter(
+    this.employees = this.employeesOriginal.filter(
       employee => this.selectedServices.every(
         service => service.employee_ids.some(id => employee.id == id)
       )

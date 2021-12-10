@@ -1,4 +1,4 @@
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,6 +63,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   providers: [
     DecimalPipe,
+    CurrencyPipe,
     { provide:MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
   ],
   exports: [
@@ -94,6 +95,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatMenuModule,
     ContactDialogComponent,
     NotFoundComponent,
+    CurrencyPipe,
   ]
 })
 export class SharedModule { }

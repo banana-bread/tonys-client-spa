@@ -15,19 +15,18 @@
   <mat-horizontal-stepper class="booking-stepper" [class.mat-step-header--hidden]="isBookingConfirmed" #stepper [linear]="true" labelPosition="bottom" color="accent">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
       <app-service-selection class="step-component"
+        style="margin-bottom: 100px;"
         [serviceDefinitions]="serviceDefinitions" 
         (selected)="onServiceSelected()">
       </app-service-selection>
-      <div fxLayout="row" fxLayoutAlign="center">
-        <div class="action-button-container">
-          <button mat-raised-button
-             (click)="goToStaffSelection()" 
-             color="accent" 
-             *ngIf="!loading" 
-             [disabled]="!selectedServices || !selectedServices?.length">
-             Next
-          </button>
-        </div>
+      <div class="action-button-container">
+        <button mat-raised-button
+           (click)="goToStaffSelection()" 
+           color="accent" 
+           *ngIf="!loading" 
+           [disabled]="!selectedServices || !selectedServices?.length">
+           Next
+        </button>
       </div>
     </mat-step>
  
