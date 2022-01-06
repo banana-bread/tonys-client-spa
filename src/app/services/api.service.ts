@@ -66,7 +66,7 @@ export class ApiService {
     return this.http
       .path('/client/login/{provider}')
       .param('provider', provider)
-      .get();
+      .post();
   }
 
   loginWithEmail(data: {username: string, password: string}): Promise<any>
