@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   
   loading = false;
   title = 'Create your free account';
-  isLoginView = false;
+  isLoginView = true;
   isEmailSignupView = false;
   isNotMobile: boolean;
 
@@ -110,17 +110,17 @@ export class LoginComponent implements OnInit {
     this.forgotPasswordService.open();
   }
 
-  async continueWithGoogle()
-  {
-    console.log('continuing with google!')
-    await this.auth.loginWithProvider('google');
-  }
+  // async continueWithGoogle()
+  // {
+  //   console.log('continuing with google!')
+  //   await this.auth.loginWithProvider('google');
+  // }
 
-  async continueWithFacebook()
-  {
-    console.log('continuing with facebook!')
-    // await this.auth.loginWithProvider('facebook');
-  }
+  // async continueWithFacebook()
+  // {
+  //   console.log('continuing with facebook!')
+  //   // await this.auth.loginWithProvider('facebook');
+  // }
 
   toggleLogin(): void
   {
