@@ -142,10 +142,6 @@ export class BookingComponent implements OnInit {
     this.isBookingConfirmed = true;
   }
 
-  // onLogin()
-  // {
-  //   this.router.navigate(['login']);
-  // }
 
   async onLogout(): Promise<void>
   {

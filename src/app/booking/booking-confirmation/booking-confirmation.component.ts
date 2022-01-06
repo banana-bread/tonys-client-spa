@@ -8,6 +8,9 @@ import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { Employee } from 'src/app/models/employee/employee.model';
 import { Company } from 'src/app/models/company/company.model';
 import * as moment from 'moment';
+import { ReCaptchaService } from 'angular-recaptcha3';
+import { ApiService } from 'src/app/services/api.service';
+
 @Component({
   selector: 'app-booking-confirmation',
   templateUrl: './booking-confirmation.component.html',
@@ -33,6 +36,8 @@ export class BookingConfirmationComponent implements OnInit {
     public appState: AppStateService,
     private bookingService: BookingService,
     private snackbarNotifications: SnackbarNotificationService,
+    private apiService: ApiService,
+    private recaptchaService: ReCaptchaService,
   ) { }
 
   // TODO: check for auth here.
@@ -52,6 +57,15 @@ export class BookingConfirmationComponent implements OnInit {
 
     try
     {
+      const token = await this.recaptchaService.execute();
+      const response = await this.apiService.verifyRecaptcha({token});
+
+      if (! response.data.success)
+      {
+        this.snackbarNotifications.error('We detected a robot.')
+        return;
+      }
+
       const serviceIds: string[] = this.services.map(service => service.id);
       const client = await this.clientService.getAuthed();
 

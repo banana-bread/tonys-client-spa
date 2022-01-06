@@ -127,4 +127,12 @@ export class ApiService {
       .data(data)
       .post();
   }
+
+  verifyRecaptcha(data: {token: string})
+  {
+    return this.http
+      .path('/verify-recaptcha')
+      .data(data)
+      .post();
+  }
 }

@@ -2,10 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppStateService } from '../app-state.service';
 import { AuthService } from '../services/auth.service';
-import { ClientService } from '../models/client/client.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ForgotPasswordService } from '../forgot-password/forgot-password.component';
+import { ReCaptchaService } from 'angular-recaptcha3';
+import { ApiService } from '../services/api.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -13,12 +16,6 @@ import { ForgotPasswordService } from '../forgot-password/forgot-password.compon
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  /*
-   TODO:
-   - implement continue with provider
-   - implement forgot your password
-   - implement captcha for email login
-  */
 
   @ViewChild('authForm') authForm: NgForm;
   
@@ -36,10 +33,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private clientService: ClientService,
     private snackbarNotification: SnackbarNotificationService,
     private appState: AppStateService,
     private forgotPasswordService: ForgotPasswordService,
+    private recaptchaService: ReCaptchaService,
+    private apiService: ApiService,
     public breakpointObserver: BreakpointObserver,
   ) { }
 
@@ -94,6 +92,15 @@ export class LoginComponent implements OnInit {
   {
     try
     {
+      const token = await this.recaptchaService.execute();
+      const response = await this.apiService.verifyRecaptcha({token});
+
+      if (! response.data.success)
+      {
+        this.snackbarNotification.error('We detected a robot.')
+        return;
+      }
+
       await this.auth.registerWithEmail(this.first_name, this.last_name, this.email, this.password, this.phone);
       this.snackbarNotification.success('Registration successful!')
       await this.auth.loginWithEmail(this.email, this.password);
