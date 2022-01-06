@@ -28,6 +28,7 @@
     "@angular/platform-browser-dynamic": "~11.1.1",
     "@angular/router": "~11.1.1",
     "@tonys-barbers/shared": "0.0.29",
+    "angular-recaptcha3": "^2.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "ng-recaptcha": "^9.0.0",

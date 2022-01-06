@@ -1,7 +1,7 @@
 <div [class.fake-mat-card]="isNotMobile">
 
 <form #authForm="ngForm" (ngSubmit)="this.onSubmit()" novalidate>
-    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="16px">
+    <!-- <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="16px">
         <button type="reset" mat-stroked-button (click)="this.continueWithGoogle()">
             <mat-icon fxFlexAlign="center" svgIcon="google"></mat-icon>
             <span fxFlex>Continue with Google</span> 
@@ -10,16 +10,16 @@
             <mat-icon fxFlexAlign="center" svgIcon="facebook"></mat-icon>
             <span fxFlex>Continue with Facebook</span> 
         </button>
-    </div> 
+    </div>  -->
 
-    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" class="mat-caption or-line"><span>Or</span></div>
+    <!-- <div *ngIf="!this.isLoginView && !this.isEmailSignupView" class="mat-caption or-line"><span>Or</span></div> -->
 
-    <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="12px">
+    <!-- <div *ngIf="!this.isLoginView && !this.isEmailSignupView" fxLayout="column" fxLayoutGap="12px">
         <button mat-flat-button type="reset" color="accent" (click)="this.toggleEmailSignup()">
             <mat-icon fxFlexAlign="center">email</mat-icon>
             <span fxFlex>Sign up with email</span> 
         </button>
-    </div> 
+    </div>  -->
 
     <div fxLayout="column">
         <mat-form-field *ngIf="this.isEmailSignupView" fxFlex hideRequiredMarker>
