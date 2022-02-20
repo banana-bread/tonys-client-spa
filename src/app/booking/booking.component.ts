@@ -103,7 +103,7 @@ export class BookingComponent implements OnInit {
 
     try
     {
-      this.selectedSlotEmployee = await this.employeeService.get(slot.employee_id, this.companyId);
+      this.selectedSlotEmployee = await this.employeeService.get(slot.employee_id, this.company.id);
     }
     finally 
     {
@@ -178,7 +178,7 @@ export class BookingComponent implements OnInit {
     const serviceIds = this.selectedServices.map(service => service.id);
   
     return await this.timeSlotService.getAllAvailable(
-      serviceIds, dateFrom, dateTo, this.selectedEmployee.id, this.companyId
+      serviceIds, dateFrom, dateTo, this.selectedEmployee.id, this.company.id
     );
   }
 }
