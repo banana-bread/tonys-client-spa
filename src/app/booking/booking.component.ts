@@ -52,8 +52,10 @@ export class BookingComponent implements OnInit {
   staffGroup: FormGroup;
 
   isBookingConfirmed = false;
+  companyExists = true;
 
   companyId = this.route.snapshot.paramMap.get('companyId');
+  companySlug = this.route.snapshot.paramMap.get('companySlug');
 
   constructor(
     private timeSlotService: TimeSlotService,
@@ -74,8 +76,10 @@ export class BookingComponent implements OnInit {
 
     try
     {
+      this.company = this.companySlug 
+        ? await this.companyService.getBySlug(this.companySlug)
+        : await this.companyService.get(this.companyId);
 
-      this.company = await this.companyService.get(this.companyId);
       this.employeesOriginal = this.company.employees;
       this.employees = cloneDeep(this.employeesOriginal);
       this.serviceDefinitions = this.company.service_definitions;
@@ -84,7 +88,7 @@ export class BookingComponent implements OnInit {
     }
     catch (e)
     {
-      this.router.navigate(['/404'])
+      this.companyExists = false;
     }
     finally
     {

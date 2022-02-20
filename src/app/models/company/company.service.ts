@@ -15,4 +15,11 @@ export class CompanyService {
 
     return new Company(response.data.company);
   }
+
+  async getBySlug(slug: string): Promise<Company>
+  {
+    const response = await this.api.getCompanyBySlug(slug);
+
+    return new Company(response.data.company);
+  }
 }

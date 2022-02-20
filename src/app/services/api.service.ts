@@ -60,6 +60,14 @@ export class ApiService {
       .get();
   }
 
+  getCompanyBySlug(slug: string): Promise<any>
+  {
+    return this.http  
+      .path('/locations/slug/{slug}')
+      .param('slug', slug)
+      .get();
+  }
+
   // This technically logins in and/or registers... find a better name?
   loginWithProvider(provider: string): Promise<any> 
   {
