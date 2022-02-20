@@ -8,13 +8,14 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
 const routes: Routes = [
   { path: 'c/:companyId', redirectTo: 'c/:companyId/bookings', pathMatch: 'full' },
+  { path: 'c/:companyId/bookings', component: BookingComponent },
+  { path: ':companySlug', component: BookingComponent },
   // { path: 'login', component: LoginComponent },
   // { path: 'register', component: RegisterComponent },
-  { path: 'c/:companyId/bookings', component: BookingComponent },
   { path: 'password/reset', component: ResetPasswordComponent, },
 
-  { path: '404', component: NotFoundComponent },
-  { path: '**', redirectTo: '/404' }
+  // { path: '404', component: NotFoundComponent },
+  // { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

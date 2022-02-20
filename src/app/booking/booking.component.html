@@ -11,7 +11,7 @@
       </mat-menu>
     </div>
   </div>
-<div class="stepper-container" fxLayout="column">
+<div class="stepper-container" fxLayout="column" *ngIf="this.companyExists">
   <mat-horizontal-stepper class="booking-stepper" [class.mat-step-header--hidden]="isBookingConfirmed" #stepper [linear]="true" labelPosition="bottom" color="accent">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
       <app-service-selection class="step-component"
@@ -68,6 +68,8 @@
     </ng-template>
   </mat-horizontal-stepper>
 </div>
+
+<app-not-found *ngIf="!this.companyExists"></app-not-found>
 
 <recaptcha 
   [size]="'invisible'"

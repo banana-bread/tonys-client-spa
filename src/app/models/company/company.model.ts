@@ -3,9 +3,9 @@ import { Employee } from "../employee/employee.model";
 import { ServiceDefinition } from "../service-definition/service-definition.model";
 
 export class Company extends BaseModel {
-
     id?: string = null;
     name?: string = null;
+    slug?: string = null;
     city?: string = null;
     region? = null;
     postal_code?: string = null;
@@ -15,7 +15,6 @@ export class Company extends BaseModel {
     time_slot_duration?: number = null;
     booking_grace_period?: number = null;
     settings?: any = null;
-    base_schedule?: any = null;
 
     employees: Employee[] = [];
     service_definitions: ServiceDefinition[] = [];
