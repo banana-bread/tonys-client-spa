@@ -5,6 +5,7 @@ import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { AppStateService } from './services/app-state.service';
 import { ContactDialogService } from './contact-dialog/contact-dialog.component';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private notifications: SnackbarNotificationService,
-    public auth: AuthService,
+    private auth: AuthService,
+    private router: Router,
     public contactDialog: ContactDialogService,
     public appState: AppStateService,
     ) 
@@ -39,5 +41,6 @@ export class AppComponent implements OnInit {
     this.auth.logout();
     this.appState.setLoggedIn(false);
     this.notifications.success('Signed out')
+    this.router.navigate(['login']);
   }
 }

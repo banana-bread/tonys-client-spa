@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppStateService } from '../services/app-state.service';
 import { AuthService } from '../services/auth.service';
@@ -8,8 +8,6 @@ import { ForgotPasswordService } from '../forgot-password/forgot-password.compon
 import { ReCaptchaService } from 'angular-recaptcha3';
 import { ApiService } from '../services/api.service';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +16,7 @@ import { ApiService } from '../services/api.service';
 export class LoginComponent implements OnInit {
 
   @ViewChild('authForm') authForm: NgForm;
+  @Output() loggedIn = new EventEmitter<void>();
   
   loading = false;
   title = 'Create your free account';
@@ -67,6 +66,8 @@ export class LoginComponent implements OnInit {
       this.isEmailSignupView 
         ? await this.register()
         : await this.login();
+
+      this.loggedIn.emit()
     }
     finally
     {
