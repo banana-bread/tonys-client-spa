@@ -7,6 +7,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { ForgotPasswordService } from '../forgot-password-dialog/forgot-password.component';
 import { ReCaptchaService } from 'angular-recaptcha3';
 import { ApiService } from '../../services/api.service';
+import { ClientService } from 'src/app/models/client/client.service';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
     private forgotPasswordService: ForgotPasswordService,
     private recaptchaService: ReCaptchaService,
     private apiService: ApiService,
+    private clientService: ClientService,
     public breakpointObserver: BreakpointObserver,
   ) { }
 
@@ -69,6 +71,9 @@ export class LoginComponent implements OnInit {
         ? await this.register()
         : await this.login();
 
+      const authedClient = await this.clientService.getAuthed();
+      this.appState.setAuthedClient(authedClient);
+      this.appState.setLoggedIn(true);
       this.loggedIn.emit()
     }
     finally
@@ -81,10 +86,7 @@ export class LoginComponent implements OnInit {
   {
     try
     {
-      // TODO: get user from login.
-      const resp = await this.auth.loginWithEmail(this.email, this.password);
-      console.log(resp)
-      this.appState.setLoggedIn(true);
+      await this.auth.loginWithEmail(this.email, this.password);
       this.snackbarNotification.success('Log in successful!');
     }
     catch
@@ -109,7 +111,6 @@ export class LoginComponent implements OnInit {
       await this.auth.registerWithEmail(this.first_name, this.last_name, this.email, this.password, this.phone);
       this.snackbarNotification.success('Registration successful!')
       await this.auth.loginWithEmail(this.email, this.password);
-      this.appState.setLoggedIn(true);
     }
     catch (e)
     {
