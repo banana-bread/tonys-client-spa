@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
+  title = 'Sign in';
+
   constructor(
     private router: Router
   ) { }
@@ -21,4 +23,13 @@ export class LoginPageComponent implements OnInit {
     this.router.navigate(['bookings'])
   }
 
+  onLoginSelected()
+  {
+    this.title = 'Sign in'
+  }
+
+  onRegisterSelected()
+  {
+    this.title = 'Register'
+  }
 }

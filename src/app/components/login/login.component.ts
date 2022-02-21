@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('authForm') authForm: NgForm;
   @Output() loggedIn = new EventEmitter<void>();
+  @Output() loginSelected = new EventEmitter<void>();
+  @Output() registerSelected = new EventEmitter<void>();
   
   loading = false;
   title = 'Create your free account';
@@ -134,6 +136,7 @@ export class LoginComponent implements OnInit {
   {
     this.isLoginView = true;
     this.isEmailSignupView = false;
+    this.loginSelected.emit()
     this.authForm.resetForm();
   }
 
@@ -141,6 +144,7 @@ export class LoginComponent implements OnInit {
   {
     this.isEmailSignupView = true;
     this.isLoginView = false;
+    this.registerSelected.emit()
     this.authForm.resetForm();
   }
 
