@@ -4,6 +4,7 @@ import { NgModel } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { SnackbarNotificationService } from "@tonys-barbers/shared";
 import { ApiService } from "../services/api.service";
+import { AppStateService } from "../services/app-state.service";
 
 @Component({
     selector: 'app-reset-password',
@@ -26,6 +27,7 @@ export class ResetPasswordComponent implements OnInit {
         public breakpointObserver: BreakpointObserver,
         private notifications: SnackbarNotificationService,
         private api: ApiService,
+        private appState: AppStateService,
     ) {}
     ngOnInit(): void 
     {
@@ -46,7 +48,7 @@ export class ResetPasswordComponent implements OnInit {
     {
         if (this.passwordField.invalid) return;
 
-        this.sending = true;
+        this.setLoading(true);
 
         try
         {
@@ -59,7 +61,13 @@ export class ResetPasswordComponent implements OnInit {
         }
         finally
         {
-            this.sending = false;
+            this.setLoading(false);
         }
+    }
+
+    setLoading(isLoading: boolean)
+    {
+        this.sending = isLoading
+        this.appState.setLoading(isLoading);
     }
 }

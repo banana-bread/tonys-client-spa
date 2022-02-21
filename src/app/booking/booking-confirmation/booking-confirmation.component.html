@@ -68,7 +68,7 @@
         *ngIf="appState.isLoggedIn && !isBookingConfirmed"
         color="accent" 
         (click)="this.createBooking()"
-        [disabled]="appState.loading">
+        [disabled]="appState.isLoading">
         Book
     </button>
 </div>

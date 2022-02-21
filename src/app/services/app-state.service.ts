@@ -9,7 +9,7 @@ export class AppStateService {
     private readonly _loading = new BehaviorSubject<boolean>(false)
     private readonly _loggedIn = new BehaviorSubject<boolean>(false);
 
-    get loading(): boolean
+    get isLoading(): boolean
     {
         return this._loading.getValue();
     }

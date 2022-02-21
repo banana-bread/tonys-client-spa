@@ -1,4 +1,3 @@
-<mat-progress-bar *ngIf="appState.loading" mode="indeterminate"></mat-progress-bar>
 <div class="stepper-container" fxLayout="column" *ngIf="this.companyExists">
   <mat-horizontal-stepper class="booking-stepper" [class.mat-step-header--hidden]="isBookingConfirmed" #stepper [linear]="true" labelPosition="bottom" color="accent">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
