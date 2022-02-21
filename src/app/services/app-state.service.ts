@@ -7,11 +7,13 @@ import { Client } from "../models/client/client.model";
 @Injectable({
     providedIn: 'root'
 })
-export class AppStateService {
-
+export class AppStateService 
+{
     private readonly _loading = new BehaviorSubject<boolean>(false)
     private readonly _loggedIn = new BehaviorSubject<boolean>(false);
     private readonly _authedClient = new BehaviorSubject<Client>(new Client());
+
+    readonly authedClient$ = this._authedClient.asObservable();
 
     get isLoading(): boolean
     {

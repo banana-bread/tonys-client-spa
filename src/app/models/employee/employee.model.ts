@@ -1,4 +1,5 @@
 import { BaseModel } from "../base.model";
+import { Company } from "../company/company.model";
 
 export class Employee extends BaseModel {
 
@@ -10,7 +11,9 @@ export class Employee extends BaseModel {
     ordinal_position?: number = 0;
 
     dates = {};
-    relations = {};
+    relations = {
+        company: Company,
+    };
 
     constructor(data: any = {}) 
     {

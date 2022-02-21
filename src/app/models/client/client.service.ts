@@ -21,8 +21,10 @@ export class ClientService {
   {
     const dateFrom = moment().unix().toString();
     const dateTo = moment().add(60, 'days').unix().toString();
-    this.api.getClientBookings(client.id, dateFrom, dateTo);
-    return []
+    const response = await this.api.getClientBookings(client.id, dateFrom, dateTo);
+    const bookings = response.data.bookings.map(booking => new Booking(booking));
+
+    return bookings;
   }
 
   async getPastBookings(client: Client): Promise<Booking[]>
@@ -30,7 +32,9 @@ export class ClientService {
     // currently will only show bookings for past year
     const dateFrom = moment().subtract(365, 'days').unix().toString();
     const dateTo = moment().unix().toString();
-    this.api.getClientBookings(client.id, dateFrom, dateTo);
-    return []
+    const response = await this.api.getClientBookings(client.id, dateFrom, dateTo);
+    const bookings = response.data.bookings.map(booking => new Booking(booking));
+
+    return bookings;
   }
 }

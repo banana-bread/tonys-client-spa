@@ -6,6 +6,7 @@ import { AppStateService } from './services/app-state.service';
 import { ContactDialogService } from './components/contact-dialog/contact-dialog.component';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { ClientService } from './models/client/client.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     private notifications: SnackbarNotificationService,
     private auth: AuthService,
     private router: Router,
+    private clientService: ClientService,
     public contactDialog: ContactDialogService,
     public appState: AppStateService,
     ) 
@@ -31,9 +33,15 @@ export class AppComponent implements OnInit {
     this.matIconRegistry.addSvgIcon('facebook',this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/facebook_icon.svg'));
   }
 
-  ngOnInit(): void 
+  async ngOnInit(): Promise<void> 
   {
     this.appState.setLoggedIn(this.auth.isLoggedIn());
+
+    if (!this.appState.isLoggedIn) return
+    
+    const authedClient = await this.clientService.getAuthed();
+    this.appState.setAuthedClient(authedClient);
+    
   }
 
   onLogout() 

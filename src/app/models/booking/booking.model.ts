@@ -1,4 +1,5 @@
 import { BaseModel } from "../base.model";
+import { Employee } from "../employee/employee.model";
 
 export class Booking extends BaseModel {
   
@@ -15,8 +16,10 @@ export class Booking extends BaseModel {
     ended_at: null,
   }
 
-  relations = {};
-
+  relations = {
+    employee: Employee,   
+  };
+  
   // TODO: figure out how to make this reusable
   constructor(data: any = {}) 
   {
