@@ -1,16 +1,4 @@
 <mat-progress-bar *ngIf="appState.loading" mode="indeterminate"></mat-progress-bar>
-  <div class="app-toolbar" fxLayout="row" fxLayoutAlign="center">
-    <div fxFlex="row" fxLayoutAlign=" center">
-      <h1 class="brand-logo">Simple Barber</h1>
-      <span fxFlex></span>
-      <button mat-stroked-button [matMenuTriggerFor]="optionsMenu">Menu</button>
-      <mat-menu #optionsMenu yPosition="below">
-        <button mat-menu-item (click)="this.contactDialog.open()">Contact</button>
-        <button mat-menu-item (click)="onLogout()" *ngIf="appState.loggedIn">Logout</button>
-        <!-- <button mat-menu-item (click)="onLogin()" *ngIf="!appState.loggedIn">Login</button> -->
-      </mat-menu>
-    </div>
-  </div>
 <div class="stepper-container" fxLayout="column" *ngIf="this.companyExists">
   <mat-horizontal-stepper class="booking-stepper" [class.mat-step-header--hidden]="isBookingConfirmed" #stepper [linear]="true" labelPosition="bottom" color="accent">  
     <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">

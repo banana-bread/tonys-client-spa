@@ -43,18 +43,3 @@ mat-progress-bar {
 .mat-step-header--hidden {
     visibility: hidden;
 }
-
-div.app-toolbar {
-    border-bottom: 1px solid #E0E0E0;
-    height: 50px; 
-    position: sticky; 
-    padding: 0 16px;
-    top: 0; 
-    background-color: #fff; 
-    z-index: 100;
-}
-
-div.app-toolbar > div {
-    max-width: 1200px;
-}
-  

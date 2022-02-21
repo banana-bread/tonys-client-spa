@@ -16,7 +16,6 @@ import { Company } from '../models/company/company.model';
 import { CompanyService } from '../models/company/company.service';
 import { AuthService } from '../services/auth.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
-import { ContactDialogService } from '../contact-dialog/contact-dialog.component';
 import { cloneDeep } from 'lodash';
 
 @Component({
@@ -60,14 +59,10 @@ export class BookingComponent implements OnInit {
   constructor(
     private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
-    private serviceDefinitionService: ServiceDefinitionService,
     private companyService: CompanyService,
     public appState: AppStateService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router,
-    private notifications: SnackbarNotificationService,
-    public contactDialog: ContactDialogService,
   ) {}   
 
   async ngOnInit(): Promise<void> 
@@ -144,21 +139,6 @@ export class BookingComponent implements OnInit {
   onBookingConfirmed()
   {
     this.isBookingConfirmed = true;
-  }
-
-
-  async onLogout(): Promise<void>
-  {
-    try
-    {
-      await this.auth.logout();
-      this.appState.setLoggedIn(false);
-      this.notifications.success('Signed out')
-    }
-    catch
-    {
-      this.notifications.error('Couldn\'t log out');
-    }
   }
 
   private getSelectedEmployee(id: string): Employee

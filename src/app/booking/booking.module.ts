@@ -8,6 +8,7 @@ import { PublicModule } from '../public.module';
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { TonysSharedModule } from '@tonys-barbers/shared';
 import { ReCaptchaModule } from 'angular-recaptcha3';
+import { ClientBookingsComponent } from '../client-bookings/client-bookings.component';
 
 const RECAPTCHA_OPTIONS = {
   invisible: {
@@ -26,6 +27,7 @@ const RECAPTCHA_OPTIONS = {
         StaffSelectionComponent,
         SlotSelectionComponent,
         BookingConfirmationComponent,
+        ClientBookingsComponent,
     ],
     imports: [
         SharedModule,

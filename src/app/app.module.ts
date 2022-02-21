@@ -9,6 +9,7 @@ import { BookingModule } from './booking/booking.module';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { SharedModule } from './shared.module';
 
 // import { RecaptchaModule } from 'ng-recaptcha';
 
@@ -23,6 +24,7 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
     HttpClientModule,
     PublicModule,
     BookingModule,
+    SharedModule,
     // RecaptchaModule,
   ],
   providers: [
