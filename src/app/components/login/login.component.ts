@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AppStateService } from '../services/app-state.service';
-import { AuthService } from '../services/auth.service';
+import { AppStateService } from '../../services/app-state.service';
+import { AuthService } from '../../services/auth.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { ForgotPasswordService } from '../forgot-password/forgot-password.component';
+import { ForgotPasswordService } from '../forgot-password-dialog/forgot-password.component';
 import { ReCaptchaService } from 'angular-recaptcha3';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',

@@ -3,8 +3,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgModel } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { SnackbarNotificationService } from "@tonys-barbers/shared";
-import { ApiService } from "../services/api.service";
-import { AppStateService } from "../services/app-state.service";
+import { ApiService } from "../../services/api.service";
+import { AppStateService } from "../../services/app-state.service";
 
 @Component({
     selector: 'app-reset-password',

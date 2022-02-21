@@ -3,7 +3,7 @@ import { NgModel } from "@angular/forms";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { MatFormField } from "@angular/material/form-field";
 import { SnackbarNotificationService } from "@tonys-barbers/shared";
-import { ApiService } from "../services/api.service";
+import { ApiService } from "../../services/api.service";
 
 @Component({
     selector: 'app-forgot-password-dialog',

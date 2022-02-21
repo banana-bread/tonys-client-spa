@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { PublicModule } from './public.module';
-import { BookingModule } from './booking/booking.module';
+import { BookingModule } from './views/booking-stepper/booking.module';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';

@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookingComponent } from './booking/booking.component';
-import { ClientBookingsComponent } from './client-bookings/client-bookings.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { RegisterComponent } from './register/register.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { BookingComponent } from './views/booking-stepper/booking.component';
+import { ClientBookingsComponent } from './views/client-bookings/client-bookings.component';
+import { LoginPageComponent } from './views/login-page/login-page.component';
+import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { LoginPageGuard } from './services/login-page-guard.service';
 
 const routes: Routes = [

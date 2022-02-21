@@ -3,7 +3,7 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { AppStateService } from './services/app-state.service';
-import { ContactDialogService } from './contact-dialog/contact-dialog.component';
+import { ContactDialogService } from './components/contact-dialog/contact-dialog.component';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 

@@ -24,8 +24,8 @@ import { TonysSharedModule } from '@tonys-barbers/shared';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
-import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { ContactDialogComponent } from './components/contact-dialog/contact-dialog.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 
 @NgModule({
