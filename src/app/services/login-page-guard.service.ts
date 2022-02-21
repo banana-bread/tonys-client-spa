@@ -9,14 +9,13 @@ import { AuthService } from './auth.service';
 export class LoginPageGuard implements CanActivate {
 
   constructor(
-      private auth: AuthService, 
       private router: Router,
-      private state: AppStateService,
+      private appState: AppStateService,
     ) {}
 
   canActivate(): boolean 
   {
-    if (this.auth.isLoggedIn()) 
+    if (this.appState.isLoggedIn) 
     {
       this.router.navigate(['bookings']);
       return false;

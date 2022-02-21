@@ -4,11 +4,11 @@
       <span fxFlex></span>
       <button mat-stroked-button [matMenuTriggerFor]="optionsMenu">Menu</button>
       <mat-menu #optionsMenu yPosition="below">
-        <button  [routerLink]="['login']" mat-menu-item *ngIf="!this.auth.isLoggedIn()">
+        <button  [routerLink]="['login']" mat-menu-item *ngIf="!this.appState.isLoggedIn">
           <mat-icon mat-list-icon>login</mat-icon>
           <span>Login</span> 
         </button>
-        <button [routerLink]="['bookings']" mat-menu-item *ngIf="this.auth.isLoggedIn()">
+        <button [routerLink]="['bookings']" mat-menu-item *ngIf="this.appState.isLoggedIn">
           <mat-icon mat-list-icon>event</mat-icon>
           <span>Bookings</span> 
         </button>
@@ -16,7 +16,7 @@
           <mat-icon mat-list-icon>contact_support</mat-icon>
           <span>Contact</span> 
         </button>
-        <button mat-menu-item (click)="this.onLogout()" *ngIf="this.auth.isLoggedIn()">
+        <button mat-menu-item (click)="this.onLogout()" *ngIf="this.appState.isLoggedIn">
           <mat-icon mat-list-icon>logout</mat-icon>
           <span>Logout</span> 
         </button>

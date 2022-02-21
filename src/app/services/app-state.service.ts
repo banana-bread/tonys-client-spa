@@ -13,10 +13,10 @@ export class AppStateService {
     {
         return this._loading.getValue();
     }
-
-    get loggedIn(): boolean
+    
+    setLoading(loading: boolean)
     {
-        return this._loggedIn.getValue();
+        this.loading = loading;
     }
 
     set loading(val: boolean)
@@ -24,18 +24,19 @@ export class AppStateService {
         this._loading.next(val);
     }
 
-    set loggedIn(val: boolean)
+    get isLoggedIn(): boolean
     {
-        this._loggedIn.next(val);
-    }
-
-    setLoading(loading: boolean)
-    {
-        this.loading = loading;
+        return this._loggedIn.getValue();
     }
 
     setLoggedIn(loggedIn: boolean): void
     {
         this.loggedIn = loggedIn;
     }
+
+    set loggedIn(val: boolean)
+    {
+        this._loggedIn.next(val);
+    }
+
 }

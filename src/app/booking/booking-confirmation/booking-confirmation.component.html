@@ -1,20 +1,20 @@
 <!-- NOT LOGGED IN -->
-<h1 class="selection-heading" *ngIf="!appState.loggedIn && !isBookingConfirmed">Sign in to continue</h1>
-<app-login *ngIf="!appState.loggedIn"></app-login>
+<h1 class="selection-heading" *ngIf="!appState.isLoggedIn && !isBookingConfirmed">Sign in to continue</h1>
+<app-login *ngIf="!appState.isLoggedIn"></app-login>
 <!-- NOT LOGGED IN -->
 
-<div class="confirmation-email-sent" *ngIf="isBookingConfirmed && appState.loggedIn" fxLayout="column" fxLayoutAlign="center center">
+<div class="confirmation-email-sent" *ngIf="isBookingConfirmed && appState.isLoggedIn" fxLayout="column" fxLayoutAlign="center center">
     <h1 class="selection-heading">Thank you!</h1>
     <mat-icon>check_circle</mat-icon>
     <p>Your booking was successfully created.  You will receieve a confirmation email shortly.  If you dont see our email, check your spam folder.</p>
 </div>
 
 <!-- LOGGED IN -->
-<h1 class="selection-heading" *ngIf="appState.loggedIn && !isBookingConfirmed">Confirm and book</h1>
+<h1 class="selection-heading" *ngIf="appState.isLoggedIn && !isBookingConfirmed">Confirm and book</h1>
 <mat-card class="selection-card mat-elevation-z2" 
     fxLayout="column" 
     fxLayoutGap="12px"
-    *ngIf="appState.loggedIn">
+    *ngIf="appState.isLoggedIn">
 
     <div fxLayout="column">
         <h2 class="mat-title">{{ company.name }}</h2>
@@ -65,7 +65,7 @@
 <div class="button-container" fxLayout="row" fxLayoutAlign="center">
     <button mat-flat-button 
         fxFlex
-        *ngIf="appState.loggedIn && !isBookingConfirmed"
+        *ngIf="appState.isLoggedIn && !isBookingConfirmed"
         color="accent" 
         (click)="this.createBooking()"
         [disabled]="appState.loading">

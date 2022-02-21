@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
@@ -11,7 +11,7 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'tonys-webapp';
 
@@ -27,6 +27,11 @@ export class AppComponent {
   {
     this.matIconRegistry.addSvgIcon('google',this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/google_icon.svg'));
     this.matIconRegistry.addSvgIcon('facebook',this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/facebook_icon.svg'));
+  }
+
+  ngOnInit(): void 
+  {
+    this.appState.setLoggedIn(this.auth.isLoggedIn());
   }
 
   onLogout() 

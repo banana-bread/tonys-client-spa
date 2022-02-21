@@ -78,8 +78,6 @@ export class BookingComponent implements OnInit {
       this.employeesOriginal = this.company.employees;
       this.employees = cloneDeep(this.employeesOriginal);
       this.serviceDefinitions = this.company.service_definitions;
-
-      this.appState.setLoggedIn(this.auth.isLoggedIn());
     }
     catch (e)
     {
