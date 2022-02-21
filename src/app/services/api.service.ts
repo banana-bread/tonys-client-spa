@@ -15,6 +15,16 @@ export class ApiService {
       .get();
   }
 
+  getClientBookings(id: string, dateFrom: string, dateTo: string): Promise<any>
+  {
+    return this.http
+      .path('/clients/{id}/bookings')
+      .param('id', id)
+      .query('date-from', dateFrom)
+      .query('date-to', dateTo)
+      .get();
+  }
+
   getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = '', companyId: string): Promise<any> 
   {
     return this.http
