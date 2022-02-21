@@ -81,7 +81,9 @@ export class LoginComponent implements OnInit {
   {
     try
     {
-      await this.auth.loginWithEmail(this.email, this.password);
+      // TODO: get user from login.
+      const resp = await this.auth.loginWithEmail(this.email, this.password);
+      console.log(resp)
       this.appState.setLoggedIn(true);
       this.snackbarNotification.success('Log in successful!');
     }
