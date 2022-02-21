@@ -9,6 +9,7 @@ import { BookingConfirmationComponent } from './booking-confirmation/booking-con
 import { TonysSharedModule } from '@tonys-barbers/shared';
 import { ReCaptchaModule } from 'angular-recaptcha3';
 import { ClientBookingsComponent } from '../client-bookings/client-bookings.component';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 const RECAPTCHA_OPTIONS = {
   invisible: {
@@ -28,6 +29,7 @@ const RECAPTCHA_OPTIONS = {
         SlotSelectionComponent,
         BookingConfirmationComponent,
         ClientBookingsComponent,
+        LoginPageComponent,
     ],
     imports: [
         SharedModule,
