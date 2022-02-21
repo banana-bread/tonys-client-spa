@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AppStateService } from '../app-state.service';
+import { AppStateService } from '../services/app-state.service';
 import { AuthService } from '../services/auth.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';

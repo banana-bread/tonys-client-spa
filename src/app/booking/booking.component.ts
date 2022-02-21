@@ -10,7 +10,7 @@ import { ServiceDefinition } from '../models/service-definition/service-definiti
 import { MatStepper } from '@angular/material/stepper';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AppStateService } from '../app-state.service';
+import { AppStateService } from '../services/app-state.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Company } from '../models/company/company.model';
 import { CompanyService } from '../models/company/company.service';

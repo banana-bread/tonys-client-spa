@@ -6,10 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LoginPageGuard } from './services/login-page-guard.service';
 
 const routes: Routes = [
   { path: 'bookings', component: ClientBookingsComponent },
-  { path: 'login', component: LoginComponent },
+  // TODO: change this to login page component, which holds logincomponent
+  { path: 'login', component: LoginComponent, canActivate: [LoginPageGuard] },
   { path: 'password/reset', component: ResetPasswordComponent, },
 
   { path: 'c/:companyId', redirectTo: 'c/:companyId/bookings', pathMatch: 'full' }, // LEGACY
