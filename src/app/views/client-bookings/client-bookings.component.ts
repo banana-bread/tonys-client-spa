@@ -27,11 +27,13 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
     this.client = this.appState.authedClient;
 
     this.clientSubscription = this.appState.authedClient$
-      .subscribe((response) => {
+      .subscribe(async (response) => {
         if (!response.id) return;
 
         this.client = new Client(response);
-        this.getBookings();
+        this.upcomingBookings = await this.clientService.getUpcomingBookings(this.client);
+        this.pastBookings = await this.clientService.getPastBookings(this.client);
+    
     })
   }
 
@@ -39,11 +41,4 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
   {
     this.clientSubscription.unsubscribe();
   }
-
-  async getBookings(): Promise<void>
-  {
-    this.upcomingBookings = await this.clientService.getUpcomingBookings(this.client);
-    this.pastBookings = await this.clientService.getPastBookings(this.client);
-  }
-
 }
