@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Booking } from 'src/app/models/booking/booking.model';
 import { Client } from 'src/app/models/client/client.model';
@@ -40,5 +41,16 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void 
   {
     this.clientSubscription.unsubscribe();
+  }
+
+  canCancel(booking: Booking): boolean
+  {
+    return !booking.cancelled_at || moment(booking.started_at).isSameOrBefore(moment());
+  }
+
+  onCancelBooking(booking: Booking) 
+  {
+    console.log(booking)
+    console.error('onCancelBooking not implemented')
   }
 }
