@@ -27,7 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ContactDialogComponent } from './components/contact-dialog/contact-dialog.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-
+import { ClientBookingCardComponent } from './views/client-bookings/client-booking-card/client-booking-card.component';
 
 @NgModule({
   imports:[ 
@@ -62,6 +62,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ContactDialogComponent,
     NotFoundComponent,
     ConfirmDialogComponent,
+    ClientBookingCardComponent,
   ],
   providers: [
     DecimalPipe,
@@ -98,6 +99,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ContactDialogComponent,
     NotFoundComponent,
     CurrencyPipe,
+    ClientBookingCardComponent,
   ]
 })
 export class SharedModule { }

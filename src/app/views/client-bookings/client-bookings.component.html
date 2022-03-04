@@ -2,38 +2,14 @@
     <mat-tab>
         <ng-template mat-tab-label>Upcoming</ng-template>
         <div class="app-view-padding">
-        <div fxLayout="column" fxLayoutGap="24px">
-            <div fxLayout="row" fxLayoutAlign="center" *ngFor="let booking of this.upcomingBookings">
-                <mat-card class="selection-card mat-elevation-z2">
-                    <div fxFlex fxLayout="column">
-                        <div class="pill" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="4px">
-                            <mat-icon>check_circle</mat-icon>                            
-                            <span>Scheduled</span> 
-                        </div>
-                        <div fxFlex fxLayout="column" fxLayoutGap="8px">
-                            <div>
-                                <mat-card-title>29 March 2022, 10:00am</mat-card-title>
-                                <mat-card-subtitle>Tracy's Barber Shop</mat-card-subtitle>
-                            </div>
-                            <div>
-                                <mat-card-subtitle class="services">Hair cut</mat-card-subtitle>
-                                <mat-card-subtitle>30 min</mat-card-subtitle>
-                            </div>
-                            <div>
-                                <mat-divider></mat-divider>
-                            </div>
-                            <div fxLayout="row" fxLayoutAlign="space-between center">
-                                <mat-card-title>Total: CA $33.50</mat-card-title>
-                                <button mat-stroked-button color="warn" (click)="this.onCancelBooking(booking)">
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </mat-card>
+            <div fxLayout="column" *ngFor="let booking of this.upcomingBookings">
+                <div fxFlex fxLayout="row" fxLayoutAlign="center">
+                    <app-client-booking-card
+                        [booking]="booking"
+                        (cancel)="this.onCancelBooking($event)">
+                    </app-client-booking-card>
+                </div>
             </div>
-        </div>
-
         </div>
     </mat-tab>  
     <mat-tab>
