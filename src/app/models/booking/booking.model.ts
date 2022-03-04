@@ -32,9 +32,19 @@ export class Booking extends BaseModel {
     services: Service,
   };
 
+  isInFuture(): boolean
+  {
+    return moment(moment()).isBefore(this.started_at);
+  }
+
+  isCancelled(): boolean
+  {
+    return !!this.cancelled_at;
+  }
+
   canBeCancelled(): boolean
   {
-    return !this.cancelled_at && moment(moment()).isBefore(this.started_at);
+    return !this.isCancelled() && this.isInFuture();
   }
 
   get duration(): number

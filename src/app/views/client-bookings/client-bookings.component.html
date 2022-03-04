@@ -1,7 +1,8 @@
-<mat-tab-group>
+<mat-tab-group animationDuration="0ms">
     <mat-tab>
         <ng-template mat-tab-label>Upcoming</ng-template>
         <div class="app-view-padding">
+            <ng-template [ngIf]="!!this.upcomingBookings.length">       
             <div fxLayout="column" *ngFor="let booking of this.upcomingBookings">
                 <div fxFlex fxLayout="row" fxLayoutAlign="center">
                     <app-client-booking-card
@@ -10,19 +11,23 @@
                     </app-client-booking-card>
                 </div>
             </div>
+            </ng-template>
+            <h1 *ngIf="!this.upcomingBookings.length">No upcoming bookings found</h1>
         </div>
     </mat-tab>  
     <mat-tab>
         <ng-template mat-tab-label>Past</ng-template>
         <div class="app-view-padding">
+            <ng-template [ngIf]="!!this.pastBookings.length">       
             <div fxLayout="column" *ngFor="let booking of this.pastBookings">
                 <div fxFlex fxLayout="row" fxLayoutAlign="center">
                     <app-client-booking-card
-                        [booking]="booking"
-                        (cancel)="this.onCancelBooking($event)">
+                        [booking]="booking">
                     </app-client-booking-card>
                 </div>
             </div>
+            </ng-template>
+            <h1 *ngIf="!this.pastBookings.length">No past bookings found</h1>
         </div>
     </mat-tab>
 </mat-tab-group>

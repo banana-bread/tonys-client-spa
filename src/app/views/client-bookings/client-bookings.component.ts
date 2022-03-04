@@ -41,7 +41,6 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
         this.client = new Client(response);
         await this._getBookings();
         this.appState.setLoading(false);
-
     })
   }
 
