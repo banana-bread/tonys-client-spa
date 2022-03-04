@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookingComponent } from './booking/booking.component';
-import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { RegisterComponent } from './register/register.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { BookingComponent } from './views/booking-stepper/booking.component';
+import { ClientBookingsComponent } from './views/client-bookings/client-bookings.component';
+import { LoginPageComponent } from './views/login-page/login-page.component';
+import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
+import { LoginPageGuard } from './services/login-page-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'c/:companyId', redirectTo: 'c/:companyId/bookings', pathMatch: 'full' },
-  { path: 'c/:companyId/bookings', component: BookingComponent },
-  { path: ':companySlug', component: BookingComponent },
-  // { path: 'login', component: LoginComponent },
-  // { path: 'register', component: RegisterComponent },
+  { path: 'bookings', component: ClientBookingsComponent, canActivate: [AuthGuardService]  },
+  // TODO: change this to login page component, which holds logincomponent
+  { path: 'login', component: LoginPageComponent, canActivate: [LoginPageGuard] },
   { path: 'password/reset', component: ResetPasswordComponent, },
+
+  { path: 'c/:companyId', redirectTo: 'c/:companyId/bookings', pathMatch: 'full' }, // LEGACY
+  { path: 'c/:companyId/bookings', component: BookingComponent },                   // LEGACY
+  { path: ':companySlug', component: BookingComponent },
+
+
+  // { path: 'register', component: RegisterComponent },
 
   // { path: '404', component: NotFoundComponent },
   // { path: '**', redirectTo: '/404' }

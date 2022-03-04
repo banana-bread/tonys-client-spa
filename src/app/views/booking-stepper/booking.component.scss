@@ -1,0 +1,39 @@
+
+.mat-tab-list  {
+    height: 300px;
+}
+
+.stepper-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    // height: calc(100% - 50px);
+    // position: relative;    
+}
+
+// If we absolutely need to use this to make step header fixed...
+::ng-deep .mat-horizontal-stepper-header-container {
+    background-color: white;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    // top: 0; 
+    top: 50px; 
+    z-index: 1000; 
+    margin-bottom: 10px;
+}
+
+.action-button-container {
+    max-width: 470px;
+    width: calc(100% - 32px);
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    button {
+        width: 100%;
+    }
+}
+
+.mat-step-header--hidden {
+    visibility: hidden;
+}

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Client } from './client.model';
 import { ApiService } from '../../services/api.service';
+import { Booking } from '../booking/booking.model';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +15,26 @@ export class ClientService {
   {
    const response = await this.api.getAuthedClient();
    return new Client(response.data.client);
+  }
+
+  async getUpcomingBookings(client: Client): Promise<Booking[]>
+  {
+    const dateFrom = moment().unix().toString();
+    const dateTo = moment().add(60, 'days').unix().toString();
+    const response = await this.api.getClientBookings(client.id, dateFrom, dateTo);
+    const bookings = response.data.bookings.map(booking => new Booking(booking));
+
+    return bookings;
+  }
+
+  async getPastBookings(client: Client): Promise<Booking[]>
+  {
+    // currently will only show bookings for past year
+    const dateFrom = moment().subtract(365, 'days').unix().toString();
+    const dateTo = moment().unix().toString();
+    const response = await this.api.getClientBookings(client.id, dateFrom, dateTo);
+    const bookings = response.data.bookings.map(booking => new Booking(booking));
+
+    return bookings;
   }
 }

@@ -2,9 +2,11 @@ import { BaseModel } from "../base.model";
 
 export class Client extends BaseModel {
 
-  id?: string = '';
-  name?: string = '';
-  email?: string = '';
+  id?: string = null;
+  first_name?: string = null;
+  last_name?: string = null;
+  email?: string = null;
+  phone?: string = null;
 
   constructor(data: any = {}) 
   {
@@ -14,4 +16,9 @@ export class Client extends BaseModel {
 
   dates = {}
   relations = {};
+
+  get full_name(): string
+  {
+    return `${this.first_name} ${this.last_name}`
+  }
 }

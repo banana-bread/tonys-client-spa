@@ -1,0 +1,55 @@
+:host {
+    max-width: 450px;
+    width: 100%;
+}
+
+mat-card {
+    padding: 0;
+
+    > div {
+        cursor: pointer; 
+        padding: 16px; 
+        width: 100%;
+    }
+}
+
+mat-card-title {
+    font-size: 16px;
+    margin-bottom: 3px;
+    color: #424242;
+}
+
+mat-card-subtitle {
+    font-size: 14px;
+    margin: 0;
+}
+
+.services {
+    color: #424242;
+}
+
+.pill {  
+    color: white;                    
+    padding: 0 8px 0 4px; 
+    width: fit-content; 
+    border-radius: 50px; 
+    margin-bottom: 16px;
+
+    mat-icon {
+        font-size: 16px; 
+        height: 16px; 
+        width: 16px;
+    }
+
+    span {
+        font-size: 12px;
+    }
+}
+
+.pill--scheduled {
+    background: #1876c9;   
+}
+
+.pill--cancelled {
+    background: #9E9E9E;
+}

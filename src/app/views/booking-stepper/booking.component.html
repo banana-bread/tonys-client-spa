@@ -1,0 +1,64 @@
+<div class="stepper-container" fxLayout="column" *ngIf="this.companyExists">
+  <mat-horizontal-stepper class="booking-stepper" [class.mat-step-header--hidden]="isBookingConfirmed" #stepper [linear]="true" labelPosition="bottom" color="accent">  
+    <mat-step #firstStep state="work_outline" [completed]="!!selectedServices?.length" fxLayout="column" fxLayoutAlign=" center">
+      <app-service-selection class="step-component"
+        style="margin-bottom: 100px;"
+        [serviceDefinitions]="serviceDefinitions" 
+        (selected)="onServiceSelected()">
+      </app-service-selection>
+      <div class="action-button-container">
+        <button mat-raised-button
+           (click)="goToStaffSelection()" 
+           color="accent" 
+           *ngIf="!loading" 
+           [disabled]="!selectedServices || !selectedServices?.length">
+           Next
+        </button>
+      </div>
+    </mat-step>
+ 
+    <mat-step #secondStep fxLayout="row" fxLayoutAlign="center center" state="person_outline" [completed]="!!selectedEmployee">
+      <ng-container *ngIf="stepper.selected == secondStep">
+        <app-staff-selection [employees]="employees"
+          (selected)="onStaffSelected($event)">
+        </app-staff-selection>
+      </ng-container>
+    </mat-step>
+
+    <mat-step #thirdStep state="today" [completed]="!!selectedSlot">
+      <ng-container *ngIf="stepper.selected == thirdStep">
+        <app-slot-selection 
+          [slots]="openSlots"
+          (selected)="onSlotSelected($event)">
+        </app-slot-selection>
+      </ng-container>
+    </mat-step>
+    
+    <mat-step #fourthStep state="receipt">
+      <ng-container *ngIf="stepper.selected == fourthStep">
+        <app-booking-confirmation 
+          [slot]="selectedSlot"
+          [services]="selectedServices"
+          [company]="company"
+          [employee]="selectedSlotEmployee"
+          (booked)="this.onBookingConfirmed()">
+        </app-booking-confirmation>
+      </ng-container>
+    </mat-step>
+  
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="phone">
+      <mat-icon>call_end</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="chat">
+      <mat-icon>forum</mat-icon>
+    </ng-template>
+  </mat-horizontal-stepper>
+</div>
+
+<app-not-found *ngIf="!this.companyExists"></app-not-found>
+
+<recaptcha 
+  [size]="'invisible'"
+  [hide]="false">
+</recaptcha>

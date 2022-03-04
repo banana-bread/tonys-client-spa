@@ -1,0 +1,38 @@
+@import '../../../../shared';
+
+:host {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-item {
+    cursor: pointer;
+    padding: 16px;
+}
+
+.mat-icon {
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+}
+
+mat-card {
+    padding: 0;
+}
+
+mat-card-title {
+    @include card-title-selection-list;
+    margin-bottom: 3px;
+    color: #424242;
+}
+
+mat-card-subtitle {
+    margin: 0;
+}
+
+mat-progress-spinner {
+    margin-top: 50px;
+}
+

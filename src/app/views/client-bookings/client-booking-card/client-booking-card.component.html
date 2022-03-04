@@ -1,0 +1,28 @@
+<mat-card class="selection-card mat-elevation-z2">
+    <div fxFlex fxLayout="column">
+        <div *ngIf="this.booking.isInFuture()" class="pill pill--{{ booking.status }}" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="4px">
+            <mat-icon *ngIf="booking.status === 'scheduled'">check_circle</mat-icon>  
+            <mat-icon *ngIf="booking.status === 'cancelled'">cancel</mat-icon>                                                      
+            <span class="capitalize">{{ booking.status }}</span> 
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutGap="8px">
+            <div>
+                <mat-card-title>{{ booking.started_at | date:'EEEE, MMMM d, h:mm a'}}</mat-card-title>
+                <mat-card-subtitle>{{ booking.employee.company.name }}, {{ booking.employee.first_name }}</mat-card-subtitle>
+            </div>
+            <div>
+                <mat-card-subtitle class="services">{{ getServices() }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ booking.duration | appDuration }}</mat-card-subtitle>
+            </div>
+            <div>
+                <mat-divider></mat-divider>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between end">
+                <mat-card-title>Total: {{ (booking.total_price / 100) * 1.13 | currency:'CA $':true:'1.2-2' }}</mat-card-title>
+                <button mat-raised-button color="warn" (click)="this.onCancel()" *ngIf="booking.canBeCancelled()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>

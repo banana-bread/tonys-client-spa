@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { isObject, isArray } from '../helpers';
+import { isObject, isArray } from '../helpers/helpers';
 
 export abstract class BaseModel {
 
