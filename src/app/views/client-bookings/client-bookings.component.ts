@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { ConfirmDialogService } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { Booking } from 'src/app/models/booking/booking.model';
@@ -49,11 +48,6 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void 
   {
     this.clientSubscription.unsubscribe();
-  }
-
-  canCancel(booking: Booking): boolean
-  {
-    return !booking.cancelled_at || moment(booking.started_at).isSameOrBefore(moment());
   }
 
   async onCancelBooking(booking: Booking): Promise<void> 

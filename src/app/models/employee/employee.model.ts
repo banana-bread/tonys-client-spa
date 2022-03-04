@@ -10,6 +10,8 @@ export class Employee extends BaseModel {
     email?: string = null;
     ordinal_position?: number = 0;
 
+    company: Company = null;
+
     dates = {};
     relations = {
         company: Company,

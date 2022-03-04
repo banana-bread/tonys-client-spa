@@ -28,10 +28,8 @@ mat-card-subtitle {
     color: #424242;
 }
 
-.pill {
-    background: #1DA345; 
-    background: #1876c9; 
-    color: white;                        
+.pill {  
+    color: white;                    
     padding: 0 8px 0 4px; 
     width: fit-content; 
     border-radius: 50px; 
@@ -46,4 +44,12 @@ mat-card-subtitle {
     span {
         font-size: 12px;
     }
+}
+
+.pill--scheduled {
+    background: #1876c9;   
+}
+
+.pill--cancelled {
+    background: #9E9E9E;
 }

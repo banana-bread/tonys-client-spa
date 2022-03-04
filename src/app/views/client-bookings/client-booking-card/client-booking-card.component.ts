@@ -11,6 +11,13 @@ export class ClientBookingCardComponent {
 
     @Output() cancel = new EventEmitter<Booking>();
 
+    getServices(): string
+    {
+        return this.booking.services.map(service =>
+            service.name
+        ).join(', ');
+    }
+
     onCancel()
     {
         this.cancel.emit(this.booking);
