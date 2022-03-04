@@ -2,10 +2,8 @@
     <mat-tab>
         <ng-template mat-tab-label>Upcoming</ng-template>
         <div class="app-view-padding">
-            <h1>upcoming</h1>
-        <div fxLayout="column" fxLayoutGap="15px">
-            <div *ngFor="let booking of this.upcomingBookings">
-    
+        <div fxLayout="column" fxLayoutGap="24px">
+            <div fxLayout="row" fxLayoutAlign="center" *ngFor="let booking of this.upcomingBookings">
                 <mat-card class="selection-card mat-elevation-z2">
                     <div fxFlex fxLayout="column">
                         <div class="pill" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="4px">

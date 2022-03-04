@@ -146,6 +146,14 @@ export class ApiService {
       .post();
   }
 
+  cancelBooking(id: string): Promise<any>
+  {
+    return this.http
+      .path('/bookings/{id}')
+      .param('id', id)
+      .delete();
+  }
+
   verifyRecaptcha(data: {token: string})
   {
     return this.http

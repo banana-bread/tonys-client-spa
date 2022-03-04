@@ -26,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { ContactDialogComponent } from './components/contact-dialog/contact-dialog.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
   declarations: [
     ContactDialogComponent,
     NotFoundComponent,
+    ConfirmDialogComponent,
   ],
   providers: [
     DecimalPipe,

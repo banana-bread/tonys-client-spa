@@ -26,4 +26,11 @@ export class BookingService {
     // const response = await this.api.getBooking(id);
     // return new Booking(response.data);
   }
+
+  async cancel(booking: Booking): Promise<any>
+  {
+    const response = await this.api.cancelBooking(booking.id);
+    
+    return response;
+  }
 }
