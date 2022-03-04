@@ -48,4 +48,17 @@ export class AuthService {
   {
     return this.jwt.hasToken() && this.jwt.hasValidToken();
   }
+
+  async attemptRefresh(): Promise<void|boolean>
+  {
+    try
+    {
+      const response = await this.api.refreshToken({refresh_token: this.jwt.getRefreshToken()});
+      this.jwt.setToken(response.data)
+    }
+    catch
+    {
+      return false;
+    }
+  }
 }

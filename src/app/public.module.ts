@@ -2,16 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared.module'
 
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LoginComponent } from './components/login/login.component';
+import { ForgotPasswordComponent } from './components/forgot-password-dialog/forgot-password.component';
+import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 // import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
   ],
@@ -22,7 +20,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   ],
   exports: [
     LoginComponent,
-    RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
   ]

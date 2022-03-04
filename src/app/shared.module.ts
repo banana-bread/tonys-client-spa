@@ -24,9 +24,10 @@ import { TonysSharedModule } from '@tonys-barbers/shared';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
-import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-
+import { ContactDialogComponent } from './components/contact-dialog/contact-dialog.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ClientBookingCardComponent } from './views/client-bookings/client-booking-card/client-booking-card.component';
 
 @NgModule({
   imports:[ 
@@ -60,6 +61,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   declarations: [
     ContactDialogComponent,
     NotFoundComponent,
+    ConfirmDialogComponent,
+    ClientBookingCardComponent,
   ],
   providers: [
     DecimalPipe,
@@ -96,6 +99,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ContactDialogComponent,
     NotFoundComponent,
     CurrencyPipe,
+    ClientBookingCardComponent,
   ]
 })
 export class SharedModule { }

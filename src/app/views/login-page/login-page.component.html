@@ -1,0 +1,10 @@
+<div class="app-view-padding">
+    <div class="container">
+        <h1 class="selection-heading">{{ this.title }}</h1>
+        <app-login 
+            (loggedIn)="this.onLoggedIn()"
+            (loginSelected)="this.onLoginSelected()"
+            (registerSelected)="this.onRegisterSelected()">
+        </app-login>
+    </div>
+</div>

@@ -15,6 +15,16 @@ export class ApiService {
       .get();
   }
 
+  getClientBookings(id: string, dateFrom: string, dateTo: string): Promise<any>
+  {
+    return this.http
+      .path('/clients/{id}/bookings')
+      .param('id', id)
+      .query('date-from', dateFrom)
+      .query('date-to', dateTo)
+      .get();
+  }
+
   getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = '', companyId: string): Promise<any> 
   {
     return this.http
@@ -136,10 +146,26 @@ export class ApiService {
       .post();
   }
 
+  cancelBooking(id: string): Promise<any>
+  {
+    return this.http
+      .path('/bookings/{id}')
+      .param('id', id)
+      .delete();
+  }
+
   verifyRecaptcha(data: {token: string})
   {
     return this.http
       .path('/verify-recaptcha')
+      .data(data)
+      .post();
+  }
+
+  refreshToken(data: { refresh_token: string }): Promise<any>
+  {
+    return this.http
+      .path('/refresh-token')
       .data(data)
       .post();
   }
