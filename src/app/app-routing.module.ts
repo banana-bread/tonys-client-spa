@@ -5,9 +5,10 @@ import { ClientBookingsComponent } from './views/client-bookings/client-bookings
 import { LoginPageComponent } from './views/login-page/login-page.component';
 import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { LoginPageGuard } from './services/login-page-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'bookings', component: ClientBookingsComponent },
+  { path: 'bookings', component: ClientBookingsComponent, canActivate: [AuthGuardService]  },
   // TODO: change this to login page component, which holds logincomponent
   { path: 'login', component: LoginPageComponent, canActivate: [LoginPageGuard] },
   { path: 'password/reset', component: ResetPasswordComponent, },

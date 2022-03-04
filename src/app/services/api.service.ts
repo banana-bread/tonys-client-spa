@@ -161,4 +161,12 @@ export class ApiService {
       .data(data)
       .post();
   }
+
+  refreshToken(data: { refresh_token: string }): Promise<any>
+  {
+    return this.http
+      .path('/refresh-token')
+      .data(data)
+      .post();
+  }
 }
