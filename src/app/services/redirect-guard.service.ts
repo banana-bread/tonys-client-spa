@@ -20,7 +20,7 @@ export class RedirectGuard implements CanActivate {
         
         if (domain === 'https://stage.simplebarber.ca') 
         {
-            window.location.href = 'https://google.ca'
+            window.location.href = 'https://stage.book.simplebarber.ca/tonys'
         }
 
         return true;
