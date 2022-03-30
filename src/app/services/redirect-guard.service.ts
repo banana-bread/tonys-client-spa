@@ -18,9 +18,9 @@ export class RedirectGuard implements CanActivate {
         if (companySlug !== 'tonys') { return true; }
 
         
-        if (domain === 'https://stage.simplebarber.ca') 
+        if (domain === 'https://simplebarber.ca') 
         {
-            window.location.href = 'https://stage.book.simplebarber.ca/tonys'
+            window.location.href = 'https://book.simplebarber.ca/tonys'
         }
 
         return true;
