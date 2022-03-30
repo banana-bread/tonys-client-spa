@@ -10,6 +10,7 @@ import { BookingModule } from './views/booking-stepper/booking.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { SharedModule } from './shared.module';
+import { RedirectGuard } from './services/redirect-guard.service';
 
 // import { RecaptchaModule } from 'ng-recaptcha';
 
@@ -28,7 +29,8 @@ import { SharedModule } from './shared.module';
     // RecaptchaModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    RedirectGuard,
   ],
   bootstrap: [AppComponent]
 })

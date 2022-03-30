@@ -6,6 +6,7 @@ import { LoginPageComponent } from './views/login-page/login-page.component';
 import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { LoginPageGuard } from './services/login-page-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RedirectGuard } from './services/redirect-guard.service';
 
 const routes: Routes = [
   { path: 'bookings', component: ClientBookingsComponent, canActivate: [AuthGuardService]  },
@@ -15,7 +16,13 @@ const routes: Routes = [
 
   { path: 'c/:companyId', redirectTo: 'c/:companyId/bookings', pathMatch: 'full' }, // LEGACY
   { path: 'c/:companyId/bookings', component: BookingComponent },                   // LEGACY
-  { path: ':companySlug', component: BookingComponent },
+
+  // This should be removed eventually.  currenty tonys endpoint is simplebarber.ca/tonys, but 
+  // the booking app will now live at book.simplebarber.ca.  tonys is the only one set up on the
+  // primary domain.  Maybe give it a couple months and then remove.
+  // { path: 'tonys', canActivate: [RedirectGuard], component: RedirectGuard, data: { externalUrl: 'http://localhost:4100/tonys' } },
+  // { path: 'tonys', canActivate: [RedirectGuard], component: BookingComponent, data: { externalUrl: 'https://google.ca' } },
+  { path: ':companySlug', canActivate: [RedirectGuard], component: BookingComponent },
 
 
   // { path: 'register', component: RegisterComponent },
