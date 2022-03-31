@@ -16,9 +16,7 @@ export class RedirectGuard implements CanActivate {
         const companyId = route.paramMap.get('companyId');
         const domain = this.router['location']._platformLocation.location.origin;
 
-        console.log('companyId')
-        console.log(companyId)
-        if (companySlug !== 'tonys' || 
+        if (companySlug !== 'tonys' && 
             companyId !== '4e25c4a0-5552-11ec-8f92-03a15ba00997') 
         { 
             return true; 
