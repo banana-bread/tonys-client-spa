@@ -13,10 +13,14 @@ export class RedirectGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean 
     {
         const companySlug = route.paramMap.get('companySlug');
+        const companyId = route.paramMap.get('companyId');
         const domain = this.router['location']._platformLocation.location.origin;
 
-        if (companySlug !== 'tonys') { return true; }
-
+        if (companySlug !== 'tonys' || 
+            companyId !== '4e25c4a0-5552-11ec-8f92-03a15ba00997') 
+        { 
+            return true; 
+        }
         
         if (domain === 'https://simplebarber.ca') 
         {
