@@ -21,6 +21,13 @@ export class SlotSelectionComponent implements OnInit {
 
   ngOnInit(): void 
   {
+    const firstAvailableDate = this.slots[0].start_time;
+    
+    if (moment().isSame(firstAvailableDate, 'day'))
+    {
+      this.onDateSelected(firstAvailableDate);
+    }
+
     this.dateFilter = (date: Date | null): boolean => {
       const day = (date || new Date())
       return this.filterUnavailableDays(day)
@@ -53,5 +60,4 @@ export class SlotSelectionComponent implements OnInit {
   {
     this.selected.emit(slot);
   }
-
 }

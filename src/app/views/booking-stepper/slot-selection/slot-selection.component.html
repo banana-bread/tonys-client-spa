@@ -21,7 +21,10 @@
           <mat-divider *ngIf="!isLast"></mat-divider>
       </div>
     </mat-card>
-    <div *ngIf="!selectedDateSlots?.length">
-      Select a day to view available appointment times.
-    </div>
+    <h3 *ngIf="!selectedDateSlots?.length">
+      No slots available today
+    </h3>
+    <mat-icon class="no-slots-available-icon" *ngIf="!selectedDateSlots?.length">
+      event_busy
+    </mat-icon>
 </div>
