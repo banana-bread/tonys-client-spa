@@ -106,7 +106,7 @@ export class ApiService {
   sendForgotPasswordLink(data: {email: string}): Promise<any>
   {
     return this.http
-      .path('/clients/forgot-password')
+      .path('/users/forgot-password')
       .data(data)
       .post();
   }
@@ -114,7 +114,7 @@ export class ApiService {
   resetPassword(data: {email: string, password: string}, signature: string, expires: string): Promise<any>
   {
     return this.http
-      .path('/clients/reset-password')
+      .path('/users/reset-password')
       .data(data)
       .query('signature', signature)
       .query('expires', expires)
