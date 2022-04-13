@@ -1,7 +1,7 @@
 <h1 class="selection-heading">Select staff</h1>
 
 <mat-card class="selection-card mat-elevation-z2">
-  <div (click)="onSelected('any')">
+  <div (click)="onSelected('any')" *ngIf="this.employees.length > 1">
      <div class="staff-selection"
         fxLayout="row"
         fxLayoutAlign=" center"
