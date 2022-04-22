@@ -77,9 +77,14 @@ mat-card.selection-card {
 
 h1.selection-heading {
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
+  font-size: 24px;
+  margin-bottom: 16px;
   color: $app-color-black;
+
+  @media (min-width: 600px) {
+    font-size: 30px;
+    margin-bottom: 24px;
+  }
 }
 
 .input-icon {
