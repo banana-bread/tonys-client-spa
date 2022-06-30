@@ -51,4 +51,9 @@ export class AppComponent implements OnInit {
     this.notifications.success('Signed out')
     this.router.navigate(['login']);
   }
+
+  onBookNow()
+  {
+    this.router.navigate(['tonys'])
+  }
 }

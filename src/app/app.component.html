@@ -4,6 +4,10 @@
       <span fxFlex></span>
       <button mat-stroked-button [matMenuTriggerFor]="optionsMenu">Menu</button>
       <mat-menu #optionsMenu yPosition="below">
+        <button  (click)="this.onBookNow()" mat-menu-item *ngIf="!this.appState.isLoggedIn">
+          <mat-icon mat-list-icon>book_online</mat-icon>
+          <span>Book now</span> 
+        </button>
         <button  [routerLink]="['login']" mat-menu-item *ngIf="!this.appState.isLoggedIn">
           <mat-icon mat-list-icon>login</mat-icon>
           <span>Login</span> 

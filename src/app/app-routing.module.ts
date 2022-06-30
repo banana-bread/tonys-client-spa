@@ -9,7 +9,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { RedirectGuard } from './services/redirect-guard.service';
 
 const routes: Routes = [
-  { path: 'bookings', component: ClientBookingsComponent, canActivate: [AuthGuardService]  },
+  { path: 'bookings', component: ClientBookingsComponent, canActivate: [AuthGuardService] },
   // TODO: change this to login page component, which holds logincomponent
   { path: 'login', component: LoginPageComponent, canActivate: [LoginPageGuard] },
   { path: 'password/reset', component: ResetPasswordComponent, },
