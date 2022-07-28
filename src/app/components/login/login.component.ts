@@ -99,14 +99,18 @@ export class LoginComponent implements OnInit {
   {
     try
     {
-      const token = await this.recaptchaService.execute();
-      const response = await this.apiService.verifyRecaptcha({token});
+      // const token = await this.recaptchaService.execute();
+      // console.log(token)
+      // return
 
-      if (! response.data.success)
-      {
-        this.snackbarNotification.error('We detected a robot.')
-        return;
-      }
+      // const response = await this.apiService.verifyRecaptcha({token});
+      // if (! response.data.success)
+      // {
+        // this.snackbarNotification.error('We detected a robot.')
+        // return;
+      // }
+
+      // TODO: should probably figure out why recapthca isn't working here ^
 
       await this.auth.registerWithEmail(this.first_name, this.last_name, this.email, this.password, this.phone);
       this.snackbarNotification.success('Registration successful!')
