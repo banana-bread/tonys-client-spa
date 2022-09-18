@@ -30,6 +30,7 @@ export class BookingConfirmationComponent implements OnInit {
   bookingEndTime: Date;
   tax: number;
   bookingTotal: number;
+  note: string;
 
   constructor(
     private clientService: ClientService,
@@ -69,7 +70,7 @@ export class BookingConfirmationComponent implements OnInit {
       const serviceIds: string[] = this.services.map(service => service.id);
       const client = await this.clientService.getAuthed();
 
-      await this.bookingService.create(client.id, this.slot.id, serviceIds, this.company.id);
+      await this.bookingService.create(client.id, this.slot.id, serviceIds, this.company.id, this.note);
       this.isBookingConfirmed = true;
       this.booked.emit();
 

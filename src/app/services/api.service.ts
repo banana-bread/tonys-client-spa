@@ -137,7 +137,7 @@ export class ApiService {
       .get();
   }
 
-  createBooking(data: {client_id: string, time_slot_id: number, service_definition_ids: string[]}, companyId: string): Promise<any>
+  createBooking(data: {client_id: string, time_slot_id: number, service_definition_ids: string[], note: string}, companyId: string): Promise<any>
   {
     return this.http
       .path('/bookings')
