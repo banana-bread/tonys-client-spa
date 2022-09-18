@@ -6,15 +6,17 @@ import { ApiService } from '../../services/api.service';
   providedIn: 'root'
 })
 export class BookingService {
+  // TODO: should be a model
 
   constructor(private api: ApiService) { }
 
-  async create(clientId: string, timeSlotId: number, serviceIds: string[], companyId: string): Promise<Booking>
+  async create(clientId: string, timeSlotId: number, serviceIds: string[], companyId: string, note: string): Promise<Booking>
   {
     const response = await this.api.createBooking({
       client_id: clientId, 
       time_slot_id: timeSlotId, 
       service_definition_ids: serviceIds,
+      note: note,
     }, companyId);
 
     return new Booking(response.data.booking);

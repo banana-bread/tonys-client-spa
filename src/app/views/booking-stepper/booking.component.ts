@@ -50,6 +50,7 @@ export class BookingComponent implements OnInit {
   serviceGroup: FormGroup;
   staffGroup: FormGroup;
 
+  // TODO: this could just be included on the booking model itself
   isBookingConfirmed = false;
   companyExists = true;
 
