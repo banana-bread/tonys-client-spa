@@ -1,21 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TimeSlot } from '../../models/time-slot/time-slot.model';
-import { TimeSlotService } from '../../models/time-slot/time-slot.service';
+import { TimeSlot } from '../../models/time-slot.model';
 import * as moment from 'moment';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { EmployeeService } from '../../models/employee/employee.service';
 import { Employee } from '../../models/employee/employee.model';
-import { ServiceDefinitionService } from '../../models/service-definition/service-definition.service';
 import { ServiceDefinition } from '../../models/service-definition/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../../services/app-state.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Company } from '../../models/company/company.model';
 import { CompanyService } from '../../models/company/company.service';
-import { AuthService } from '../../services/auth.service';
-import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { cloneDeep } from 'lodash';
 
 @Component({
@@ -58,11 +54,9 @@ export class BookingComponent implements OnInit {
   companySlug = this.route.snapshot.paramMap.get('companySlug');
 
   constructor(
-    private timeSlotService: TimeSlotService,
     private employeeService: EmployeeService,
     private companyService: CompanyService,
     public appState: AppStateService,
-    private auth: AuthService,
     private route: ActivatedRoute,
   ) {}   
 
@@ -152,12 +146,14 @@ export class BookingComponent implements OnInit {
     // TODO: this 50 days should be paginated, as well as a setting which
     //       specifies max number of days into the future clients can book
     //       for.
-    const dateFrom = moment().startOf('day').unix().toString();
-    const dateTo = moment().endOf('day').add(50, 'days').unix().toString();
-    const serviceIds = this.selectedServices.map(service => service.id);
-  
-    return await this.timeSlotService.getAllAvailable(
-      serviceIds, dateFrom, dateTo, this.selectedEmployee.id, this.company.id
-    );
+    const params = {
+      services: this.selectedServices,
+      dateFrom: moment().startOf('day').unix().toString(),
+      dateTo: moment().endOf('day').add(50, 'days').unix().toString(),
+      employee: this.selectedEmployee,
+      company: this.company,
+    }
+
+    return await TimeSlot.all(params)
   }
 }

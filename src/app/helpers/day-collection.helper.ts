@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { TimeSlot } from '../models/time-slot/time-slot.model';
+import { TimeSlot } from '../models/time-slot.model';
 
 type Moment = moment.Moment;
 
