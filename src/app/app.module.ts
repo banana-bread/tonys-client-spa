@@ -12,7 +12,6 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
 import { SharedModule } from './shared.module';
 import { BaseModel } from './models/base.model';
 import { ApiService } from './services/api.service';
-import { AppInjector } from './services/app-injector.service';
 
 @NgModule({
   declarations: [

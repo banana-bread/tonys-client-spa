@@ -4,21 +4,19 @@ import * as moment from 'moment';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { EmployeeService } from '../../models/employee/employee.service';
 import { Employee } from '../../models/employee/employee.model';
-import { ServiceDefinition } from '../../models/service-definition/service-definition.model';
+import { ServiceDefinition } from '../../models/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../../services/app-state.service';
 import { ActivatedRoute } from '@angular/router';
-import { Company } from '../../models/company/company.model';
-import { CompanyService } from '../../models/company/company.service';
+import { Company } from '../../models/company.model';
 import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
   }]
@@ -55,7 +53,6 @@ export class BookingComponent implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private companyService: CompanyService,
     public appState: AppStateService,
     private route: ActivatedRoute,
   ) {}   
@@ -67,8 +64,8 @@ export class BookingComponent implements OnInit {
     try
     {
       this.company = this.companySlug 
-        ? await this.companyService.getBySlug(this.companySlug)
-        : await this.companyService.get(this.companyId);
+        ? await Company.findBySlug(this.companySlug)
+        : await Company.find(this.companyId)
 
       this.employeesOriginal = this.company.employees;
       this.employees = cloneDeep(this.employeesOriginal);

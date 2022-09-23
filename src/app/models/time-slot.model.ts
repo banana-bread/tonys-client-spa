@@ -25,7 +25,7 @@ export class TimeSlot extends BaseModel {
 
     static async all(params): Promise<any>
     {
-      const response = await super.api.getAllTimeSlots(
+      const response = await this.api.getAllTimeSlots(
         params.services.map(service => service.id),
         params.dateFrom,
         params.dateTo,
