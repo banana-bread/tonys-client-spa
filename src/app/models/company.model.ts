@@ -1,6 +1,6 @@
-import { BaseModel } from "../base.model";
-import { Employee } from "../employee/employee.model";
-import { ServiceDefinition } from "../service-definition/service-definition.model";
+import { BaseModel } from "./base.model";
+import { Employee } from "./employee/employee.model";
+import { ServiceDefinition } from "./service-definition.model";
 
 export class Company extends BaseModel {
     id?: string = null;
@@ -30,6 +30,20 @@ export class Company extends BaseModel {
   {
     super();
     this.map(data);
+  }
+
+  static async find(id: string)
+  {
+    const response = await this.api.getCompany(id)
+
+    return new Company(response.data.company)
+  }
+
+  static async findBySlug(slug: string)
+  {
+    const response = await this.api.getCompanyBySlug(slug)
+
+    return new Company(response.data.company)
   }
 
   get full_address(): string

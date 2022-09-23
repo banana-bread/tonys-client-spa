@@ -1,5 +1,5 @@
 import { BaseModel } from "../base.model";
-import { Company } from "../company/company.model";
+import { Company } from "../company.model";
 
 export class Employee extends BaseModel {
 
