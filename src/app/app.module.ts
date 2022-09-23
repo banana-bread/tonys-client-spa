@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { SharedModule } from './shared.module';
 import { RedirectGuard } from './services/redirect-guard.service';
-
-// import { RecaptchaModule } from 'ng-recaptcha';
+import { BaseModel } from './models/base.model';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { RedirectGuard } from './services/redirect-guard.service';
     PublicModule,
     BookingModule,
     SharedModule,
-    // RecaptchaModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -34,4 +33,10 @@ import { RedirectGuard } from './services/redirect-guard.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule 
+{ 
+  constructor(private injector: Injector) 
+  {
+    BaseModel.api = this.injector.get(ApiService)
+  }
+}

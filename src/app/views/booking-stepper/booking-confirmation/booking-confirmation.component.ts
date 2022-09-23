@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ServiceDefinition } from 'src/app/models/service-definition/service-definition.model';
-import { TimeSlot } from 'src/app/models/time-slot/time-slot.model';
+import { TimeSlot } from 'src/app/models/time-slot.model';
 import { BookingService } from 'src/app/models/booking/booking.service';
 import { ClientService } from 'src/app/models/client/client.service';
 import { AppStateService } from 'src/app/services/app-state.service';

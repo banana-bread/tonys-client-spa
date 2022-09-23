@@ -25,7 +25,7 @@ export class ApiService {
       .get();
   }
 
-  getAvailableTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = '', companyId: string): Promise<any> 
+  getAllTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = '', companyId: string): Promise<any> 
   {
     return this.http
       .path('/time-slots')

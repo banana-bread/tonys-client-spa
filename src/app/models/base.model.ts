@@ -1,14 +1,15 @@
-import * as moment from 'moment';
-import { isObject, isArray } from '../helpers/helpers';
+import * as moment from 'moment'
+import { isObject, isArray } from '../helpers/helpers'
+import { ApiService } from "../services/api.service";
 
 export abstract class BaseModel {
 
-    abstract dates: any;   
-    abstract relations: any;
+    abstract dates: any
+    abstract relations: any
+    static api: ApiService;
 
     map(data: any) 
     {
-
         this._mapProperties(data);
         this._mapRelations(data);
         this._mapDates(data);
@@ -17,9 +18,6 @@ export abstract class BaseModel {
     private _mapProperties(attributes: any)
     {
         Object.keys(this).forEach(key => {
-            // console.log(key)
-            // console.log(attributes)
-
             // If key is a relation, skip here.
             if (key === 'relations' || key === 'dates' || this.relations[key] || this.dates[key] || !attributes)
             {
