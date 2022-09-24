@@ -1,5 +1,5 @@
 import { BaseModel } from "./base.model";
-import { Employee } from "./employee/employee.model";
+import { Employee } from "./employee.model";
 import { ServiceDefinition } from "./service-definition.model";
 
 export class Company extends BaseModel {
@@ -32,11 +32,11 @@ export class Company extends BaseModel {
     this.map(data);
   }
 
-  static async find(id: string)
+  static async find(id: string): Promise<Company>
   {
     const response = await this.api.getCompany(id)
 
-    return new Company(response.data.company)
+    return new Company(response.data.company);
   }
 
   static async findBySlug(slug: string)

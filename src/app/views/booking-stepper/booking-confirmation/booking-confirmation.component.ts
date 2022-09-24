@@ -5,7 +5,7 @@ import { BookingService } from 'src/app/models/booking/booking.service';
 import { ClientService } from 'src/app/models/client/client.service';
 import { AppStateService } from 'src/app/services/app-state.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
-import { Employee } from 'src/app/models/employee/employee.model';
+import { Employee } from 'src/app/models/employee.model';
 import { Company } from 'src/app/models/company.model';
 import * as moment from 'moment';
 import { ReCaptchaService } from 'angular-recaptcha3';

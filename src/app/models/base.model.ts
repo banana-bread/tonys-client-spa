@@ -1,4 +1,5 @@
 import * as moment from 'moment'
+import { NgPluralizeService } from 'ng-pluralize';
 import { isObject, isArray } from '../helpers/helpers'
 import { ApiService } from "../services/api.service";
 
@@ -7,6 +8,20 @@ export abstract class BaseModel {
     abstract dates: any
     abstract relations: any
     static api: ApiService;
+    static pluralizeService: NgPluralizeService
+
+    // TODO: maybe try to get this working eventually, for now we'll just duplicate methods
+    //       on derived model classes
+    // static async find(id: string): Promise<any>
+    // {
+    //   const resource = this.name.toLowerCase()
+    //   const hasCompanyId = this.toString().includes('this.company_id = null;')
+    //   const response = await this.api.get(this.pluralizeService.pluralize(resource), id, hasCompanyId)
+    //   const modelFile = await import(`./${resource}.model`)
+    //   const modelClass = modelFile[resource.charAt(0).toUpperCase() + resource.slice(1)]
+
+    //   return new modelClass(response.data[resource])
+    // }
 
     map(data: any) 
     {

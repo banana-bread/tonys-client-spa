@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
 import { Client } from "../models/client/client.model";
+import { Company } from "../models/company.model";
 
 // TODO: we could create a stateobject interface, have classes
 //      implement it, register them in here... maybe
@@ -12,6 +13,7 @@ export class AppStateService
     private readonly _loading = new BehaviorSubject<boolean>(false)
     private readonly _loggedIn = new BehaviorSubject<boolean>(false);
     private readonly _authedClient = new BehaviorSubject<Client>(new Client());
+    private readonly _company = new BehaviorSubject<Company>(new Company());
 
     readonly authedClient$ = this._authedClient.asObservable();
 
@@ -29,6 +31,11 @@ export class AppStateService
     {
         return this._authedClient.getValue();
     }
+
+    get company(): Company
+    {
+      return this._company.getValue()
+    }
     
     setLoading(loading: boolean)
     {
@@ -45,6 +52,11 @@ export class AppStateService
         this.authedClient = client;
     }
 
+    setCompany(company: Company)
+    {
+      this.company = company
+    }
+
     set loading(val: boolean)
     {
         this._loading.next(val);
@@ -58,5 +70,10 @@ export class AppStateService
     set authedClient(val: Client)
     {
         this._authedClient.next(val);
+    }
+
+    set company(val: Company)
+    {
+        this._company.next(val);
     }
 }
