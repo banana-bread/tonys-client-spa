@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ServiceDefinition } from 'src/app/models/service-definition.model';
 import { TimeSlot } from 'src/app/models/time-slot.model';
 import { BookingService } from 'src/app/models/booking/booking.service';
-import { ClientService } from 'src/app/models/client/client.service';
 import { AppStateService } from 'src/app/services/app-state.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { Employee } from 'src/app/models/employee.model';
@@ -10,6 +9,7 @@ import { Company } from 'src/app/models/company.model';
 import * as moment from 'moment';
 import { ReCaptchaService } from 'angular-recaptcha3';
 import { ApiService } from 'src/app/services/api.service';
+import { Client } from 'src/app/models/client.model';
 
 @Component({
   selector: 'app-booking-confirmation',
@@ -33,7 +33,6 @@ export class BookingConfirmationComponent implements OnInit {
   note: string;
 
   constructor(
-    private clientService: ClientService,
     public appState: AppStateService,
     private bookingService: BookingService,
     private snackbarNotifications: SnackbarNotificationService,
@@ -68,7 +67,7 @@ export class BookingConfirmationComponent implements OnInit {
       }
 
       const serviceIds: string[] = this.services.map(service => service.id);
-      const client = await this.clientService.getAuthed();
+      const client = await Client.authed()
 
       await this.bookingService.create(client.id, this.slot.id, serviceIds, this.company.id, this.note);
       this.isBookingConfirmed = true;

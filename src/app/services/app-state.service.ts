@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
-import { Client } from "../models/client/client.model";
+import { Client } from "../models/client.model";
 import { Company } from "../models/company.model";
 
 // TODO: we could create a stateobject interface, have classes

@@ -1,7 +1,7 @@
 import * as moment from "moment";
 import { BaseModel } from "../base.model";
 import { Employee } from "../employee.model";
-import { Service } from "../service/service.model";
+import { Service } from "../service.model";
 
 export class Booking extends BaseModel {
   // TODO: figure out how to make this reusable
