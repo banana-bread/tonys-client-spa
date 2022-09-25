@@ -5,9 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ForgotPasswordService } from '../forgot-password-dialog/forgot-password.component';
-import { ReCaptchaService } from 'angular-recaptcha3';
-import { ApiService } from '../../services/api.service';
-import { ClientService } from 'src/app/models/client/client.service';
+import { Client } from 'src/app/models/client.model';
 
 @Component({
   selector: 'app-login',
@@ -38,9 +36,6 @@ export class LoginComponent implements OnInit {
     private snackbarNotification: SnackbarNotificationService,
     private appState: AppStateService,
     private forgotPasswordService: ForgotPasswordService,
-    private recaptchaService: ReCaptchaService,
-    private apiService: ApiService,
-    private clientService: ClientService,
     public breakpointObserver: BreakpointObserver,
   ) { }
 
@@ -71,7 +66,7 @@ export class LoginComponent implements OnInit {
         ? await this.register()
         : await this.login();
 
-      const authedClient = await this.clientService.getAuthed();
+      const authedClient = await Client.authed()
       this.appState.setAuthedClient(authedClient);
       this.appState.setLoggedIn(true);
       this.loggedIn.emit()

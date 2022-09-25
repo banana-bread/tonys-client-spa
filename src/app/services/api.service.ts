@@ -1,12 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpAdapter } from '@tonys-barbers/shared';
+import { Booking } from '../models/booking.model';
+import { AppStateService } from './app-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: HttpAdapter) { }
+  constructor(
+    private http: HttpAdapter,
+    private state: AppStateService,
+  ) { }
+
+  /////// new dynamic methods /////////
+  // get(resource: string, id: string|number, withCompany: boolean): Promise<any>
+  // {
+  //   let request = this.http
+  //     .path(`/${resource}/${id}`)
+    
+  //   if (withCompany)
+  //   {
+  //     request = request.withCompany(this.state.company.id)
+  //   }
+
+  //   return request.get()
+  // }
+  //////// old methods, still in use /////////
+
+  getEmployee(id: string): Promise<any>
+  {
+    return this.http
+      .path('/employees/{id}')
+      .param('id', id)
+      .withCompany(this.state.company.id)
+      .get()
+  }
 
   getAuthedClient(): Promise<any> 
   {
@@ -25,6 +54,7 @@ export class ApiService {
       .get();
   }
 
+  // TODO: remove, push to BaseModel, change -'s with _'s
   getAllTimeSlots(serviceIds: string[], dateFrom: string, dateTo: string, employeeId: string = '', companyId: string): Promise<any> 
   {
     return this.http
@@ -34,23 +64,6 @@ export class ApiService {
       .query('employee-id', employeeId)
       .query('date-from', dateFrom)
       .query('date-to', dateTo)
-      .get();
-  }
-
-  getEmployees(companyId: string): Promise<any> 
-  {
-    return this.http  
-      .path('/booking/employees')
-      .withCompany(companyId)
-      .get();
-  }
-
-  getEmployee(id: string, companyId: string): Promise<any> 
-  {
-    return this.http
-      .path('/employees/{id}')
-      .withCompany(companyId)
-      .param('id', id)
       .get();
   }
 
@@ -64,10 +77,10 @@ export class ApiService {
 
   getCompany(id: string): Promise<any>
   {
-    return this.http  
+    return this.http
       .path('/locations/{id}')
       .param('id', id)
-      .get();
+      .get()
   }
 
   getCompanyBySlug(slug: string): Promise<any>
@@ -137,11 +150,11 @@ export class ApiService {
       .get();
   }
 
-  createBooking(data: {client_id: string, time_slot_id: number, service_definition_ids: string[], note: string}, companyId: string): Promise<any>
+  createBooking(data: Booking): Promise<any>
   {
     return this.http
       .path('/bookings')
-      .withCompany(companyId)
+      .withCompany(this.state.company.id)
       .data(data)
       .post();
   }

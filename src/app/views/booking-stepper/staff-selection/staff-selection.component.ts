@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Employee } from 'src/app/models/employee/employee.model';
+import { Employee } from 'src/app/models/employee.model';
 
 @Component({
   selector: 'app-staff-selection',

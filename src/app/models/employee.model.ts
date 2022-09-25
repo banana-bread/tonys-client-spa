@@ -1,5 +1,5 @@
-import { BaseModel } from "../base.model";
-import { Company } from "../company.model";
+import { BaseModel } from "./base.model";
+import { Company } from "./company.model";
 
 export class Employee extends BaseModel {
 
@@ -19,9 +19,16 @@ export class Employee extends BaseModel {
 
     constructor(data: any = {}) 
     {
-        super();
-        this.map(data);
+        super()
+        this.map(data)
     }
+
+    static async find(id: string): Promise<Employee>
+    {
+      const response = await this.api.getEmployee(id)
+  
+      return new Employee(response.data.employee)
+    }    
     
     get initials(): string
     {

@@ -2,10 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SnackbarNotificationService } from '@tonys-barbers/shared';
 import { Subscription } from 'rxjs';
 import { ConfirmDialogService } from 'src/app/components/confirm-dialog/confirm-dialog.component';
-import { Booking } from 'src/app/models/booking/booking.model';
-import { BookingService } from 'src/app/models/booking/booking.service';
-import { Client } from 'src/app/models/client/client.model';
-import { ClientService } from 'src/app/models/client/client.service';
+import { Booking } from 'src/app/models/booking.model';
+import { Client } from 'src/app/models/client.model';
 import { AppStateService } from 'src/app/services/app-state.service';
 
 @Component({
@@ -22,10 +20,8 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private appState: AppStateService,
-    private clientService: ClientService,
     private confirmDialog: ConfirmDialogService,
     private notifications: SnackbarNotificationService,
-    private bookingService: BookingService,
   ) { }
 
   async ngOnInit(): Promise<void> 
@@ -62,7 +58,7 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
 
     try 
     {
-      await this.bookingService.cancel(booking);
+      await booking.cancel()
       this.notifications.success('Booking cancelled');
       await this._getBookings();
     }
@@ -78,7 +74,7 @@ export class ClientBookingsComponent implements OnInit, OnDestroy {
 
   private async _getBookings(): Promise<void>
   {
-    this.upcomingBookings = await this.clientService.getUpcomingBookings(this.client);
-    this.pastBookings = await this.clientService.getPastBookings(this.client);
+    this.upcomingBookings = await this.client.upcomingBookings()
+    this.pastBookings =  await this.client.passedBookings()
   }
 }
