@@ -2,14 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TimeSlot } from '../../models/time-slot.model';
 import * as moment from 'moment';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { EmployeeService } from '../../models/employee/employee.service';
-import { Employee } from '../../models/employee/employee.model';
+import { Employee } from '../../models/employee.model';
 import { ServiceDefinition } from '../../models/service-definition.model';
 import { MatStepper } from '@angular/material/stepper';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AppStateService } from '../../services/app-state.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Company } from '../../models/company.model';
 import { cloneDeep } from 'lodash';
 
@@ -52,7 +51,6 @@ export class BookingComponent implements OnInit {
   companySlug = this.route.snapshot.paramMap.get('companySlug');
 
   constructor(
-    private employeeService: EmployeeService,
     public appState: AppStateService,
     private route: ActivatedRoute,
   ) {}   
@@ -67,6 +65,7 @@ export class BookingComponent implements OnInit {
         ? await Company.findBySlug(this.companySlug)
         : await Company.find(this.companyId)
 
+      this.appState.setCompany(this.company)
       this.employeesOriginal = this.company.employees;
       this.employees = cloneDeep(this.employeesOriginal);
       this.serviceDefinitions = this.company.service_definitions;
@@ -88,7 +87,7 @@ export class BookingComponent implements OnInit {
 
     try
     {
-      this.selectedSlotEmployee = await this.employeeService.get(slot.employee_id, this.company.id);
+      this.selectedSlotEmployee = await Employee.find(slot.employee_id);
     }
     finally 
     {

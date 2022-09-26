@@ -6,7 +6,7 @@ import { AppStateService } from './services/app-state.service';
 import { ContactDialogService } from './components/contact-dialog/contact-dialog.component';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
-import { ClientService } from './models/client/client.service';
+import { Client } from './models/client.model';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     private notifications: SnackbarNotificationService,
     private auth: AuthService,
     private router: Router,
-    private clientService: ClientService,
     public contactDialog: ContactDialogService,
     public appState: AppStateService,
     ) 
@@ -39,7 +38,7 @@ export class AppComponent implements OnInit {
 
     if (!this.appState.isLoggedIn) return
     
-    const authedClient = await this.clientService.getAuthed();
+    const authedClient = await Client.authed();
     this.appState.setAuthedClient(authedClient);
     
   }
