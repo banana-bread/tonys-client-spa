@@ -34,7 +34,7 @@ const RECAPTCHA_OPTIONS = {
     imports: [
         SharedModule,
         PublicModule,
-        TonysSharedModule.forRoot('http://localhost:89'),
+        TonysSharedModule.forRoot('https://api.simplebarber.ca'),
         ReCaptchaModule.forRoot(RECAPTCHA_OPTIONS),
     ],
     exports: []

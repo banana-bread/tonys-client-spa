@@ -10,6 +10,7 @@ import { BookingModule } from './views/booking-stepper/booking.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { SharedModule } from './shared.module';
+import { RedirectGuard } from './services/redirect-guard.service';
 import { BaseModel } from './models/base.model';
 import { ApiService } from './services/api.service';
 
@@ -27,7 +28,8 @@ import { ApiService } from './services/api.service';
     SharedModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    RedirectGuard,
   ],
   bootstrap: [AppComponent]
 })

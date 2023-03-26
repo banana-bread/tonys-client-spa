@@ -55,7 +55,7 @@ import { ClientBookingCardComponent } from './views/client-bookings/client-booki
     MatDialogModule,
     MatToolbarModule,
     MatMenuModule,
-    TonysSharedModule.forRoot('http://localhost:89'),
+    TonysSharedModule.forRoot('https://api.simplebarber.ca'),
     NgxMaskModule.forRoot(),
   ],
   declarations: [
